@@ -11,7 +11,7 @@ public class Atendimento {
 		this.cod = cod;
 		this.dataInicio = dataInicio;
 		this.duracao = duracao;
-		this.status = "PENDENTE";
+		this.status = status;
 		this.evento = evento;
 	}
 	
