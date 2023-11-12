@@ -1,0 +1,36 @@
+package dados;
+
+public class Evento implements Comparable<Evento> {
+    private String codigo;
+    private String data;
+    private double latitude;
+    private double longitude;
+
+    public Evento(String codigo, String data, double latitude, double longitude){
+        this.codigo = codigo;
+        this.data = data;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    @Override
+    public int compareTo(Evento o) {
+        return this.getCodigo().compareTo(o.getCodigo());
+    }
+}
