@@ -23,6 +23,7 @@ public class CadastroEquipe extends JFrame implements ActionListener {
     private ArrayList<Equipe> equipes=new ArrayList<>();
 
     public CadastroEquipe(){
+        super();
         cadastrarButton.addActionListener(this);
         limparButton.addActionListener(this);
         mostrarDadosButton.addActionListener(this);
@@ -30,7 +31,10 @@ public class CadastroEquipe extends JFrame implements ActionListener {
 
         JFrame frame=new JFrame();
         frame.setContentPane(cadastroEquipe);
-        frame.setTitle("Cadastro de Equipes");
+        frame.setTitle("ACMERescue");
+        ImageIcon imageIcon = new ImageIcon("icon.png");
+        frame.setLocationRelativeTo(null);
+        frame.setIconImage(imageIcon.getImage());
         frame.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         frame.setSize(800,400);
         frame.pack();
