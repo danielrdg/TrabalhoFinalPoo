@@ -17,5 +17,10 @@ public class Equipamento {
 	public double getCustoDia() {
 		return custoDia;
 	}
+
+	@Override
+    public String toString() {
+        return "ID: " + id + ", Equipamento: " + nome + ", Custo por Dia: R$" + custoDia;
+    }
 	
 }
