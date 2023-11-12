@@ -5,7 +5,7 @@ import dados.Equipamento;
 
 import java.util.ArrayList;
 
-public class Equipe {
+public class Equipe implements Comparable<Equipe> {
 	private String codinome;
 	private int quantidade;
 	private double latitude;
@@ -39,7 +39,11 @@ public class Equipe {
 	public void addAtendimentos() {
 		atendimentos = new ArrayList<Atendimento>();
 	}
-	
+
+	public String getCodinome() {
+		return codinome;
+	}
+
 	public double somatorioCustosEquipamento() {
 		double somatorio = 0;
 		
@@ -49,6 +53,9 @@ public class Equipe {
 		
 		return somatorio;
 	}
-	
-	
+
+	@Override
+	public int compareTo(Equipe o) {
+		return this.getCodinome().compareTo(o.getCodinome());
+	}
 }

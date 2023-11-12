@@ -26,6 +26,10 @@ public class ACMERescue implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         ccButton.addActionListener(this);
+        buttonccButton.addActionListener(this);
+        ccccButton.addActionListener(this);
+        ccccButton1.addActionListener(this);
+        button5.addActionListener(this);
 
         frame.setVisible(true);
 
@@ -37,6 +41,9 @@ public class ACMERescue implements ActionListener {
             new CadastroEvento();
             ACMERescueMenu.disable();
 
+        }
+        else if(e.getSource()==buttonccButton){
+            new CadastroEquipe();
         }
     }
 }

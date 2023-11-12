@@ -53,7 +53,8 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Buttoncc"/>
+          <font name="Consolas"/>
+          <text value="Cadastrar Equipe"/>
         </properties>
       </component>
       <component id="fee6b" class="javax.swing.JButton" binding="ccccButton" default-binding="true">
