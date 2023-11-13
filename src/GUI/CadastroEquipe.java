@@ -36,8 +36,8 @@ public class CadastroEquipe extends JFrame implements ActionListener {
         frame.setLocationRelativeTo(null);
         frame.setIconImage(imageIcon.getImage());
         frame.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        frame.setSize(800,400);
-        frame.pack();
+        frame.setSize(600,400);
+        //frame.pack();
         frame.setVisible(true);
     }
 

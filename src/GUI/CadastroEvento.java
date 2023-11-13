@@ -107,7 +107,7 @@ public class CadastroEvento implements ActionListener {
             System.exit(0);
         }
         else if (e.getSource()==voltarButton){
-            new ACMERescue();
+            CadastroE.setVisible(false);
         }
     }
 

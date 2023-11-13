@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 
 public class ACMERescue implements ActionListener {
 
-    private JButton ccButton;
-    private JButton buttonccButton;
-    private JButton ccccButton;
+    private JButton cadastroEvento;
+    private JButton cadastroEquipe;
+    private JButton cadastroEquipamento;
     private JButton ccccButton1;
     private JButton button5;
     private JPanel ACMERescueMenu;
@@ -25,9 +25,9 @@ public class ACMERescue implements ActionListener {
         frame.setIconImage(imageIcon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        ccButton.addActionListener(this);
-        buttonccButton.addActionListener(this);
-        ccccButton.addActionListener(this);
+        cadastroEvento.addActionListener(this);
+        cadastroEquipe.addActionListener(this);
+        cadastroEquipamento.addActionListener(this);
         ccccButton1.addActionListener(this);
         button5.addActionListener(this);
 
@@ -37,13 +37,17 @@ public class ACMERescue implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==ccButton){
+        if (e.getSource()== cadastroEvento){
             new CadastroEvento();
             ACMERescueMenu.disable();
 
         }
-        else if(e.getSource()==buttonccButton){
+        else if(e.getSource()== cadastroEquipe){
             new CadastroEquipe();
+        }
+
+        else if(e.getSource()== cadastroEquipamento){
+            new CadastroEquipamento();
         }
     }
 }
