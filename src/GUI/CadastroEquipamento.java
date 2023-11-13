@@ -1,149 +1,116 @@
 package GUI;
 
 import dados.Equipamento;
+import dados.Evento;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class CadastroEquipamento {
+public class CadastroEquipamento extends JFrame implements ActionListener {
+    private JPanel EquipamentoCad;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JButton confirmarButton;
+    private JButton limparButton;
+    private JButton mostrarDadosButton;
+    private JTextArea textArea1;
+    private JButton finalizarButton;
+    private ArrayList<Equipamento>equipamentos = new ArrayList<>();
 
-    private JFrame frame;
-    private JTextField campoId;
-    private JTextField campoNome;
-    private JTextField campoCusto;
-    private JTextArea areaEquipamentos;
-    private ArrayList<Equipamento> equipamentos;
+    public CadastroEquipamento(){
 
-    public CadastroEquipamento() {
+        JFrame frame = new JFrame();
+        frame.setContentPane(EquipamentoCad);
+        frame.setSize(600,400);
+        frame.setTitle("ACMERescue");
+        ImageIcon imageIcon = new ImageIcon("icon.png");
+        frame.setLocationRelativeTo(null);
+        frame.setIconImage(imageIcon.getImage());
 
-        equipamentos = new ArrayList<>();
+        confirmarButton.addActionListener(this);
+        limparButton.addActionListener(this);
+        mostrarDadosButton.addActionListener(this);
+        finalizarButton.addActionListener(this);
 
-        frame = new JFrame("Cadastro de Equipamentos");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 310);
-        frame.setResizable(false);
-        frame.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        campoId = new JTextField(10);
-        campoNome = new JTextField(10);
-        campoCusto = new JTextField(10);
-        areaEquipamentos = new JTextArea(10, 30);
-        areaEquipamentos.setEditable(false);
-
-        JButton botaoCadastrar = new JButton("Cadastrar Equipamento");
-        JButton botaoVerEquipamentos = new JButton("Ver Equipamentos Salvos");
-        JButton botaoLimparCampos = new JButton("Limpar Campos");
-        JButton botaoLimparArea = new JButton("Limpar Console");
-        JButton botaoSair = new JButton("Sair do Programa");
-
-        botaoCadastrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cadastrarEquipamento();
-            }
-        });
-
-        botaoVerEquipamentos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mostrarEquipamentos();
-            }
-        });
-
-        botaoLimparCampos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                limparCampos();
-            }
-        });
-
-        botaoLimparArea.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                limparArea();
-            }
-        });
-
-        botaoSair.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sairDoPrograma();
-            }
-        });
-
-        frame.add(new JLabel("ID: "));
-        frame.add(campoId);
-        frame.add(new JLabel("Equipamento: "));
-        frame.add(campoNome);
-        frame.add(new JLabel("Custo por dia: "));
-        frame.add(campoCusto);
-        frame.add(botaoCadastrar);
-        frame.add(botaoVerEquipamentos);
-        frame.add(botaoLimparCampos);
-        frame.add(botaoLimparArea);
-        frame.add(botaoSair);
-
-        frame.add(new JScrollPane(areaEquipamentos));
         frame.setVisible(true);
     }
 
+    private boolean existeID(int id){
+        for(Equipamento equipamento: equipamentos){
+            if (equipamento.getId()==id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     private void cadastrarEquipamento() {
         try {
-            int id = Integer.parseInt(campoId.getText());
-            String nome = campoNome.getText();
-    
-            if (!nome.matches("^[a-zA-Z]*$")) {
-                throw new NumberFormatException();
+            int idEquipamento = Integer.parseInt(textField1.getText());
+            String nomeEquipamento =textField2.getText();
+            double custoDia = Double.parseDouble(textField3.getText());
+            if (existeID(idEquipamento)) {
+                textArea1.append("Erro! Já existe um equipamento com esse ID."+"\n");
             }
-    
-            double custo = Double.parseDouble(campoCusto.getText());
-    
-            Equipamento equipamento = new Equipamento(id, nome, custo);
-            equipamentos.add(equipamento);
-    
-            appendTextoArea("Equipamento cadastrado com sucesso!", Color.GREEN);
-            limparCampos();
-        } catch (NumberFormatException ex) {
-            appendTextoArea("Insira valores válidos.", Color.RED);
+            else {
+                equipamentos.add(new Equipamento(idEquipamento, nomeEquipamento, custoDia));
+                textArea1.append("Equipamento cadastrado!"+"\n");
+            }
+        }
+        catch (NumberFormatException e){
+            textArea1.append("Formato inválido! Tente novamente."+"\n");
         }
     }
-    
+
 
     private void mostrarEquipamentos() {
-        if (equipamentos.isEmpty()) {
-            appendTextoArea("Nenhum equipamento cadastrado.", Color.BLUE);
-        } else {
-            StringBuilder listaEquipamentos = new StringBuilder("Equipamentos Salvos:\n");
-
-            for (Equipamento equipamento : equipamentos) {
-                listaEquipamentos.append(equipamento.toString()).append("\n");
-            }
-
-            appendTextoArea(listaEquipamentos.toString(), Color.BLACK);
+        if (equipamentos.isEmpty()){
+            textArea1.append("Nenhum equipamento cadastrado."+"\n");
         }
+        else {
+            Collections.sort(equipamentos);
+            for (Equipamento equipamento:equipamentos){
+                textArea1.append("ID: " + equipamento.getId()+"\n");
+                textArea1.append("Nome: " + equipamento.getNome()+"\n");
+                textArea1.append("Custo do Dia: " +"R$"+ equipamento.getCustoDia()+"\n");
+            }}
     }
 
-    private void appendTextoArea(String texto, Color cor) {
-        limparArea();
-        areaEquipamentos.append(texto + "\n");
-        areaEquipamentos.setForeground(cor);
-    }
 
     private void limparCampos() {
-        campoId.setText("");
-        campoNome.setText("");
-        campoCusto.setText("");
+        textField1.setText("");
+        textField2.setText("");
+        textField3.setText("");
+        textArea1.setText("");
     }
 
-    private void limparArea() {
-        areaEquipamentos.setText("");
-    }
 
     private void sairDoPrograma() {
         System.exit(0);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()== confirmarButton){
+            cadastrarEquipamento();
+        }
+        else if (e.getSource() == limparButton){
+            limparCampos();
+        }
+        else if (e.getSource()==mostrarDadosButton){
+            mostrarEquipamentos();
+        }
+        else if (e.getSource()== finalizarButton){
+            sairDoPrograma();
+        }
+    }
 }
+
+
