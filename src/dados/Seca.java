@@ -1,12 +1,13 @@
 package dados;
 
-import dados.Evento;
-
 public class Seca extends Evento {
 	private int estiagem;
 	
-	public Seca(String codigo, String data, double latitude, double longitude) {
+	public Seca(String codigo, String data, double latitude, double longitude, int estiagem) {
 		super(codigo, data, latitude, longitude);
-		estiagem = this.estiagem;
+		this.estiagem=estiagem;
+	}
+	public int getEstiagem(){
+		return estiagem;
 	}
 }
