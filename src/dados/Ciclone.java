@@ -9,5 +9,12 @@ public class Ciclone extends Evento {
 		this.velocidade = velocidade;
 		this.precipitacao = precipitacao;
 	}
-	
+
+	public double getPrecipitacao() {
+		return precipitacao;
+	}
+
+	public double getVelocidade() {
+		return velocidade;
+	}
 }

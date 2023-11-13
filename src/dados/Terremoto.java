@@ -1,7 +1,5 @@
 package dados;
 
-import dados.Evento;
-
 public class Terremoto extends Evento {
 	private double magnitude;
 
@@ -9,5 +7,8 @@ public class Terremoto extends Evento {
 		super(codigo, data, latitude, longitude);
 		this.magnitude = magnitude;
 	}
-	
+
+	public double getMagnitude() {
+		return magnitude;
+	}
 }
