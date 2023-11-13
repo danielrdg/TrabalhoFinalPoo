@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CadastroEvento implements ActionListener {
+public class CadastroEvento extends JFrame implements ActionListener {
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField3;
@@ -39,9 +39,9 @@ public class CadastroEvento implements ActionListener {
 
 
 
-    private ArrayList<Evento>evento=new ArrayList<>();
+    private ArrayList<Evento>eventos = new ArrayList<>();
 
-    public CadastroEvento(){
+    public CadastroEvento() {
         super();
         for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
             if ("Nimbus".equals(info.getName())) {
@@ -59,17 +59,14 @@ public class CadastroEvento implements ActionListener {
         finalizarButton.addActionListener(this);
         voltarButton.addActionListener(this);
 
-
-
-        JFrame frame = new JFrame();
-        frame.setContentPane(CadastroE);
-        frame.setSize(600,400);
-        frame.setTitle("ACMERescue");
+        setContentPane(CadastroE);
+        setSize(600,400);
+        setTitle("ACMERescue");
         ImageIcon imageIcon = new ImageIcon("icon.png");
-        frame.setLocationRelativeTo(null);
-        frame.setIconImage(imageIcon.getImage());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        setLocationRelativeTo(null);
+        setIconImage(imageIcon.getImage());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     private void cadastrarEvento(){
@@ -79,7 +76,6 @@ public class CadastroEvento implements ActionListener {
             double latitudeEvento = Double.parseDouble(textField3.getText());
             double longitudeEvento = Double.parseDouble(textField4.getText());
             int tipoEvento = Integer.parseInt(textField5.getText());
-
 
             if (existeCodigo(codigoEvento)) {
                 textArea1.append("Erro! Já existe um evento com esse código."+"\n");
@@ -111,7 +107,7 @@ public class CadastroEvento implements ActionListener {
                         try {
                             double vel = Double.parseDouble(txtCiclone.getText());
                             double prec = Double.parseDouble(txtPrecipitacao.getText());
-                            evento.add(new Ciclone(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, vel, prec));
+                            eventos.add(new Ciclone(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, vel, prec));
                             textArea1.append("Evento cadastrado!" + "\n");
                             Ciclo.setVisible(false);
                         } catch (NumberFormatException ex) {
@@ -144,7 +140,7 @@ public class CadastroEvento implements ActionListener {
                     botaoConfirmarTer.addActionListener(event -> {
                         try {
                             double mag = Double.parseDouble(txtTerremoto.getText());
-                            evento.add(new Terremoto(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, mag));
+                            eventos.add(new Terremoto(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, mag));
                             textArea1.append("Evento cadastrado!" + "\n");
                             Terre.setVisible(false);
                         } catch (NumberFormatException ex) {
@@ -178,7 +174,7 @@ public class CadastroEvento implements ActionListener {
                     botaoConfirmarSec.addActionListener(event -> {
                         try {
                             int est = Integer.parseInt(txtSeca.getText());
-                            evento.add(new Seca(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, est));
+                            eventos.add(new Seca(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, est));
                             textArea1.append("Evento cadastrado!" + "\n");
                             Seca.setVisible(false);
                         } catch (NumberFormatException ex) {
@@ -197,7 +193,7 @@ public class CadastroEvento implements ActionListener {
         }
     }
     private boolean existeCodigo(String codigo){
-        for(Evento eventos: evento){
+        for(Evento eventos: eventos){
             if (eventos.getCodigo().equals(codigo)){
                 return true;
             }
@@ -205,23 +201,23 @@ public class CadastroEvento implements ActionListener {
         return false;
     }
     private void mostrarDados() {
-        if (evento.isEmpty()) {
+        if (eventos.isEmpty()) {
             textArea1.append("Nenhum evento cadastrado."+"\n");
         } else {
-            Collections.sort(evento);
-            for (Evento evento1 : evento){
+            Collections.sort(eventos);
+            for (Evento evento1 : eventos){
                 textArea1.append("Código: "+evento1.getCodigo()+"\n");
                 textArea1.append("Data: " +evento1.getData()+"\n");
                 textArea1.append("Latitude: "+evento1.getLatitude()+"\n");
                 textArea1.append("Longitude: "+evento1.getLongitude()+"\n");
 
                 if (evento1 instanceof Ciclone){
-                    Ciclone ciclone= (Ciclone) evento1;
+                    Ciclone ciclone = (Ciclone) evento1;
                     textArea1.append("Tipo de evento: Ciclone\n");
                     textArea1.append("Velocidade: "+ciclone.getVelocidade()+ "\n");
                     textArea1.append("Precipitação: "+ciclone.getPrecipitacao()+"\n");
                 } else if (evento1 instanceof Terremoto){
-                    Terremoto terremoto= (Terremoto) evento1;
+                    Terremoto terremoto = (Terremoto) evento1;
                     textArea1.append("Tipo de evento: Terremoto\n");
                     textArea1.append("Magnitude: " + terremoto.getMagnitude() + "\n");
                 } else if (evento1 instanceof Seca){
@@ -236,22 +232,22 @@ public class CadastroEvento implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==confirmarButton){
+        if (e.getSource() == confirmarButton){
             cadastrarEvento();}
-        else if (e.getSource()==limparButton){
+        else if (e.getSource() == limparButton){
             textField1.setText("");
             textField2.setText("");
             textField3.setText("");
             textField4.setText("");
             textArea1.setText("");
         }
-        else if (e.getSource()==mostrarDadosButton){
+        else if (e.getSource() == mostrarDadosButton){
             mostrarDados();
         }
-        else if (e.getSource()==finalizarButton){
-            System.exit(0);
+        else if (e.getSource() == finalizarButton){
+            dispose();
         }
-        else if (e.getSource()==voltarButton){
+        else if (e.getSource() == voltarButton){
             CadastroE.setVisible(false);
         }
         else if (e.getSource() == botaoConfirmarCic){

@@ -19,26 +19,25 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
     private JButton limparButton;
     private JButton mostrarDadosButton;
     private JTextArea textArea1;
-    private JButton finalizarButton;
+    private JButton voltarButton;
     private ArrayList<Equipamento>equipamentos = new ArrayList<>();
 
-    public CadastroEquipamento(){
-
-        JFrame frame = new JFrame();
-        frame.setContentPane(EquipamentoCad);
-        frame.setSize(600,400);
-        frame.setTitle("ACMERescue");
-        ImageIcon imageIcon = new ImageIcon("icon.png");
-        frame.setLocationRelativeTo(null);
-        frame.setIconImage(imageIcon.getImage());
+    public CadastroEquipamento() {
 
         confirmarButton.addActionListener(this);
         limparButton.addActionListener(this);
         mostrarDadosButton.addActionListener(this);
-        finalizarButton.addActionListener(this);
+        voltarButton.addActionListener(this);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        setContentPane(EquipamentoCad);
+        setSize(600,400);
+        setTitle("ACMERescue");
+        ImageIcon imageIcon = new ImageIcon("icon.png");
+        setLocationRelativeTo(null);
+        setIconImage(imageIcon.getImage());
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setVisible(true);
+
     }
 
     private boolean existeID(int id){
@@ -93,7 +92,7 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
 
 
     private void sairDoPrograma() {
-        System.exit(0);
+        dispose();
     }
 
     @Override
@@ -107,7 +106,7 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
         else if (e.getSource()==mostrarDadosButton){
             mostrarEquipamentos();
         }
-        else if (e.getSource()== finalizarButton){
+        else if (e.getSource()== voltarButton){
             sairDoPrograma();
         }
     }

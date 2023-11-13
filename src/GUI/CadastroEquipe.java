@@ -14,47 +14,46 @@ public class CadastroEquipe extends JFrame implements ActionListener {
     private JTextField textField2;
     private JTextField textField3;
     private JTextField textField4;
-    private JButton cadastrarButton;
-    private JButton limparButton;
-    private JButton mostrarDadosButton;
-    private JButton finalizarButton;
+    private JButton cadastrar;
+    private JButton limpar;
+    private JButton mostrarDados;
+    private JButton voltar;
     private JTextArea textArea1;
     private JPanel cadastroEquipe;
-    private ArrayList<Equipe> equipes=new ArrayList<>();
+    private ArrayList<Equipe> equipes;
 
     public CadastroEquipe(){
         super();
-        cadastrarButton.addActionListener(this);
-        limparButton.addActionListener(this);
-        mostrarDadosButton.addActionListener(this);
-        finalizarButton.addActionListener(this);
+        cadastrar.addActionListener(this);
+        limpar.addActionListener(this);
+        mostrarDados.addActionListener(this);
+        voltar.addActionListener(this);
+        equipes = new ArrayList<>();
 
-        JFrame frame=new JFrame();
-        frame.setContentPane(cadastroEquipe);
-        frame.setTitle("ACMERescue");
+        setContentPane(cadastroEquipe);
+        setTitle("ACMERescue");
         ImageIcon imageIcon = new ImageIcon("icon.png");
-        frame.setLocationRelativeTo(null);
-        frame.setIconImage(imageIcon.getImage());
-        frame.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        frame.setSize(600,400);
-        //frame.pack();
-        frame.setVisible(true);
+        setLocationRelativeTo(null);
+        setIconImage(imageIcon.getImage());
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setSize(600, 400);
+        setVisible(true);
     }
 
-    private void cadastrarEquipe(){
+    private void cadastrarEquipe() {
         try {
-            String codinome=textField1.getText();
-            int quantidade=Integer.parseInt(textField2.getText().trim());
-            double latitude=Double.parseDouble(textField3.getText().trim());
-            double longitude=Double.parseDouble(textField4.getText().trim());
-            Equipe equipe=new Equipe(codinome,quantidade,latitude,longitude);
+            String codinome = textField1.getText();
+            int quantidade = Integer.parseInt(textField2.getText().trim());
+            double latitude = Double.parseDouble(textField3.getText().trim());
+            double longitude = Double.parseDouble(textField4.getText().trim());
+            Equipe equipe = new Equipe(codinome,quantidade,latitude,longitude);
+
             for(Equipe e:equipes){
                 if(e.getCodinome().equals(equipe.getCodinome())){
-                    textArea1.append("Já existe uma equipe com esse codinome, tente novamente.\n");
+                    textArea1.append("Já existe uma equipe com esse codinome.\n");
                 }
             }
             equipes.add(equipe);
-            limparCampos();
             textArea1.append("Equipe cadastrada com sucesso.\n");
         }
         catch(NumberFormatException e){
@@ -62,7 +61,7 @@ public class CadastroEquipe extends JFrame implements ActionListener {
         }
     }
 
-    private void limparCampos(){
+    private void limparCampos() {
         textField1.setText("");
         textField2.setText("");
         textField3.setText("");
@@ -70,34 +69,34 @@ public class CadastroEquipe extends JFrame implements ActionListener {
         textArea1.setText("");
     }
 
-    private void finalizar(){
-        System.exit(0);
+    private void voltar(){
+        dispose();
     }
 
-    private void mostrarDados(){
+    private void mostrarDados() {
 
         Collections.sort(equipes);
 
         if(equipes.isEmpty()){
-            textArea1.append("Não há equipes cadastradas!\n");
+            textArea1.append("Nenhuma equipe cadastrada.\n");
         }
-        for(Equipe e:equipes){
+        for(Equipe e : equipes){
             textArea1.append("Codinome: " + e.getCodinome()+"\n" + "Quantidade de membros: " + e.getQuantidade()+"\n" + "Latitude: " + e.getLatitude()+"\n" + "Longitude: " + e.getLongitude()+"\n\n");
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==cadastrarButton){
+        if(e.getSource() == cadastrar){
             cadastrarEquipe();
         }
-        else if(e.getSource()==limparButton){
+        else if(e.getSource() == limpar){
             limparCampos();
         }
-        else if(e.getSource()==finalizarButton){
-            finalizar();
+        else if(e.getSource() == voltar){
+            dispose();
         }
-        else if(e.getSource()==mostrarDadosButton){
+        else if(e.getSource() == mostrarDados){
             mostrarDados();
         }
     }
