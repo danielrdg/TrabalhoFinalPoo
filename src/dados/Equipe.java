@@ -31,13 +31,13 @@ public class Equipe implements Comparable<Equipe> {
 	public double getLongitude() {
 		return longitude;
 	}
-	
-	public void addEquipamentos() {
-		equipamentos = new ArrayList<Equipamento>();
+
+	public void setEquipamentos(ArrayList<Equipamento> equipamentos) {
+		this.equipamentos = equipamentos;
 	}
-	
-	public void addAtendimentos() {
-		atendimentos = new ArrayList<Atendimento>();
+
+	public void setAtendimentos(ArrayList<Atendimento> atendimentos) {
+		this.atendimentos = atendimentos;
 	}
 
 	public String getCodinome() {
