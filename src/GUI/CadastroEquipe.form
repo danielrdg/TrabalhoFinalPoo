@@ -78,7 +78,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="64f87" class="javax.swing.JButton" binding="limparButton" default-binding="true">
+      <component id="64f87" class="javax.swing.JButton" binding="limpar">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -87,7 +87,7 @@
           <text value="Limpar"/>
         </properties>
       </component>
-      <component id="cc847" class="javax.swing.JButton" binding="cadastrarButton" default-binding="true">
+      <component id="cc847" class="javax.swing.JButton" binding="cadastrar">
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -96,7 +96,7 @@
           <text value="Cadastrar"/>
         </properties>
       </component>
-      <component id="51188" class="javax.swing.JButton" binding="mostrarDadosButton" default-binding="true">
+      <component id="51188" class="javax.swing.JButton" binding="mostrarDados">
         <constraints>
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -105,13 +105,13 @@
           <text value="Mostrar dados"/>
         </properties>
       </component>
-      <component id="cf68b" class="javax.swing.JButton" binding="finalizarButton" default-binding="true">
+      <component id="cf68b" class="javax.swing.JButton" binding="voltar">
         <constraints>
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="DialogInput"/>
-          <text value="Finalizar"/>
+          <text value="Voltar"/>
         </properties>
       </component>
       <component id="edfff" class="javax.swing.JLabel">

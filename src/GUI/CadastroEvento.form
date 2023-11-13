@@ -111,7 +111,7 @@
         </constraints>
         <properties>
           <font name="DialogInput"/>
-          <text value="Finalizar"/>
+          <text value="Voltar"/>
         </properties>
       </component>
       <component id="9c39a" class="javax.swing.JLabel">
