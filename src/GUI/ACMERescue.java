@@ -20,10 +20,12 @@ public class ACMERescue extends JFrame {
     private ArrayList<Equipe> equipes;
     private ArrayList<Evento> eventos;
     private CadastroEquipe cadastroEquipePainel = new CadastroEquipe(this, equipes);
-    private MostrarEvento mostrarEvento = new MostrarEvento(this, eventos);
+    private Evento eventoSelecionado;
+    private MostrarEvento mostrarEvento = new MostrarEvento(this,eventoSelecionado);
 
     public ACMERescue(){
         super();
+        this.eventoSelecionado = mostrarEvento.getEventoSelecionado();
         this.setContentPane(painel);
         this.setSize(600,400);
         this.setTitle("ACMERescue");

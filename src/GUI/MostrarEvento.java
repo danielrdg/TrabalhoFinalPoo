@@ -14,14 +14,13 @@ public class MostrarEvento extends JFrame {
     private JButton voltarButton;
     private JButton confirmarButton;
     private ACMERescue acmeRescue;
-    private ArrayList<Evento> eventos;
     private AppEvento appEvento = new AppEvento();
     private Evento eventoSelecionado;
-    private CadastrarAtendimento cadastrarAtendimento = new CadastrarAtendimento(acmeRescue, eventoSelecionado);
 
-    public MostrarEvento(ACMERescue acmeRescue, ArrayList<Evento> eventos) {
+    public MostrarEvento(ACMERescue acmeRescue, Evento eventoSelecionado) {
         this.acmeRescue = acmeRescue;
-        this.eventos = eventos;
+        this.eventoSelecionado = eventoSelecionado;
+
         DefaultComboBoxModel<Evento> comboBoxModel = new DefaultComboBoxModel<>();
 
         for (Evento e : appEvento.getEventos()){
@@ -32,20 +31,26 @@ public class MostrarEvento extends JFrame {
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                eventoSelecionado = (Evento) comboBox1.getSelectedItem();
-                setContentPane(cadastrarAtendimento.getPainel());
+                Evento eventoSelecionado = (Evento) comboBox1.getSelectedItem();
+                CadastrarAtendimento cadastrarAtendimento = new CadastrarAtendimento(acmeRescue, eventoSelecionado);
+                acmeRescue.setSize(800,400);
+                acmeRescue.setContentPane(cadastrarAtendimento.getPainel());
             }
         });
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                acmeRescue.setContentPane(acmeRescue.getPainel());
                 acmeRescue.setSize(600,400);
+                acmeRescue.setContentPane(acmeRescue.getPainel());
             }
         });
     }
 
     public JPanel getPainel() {
         return painel;
+    }
+
+    public Evento getEventoSelecionado() {
+        return eventoSelecionado;
     }
 }
