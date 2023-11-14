@@ -2,14 +2,13 @@ package GUI;
 
 import app.AppEquipe;
 import dados.Equipe;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CadastroEquipe extends JFrame implements ActionListener {
+public class CadastroEquipe implements ActionListener {
 
     private JTextField textField1;
     private JTextField textField2;
@@ -20,25 +19,18 @@ public class CadastroEquipe extends JFrame implements ActionListener {
     private JButton mostrarDados;
     private JButton voltar;
     private JTextArea textArea1;
-    private JPanel cadastroEquipe;
+    private JPanel painel;
     private AppEquipe appEquipe;
+    private ACMERescue acmeRescue;
 
-    public CadastroEquipe(){
+    public CadastroEquipe(ACMERescue acmeRescue){
         super();
+        this.acmeRescue = acmeRescue;
         appEquipe = new AppEquipe();
         cadastrar.addActionListener(this);
         limpar.addActionListener(this);
         mostrarDados.addActionListener(this);
         voltar.addActionListener(this);
-
-        setContentPane(cadastroEquipe);
-        setTitle("ACMERescue");
-        ImageIcon imageIcon = new ImageIcon("icon.png");
-        setLocationRelativeTo(null);
-        setIconImage(imageIcon.getImage());
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(600, 400);
-        setVisible(true);
     }
 
     private void cadastrarEquipe() {
@@ -68,10 +60,6 @@ public class CadastroEquipe extends JFrame implements ActionListener {
         textArea1.setText("");
     }
 
-    private void voltar(){
-        dispose();
-    }
-
     private void mostrarDados() {
         ArrayList<Equipe> equipes = appEquipe.getEquipes();
 
@@ -93,11 +81,12 @@ public class CadastroEquipe extends JFrame implements ActionListener {
         else if(e.getSource() == limpar){
             limparCampos();
         }
-        else if(e.getSource() == voltar){
-            dispose();
-        }
         else if(e.getSource() == mostrarDados){
             mostrarDados();
         }
+    }
+
+    public JPanel getPainel() {
+        return painel;
     }
 }

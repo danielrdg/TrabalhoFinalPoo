@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ACMERescue implements ActionListener {
+public class ACMERescue extends JFrame {
 
     private JButton cadastroEvento;
     private JButton cadastroEquipe;
@@ -14,40 +14,35 @@ public class ACMERescue implements ActionListener {
     private JPanel ACMERescueMenu;
     private JPanel CadastroEvento;
     private JPanel panel1;
+    private CadastroEquipe cadastroEquipePainel = new CadastroEquipe(this);
 
     public ACMERescue(){
-        JFrame frame = new JFrame();
-        frame.setContentPane(ACMERescueMenu);
-        frame.setSize(600,400);
-        frame.setTitle("ACMERescue");
+        super();
+        this.setContentPane(ACMERescueMenu);
+        this.setSize(600,400);
+        this.setTitle("ACMERescue");
         ImageIcon imageIcon = new ImageIcon("icon.png");
-        frame.setLocationRelativeTo(null);
-        frame.setIconImage(imageIcon.getImage());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        this.setIconImage(imageIcon.getImage());
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
 
-        cadastroEvento.addActionListener(this);
-        cadastroEquipe.addActionListener(this);
-        cadastroEquipamento.addActionListener(this);
-        ccccButton1.addActionListener(this);
-        button5.addActionListener(this);
-
-        frame.setVisible(true);
-
+        cadastroEquipe.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               mudarPainel(1);
+            }
+        });
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource()== cadastroEvento){
-            new CadastroEvento();
-            ACMERescueMenu.disable();
-
-        }
-        else if(e.getSource()== cadastroEquipe){
-            new CadastroEquipe();
+    public void mudarPainel(int painel) {
+        switch(painel) {
+            case 1:
+                this.setContentPane(cadastroEquipePainel.getPainel());
+                this.setSize(800,400);
+                break;
         }
 
-        else if(e.getSource()== cadastroEquipamento){
-            new CadastroEquipamento();
-        }
     }
 }
+
