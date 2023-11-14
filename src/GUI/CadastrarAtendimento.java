@@ -7,17 +7,14 @@
     import javax.swing.*;
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
+    import java.util.ArrayList;
 
     public class CadastrarAtendimento extends JFrame{
         private JPanel painel;
-        private JTextField textField1;
-        private JTextField textField2;
-        private JTextField textField3;
+        private JTextField textField1, textField2, textField3;
+        private ArrayList<JTextField> camposDeTexto;
         private JTextArea textArea1;
-        private JButton cadastrarButton;
-        private JButton limparButton;
-        private JButton mostrarDadosButton;
-        private JButton finalizarButton;
+        private JButton cadastrarButton, limparButton, mostrarDadosButton, finalizarButton;
         private ACMERescue acmeRescue;
         private Evento eventoSelecionado;
         private AppAtendimento appAtendimento = new AppAtendimento();
@@ -25,6 +22,10 @@
         public CadastrarAtendimento(ACMERescue acmeRescue, Evento eventoSelecionado){
             this.acmeRescue = acmeRescue;
             this.eventoSelecionado = eventoSelecionado;
+            camposDeTexto = new ArrayList<>();
+            camposDeTexto.add(textField1);
+            camposDeTexto.add(textField2);
+            camposDeTexto.add(textField3);
 
             cadastrarButton.addActionListener(new ActionListener() {
                 @Override
@@ -33,15 +34,16 @@
                        int cod = Integer.parseInt(textField1.getText().trim());
                        String dataInicio = textField2.getText().trim();
                        int duracao = Integer.parseInt(textField3.getText().trim());
-                       String status = "PENDENTE";
-                       Evento evento = eventoSelecionado;
+                       String status = "PENDENTE"; //Todos obj atendimento quando instanciado fica no estado pendente.
+
                        Atendimento atendimento = new Atendimento(cod,dataInicio,duracao,status,eventoSelecionado);
-                       if(eventoSelecionado.getAtendimento() != null){
+
+                       if (eventoSelecionado.getAtendimento() != null){
                            textArea1.append("Erro! Esse evento já possuí um atendimento.");
                        }
-                       if(appAtendimento.add(atendimento)){
+                       if (appAtendimento.add(atendimento)){
                            textArea1.append("Atendimendo cadastrado com sucesso!");
-                       } else{
+                       } else {
                            textArea1.append("Erro! Já existe um atendimento com esse código.");
                        }
                    }
@@ -53,24 +55,24 @@
             limparButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    textField1.setText("");
-                    textField2.setText("");
-                    textField3.setText("");
+
+                    for (JTextField campoDeTexto : camposDeTexto) {
+                        campoDeTexto.setText("");
+                    }
+
                     textArea1.setText("");
                 }
             });
             mostrarDadosButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(appAtendimento.getAtendimentosPendentes().isEmpty()){
+                    if (appAtendimento.getAtendimentosPendentes().isEmpty()){
                         textArea1.append("Nenhum atendimento cadastrado.");
-                    } else{
-                        for(Atendimento a : appAtendimento.getAtendimentosPendentes()){
-                            textArea1.append("Codigo: " + a.getCod() + "\n" + "Data de inicio: " + a.getDataInicio() + "\n" + "Duração: " + a.getDuracao() + "\n" + "Status: " + a.getStatus() + "\n" + "Evento: " + a.getEvento() +"\n\n");
-
+                    } else {
+                        for (Atendimento atendimento : appAtendimento.getAtendimentosPendentes()){
+                            textArea1.append("Atendimento:\n" + atendimento.toString());
                         }
                     }
-
                 }
             });
             finalizarButton.addActionListener(new ActionListener() {
