@@ -1,5 +1,6 @@
 package GUI;
 
+import app.AppEquipe;
 import dados.Equipe;
 
 import javax.swing.*;
@@ -20,15 +21,15 @@ public class CadastroEquipe extends JFrame implements ActionListener {
     private JButton voltar;
     private JTextArea textArea1;
     private JPanel cadastroEquipe;
-    private ArrayList<Equipe> equipes;
+    private AppEquipe appEquipe;
 
     public CadastroEquipe(){
         super();
+        appEquipe = new AppEquipe();
         cadastrar.addActionListener(this);
         limpar.addActionListener(this);
         mostrarDados.addActionListener(this);
         voltar.addActionListener(this);
-        equipes = new ArrayList<>();
 
         setContentPane(cadastroEquipe);
         setTitle("ACMERescue");
@@ -47,14 +48,12 @@ public class CadastroEquipe extends JFrame implements ActionListener {
             double latitude = Double.parseDouble(textField3.getText().trim());
             double longitude = Double.parseDouble(textField4.getText().trim());
             Equipe equipe = new Equipe(codinome,quantidade,latitude,longitude);
-
-            for(Equipe e:equipes){
-                if(e.getCodinome().equals(equipe.getCodinome())){
-                    textArea1.append("Já existe uma equipe com esse codinome.\n");
-                }
+            if(appEquipe.cadastrarEquipe(equipe)) {
+                textArea1.append("Equipe cadastrada com sucesso.");
             }
-            equipes.add(equipe);
-            textArea1.append("Equipe cadastrada com sucesso.\n");
+            else {
+                textArea1.append("Já existe uma equipe com esse codinome;");
+            }
         }
         catch(NumberFormatException e){
             textArea1.append("Formato inválido, tente novamente!\n");
@@ -74,6 +73,7 @@ public class CadastroEquipe extends JFrame implements ActionListener {
     }
 
     private void mostrarDados() {
+        ArrayList<Equipe> equipes = appEquipe.getEquipes();
 
         Collections.sort(equipes);
 

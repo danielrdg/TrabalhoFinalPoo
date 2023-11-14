@@ -1,5 +1,6 @@
 package GUI;
 
+import app.AppEvento;
 import dados.Ciclone;
 import dados.Evento;
 import dados.Seca;
@@ -36,10 +37,7 @@ public class CadastroEvento extends JFrame implements ActionListener {
     private JLabel labelSeca;
     private JTextField txtSeca;
     private JButton botaoConfirmarSec;
-
-
-
-    private ArrayList<Evento>eventos = new ArrayList<>();
+    private AppEvento appEvento;
 
     public CadastroEvento() {
         super();
@@ -58,6 +56,7 @@ public class CadastroEvento extends JFrame implements ActionListener {
         limparButton.addActionListener(this);
         finalizarButton.addActionListener(this);
         voltarButton.addActionListener(this);
+        appEvento = new AppEvento();
 
         setContentPane(CadastroE);
         setSize(600,400);
@@ -105,6 +104,7 @@ public class CadastroEvento extends JFrame implements ActionListener {
 
                     botaoConfirmarCic.addActionListener(event -> {
                         try {
+                            ArrayList<Evento> eventos = appEvento.getEventos();
                             double vel = Double.parseDouble(txtCiclone.getText());
                             double prec = Double.parseDouble(txtPrecipitacao.getText());
                             eventos.add(new Ciclone(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, vel, prec));
@@ -139,6 +139,7 @@ public class CadastroEvento extends JFrame implements ActionListener {
 
                     botaoConfirmarTer.addActionListener(event -> {
                         try {
+                            ArrayList<Evento> eventos = appEvento.getEventos();
                             double mag = Double.parseDouble(txtTerremoto.getText());
                             eventos.add(new Terremoto(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, mag));
                             textArea1.append("Evento cadastrado!" + "\n");
@@ -173,6 +174,7 @@ public class CadastroEvento extends JFrame implements ActionListener {
 
                     botaoConfirmarSec.addActionListener(event -> {
                         try {
+                            ArrayList<Evento> eventos = appEvento.getEventos();
                             int est = Integer.parseInt(txtSeca.getText());
                             eventos.add(new Seca(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, est));
                             textArea1.append("Evento cadastrado!" + "\n");
@@ -193,14 +195,16 @@ public class CadastroEvento extends JFrame implements ActionListener {
         }
     }
     private boolean existeCodigo(String codigo){
-        for(Evento eventos: eventos){
-            if (eventos.getCodigo().equals(codigo)){
+        ArrayList<Evento> eventos = appEvento.getEventos();
+        for(Evento evento : eventos){
+            if (evento.getCodigo().equals(codigo)){
                 return true;
             }
         }
         return false;
     }
     private void mostrarDados() {
+        ArrayList<Evento> eventos = appEvento.getEventos();
         if (eventos.isEmpty()) {
             textArea1.append("Nenhum evento cadastrado."+"\n");
         } else {
