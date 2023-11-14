@@ -46,6 +46,28 @@ public class Atendimento {
 		return RAIO_TERRA * c;
 		
 	}
-	
-	
+
+	public int getCod() {
+		return cod;
+	}
+
+	public String getDataInicio() {
+		return dataInicio;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public int getDuracao() {
+		return duracao;
+	}
+
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }

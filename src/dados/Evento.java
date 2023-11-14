@@ -30,6 +30,10 @@ public class Evento implements Comparable<Evento> {
         return latitude;
     }
 
+    public Atendimento getAtendimento() {
+        return atendimento;
+    }
+
     public void setAtendimento(Atendimento atendimento) {
         this.atendimento = atendimento;
     }
