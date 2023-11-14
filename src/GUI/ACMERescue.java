@@ -11,14 +11,14 @@ public class ACMERescue extends JFrame {
     private JButton cadastroEquipamento;
     private JButton ccccButton1;
     private JButton button5;
-    private JPanel ACMERescueMenu;
+    private JPanel painel;
     private JPanel CadastroEvento;
     private JPanel panel1;
     private CadastroEquipe cadastroEquipePainel = new CadastroEquipe(this);
 
     public ACMERescue(){
         super();
-        this.setContentPane(ACMERescueMenu);
+        this.setContentPane(painel);
         this.setSize(600,400);
         this.setTitle("ACMERescue");
         ImageIcon imageIcon = new ImageIcon("icon.png");
@@ -43,6 +43,10 @@ public class ACMERescue extends JFrame {
                 break;
         }
 
+    }
+
+    public JPanel getPainel() {
+        return painel;
     }
 }
 
