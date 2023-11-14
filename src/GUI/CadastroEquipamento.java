@@ -1,5 +1,6 @@
 package GUI;
 
+import app.AppEquipamento;
 import dados.Equipamento;
 import dados.Evento;
 
@@ -20,7 +21,7 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
     private JButton mostrarDadosButton;
     private JTextArea textArea1;
     private JButton voltarButton;
-    private ArrayList<Equipamento>equipamentos = new ArrayList<>();
+    private AppEquipamento appEquipamento;
 
     public CadastroEquipamento() {
 
@@ -28,6 +29,7 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
         limparButton.addActionListener(this);
         mostrarDadosButton.addActionListener(this);
         voltarButton.addActionListener(this);
+        appEquipamento = new AppEquipamento();
 
         setContentPane(EquipamentoCad);
         setSize(600,400);
@@ -40,27 +42,18 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
 
     }
 
-    private boolean existeID(int id){
-        for(Equipamento equipamento: equipamentos){
-            if (equipamento.getId()==id){
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     private void cadastrarEquipamento() {
         try {
-            int idEquipamento = Integer.parseInt(textField1.getText());
-            String nomeEquipamento =textField2.getText();
-            double custoDia = Double.parseDouble(textField3.getText());
-            if (existeID(idEquipamento)) {
-                textArea1.append("Erro! Já existe um equipamento com esse ID."+"\n");
+            int idEquipamento = Integer.parseInt(textField1.getText().trim());
+            String nomeEquipamento =textField2.getText().trim();
+            double custoDia = Double.parseDouble(textField3.getText().trim());
+            Equipamento equipamento = new Equipamento(idEquipamento, nomeEquipamento, custoDia);
+            if(appEquipamento.cadastrarEquipamento(equipamento)) {
+                textArea1.append("Equipamento cadastrado com sucesso.");
             }
             else {
-                equipamentos.add(new Equipamento(idEquipamento, nomeEquipamento, custoDia));
-                textArea1.append("Equipamento cadastrado!"+"\n");
+                textArea1.append("Erro! Já existe um equipamento com esse ID.");
             }
         }
         catch (NumberFormatException e){
@@ -70,6 +63,8 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
 
 
     private void mostrarEquipamentos() {
+        ArrayList<Equipamento> equipamentos = appEquipamento.getEquipamentos();
+
         if (equipamentos.isEmpty()){
             textArea1.append("Nenhum equipamento cadastrado."+"\n");
         }
