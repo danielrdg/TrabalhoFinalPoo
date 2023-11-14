@@ -1,5 +1,6 @@
 package GUI;
 
+import dados.Atendimento;
 import dados.Evento;
 
 import javax.swing.*;
@@ -27,7 +28,17 @@ public class CadastrarAtendimento extends JFrame{
         cadastrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+               try {
+                   int cod = Integer.parseInt(textField1.getText().trim());
+                   String dataInicio = textField2.getText().trim();
+                   int duracao = Integer.parseInt(textField3.getText().trim());
+                   String status = "PENDENTE";
+                   Evento evento = eventoSelecionado;
+                   Atendimento atendimento = new Atendimento(cod,dataInicio,duracao,status,eventoSelecionado);
+               }
+               catch(NumberFormatException ex){
+                   textArea1.append("Formato invalido, tente novamente.");
+               }
             }
         });
         limparButton.addActionListener(new ActionListener() {

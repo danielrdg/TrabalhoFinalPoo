@@ -21,11 +21,10 @@ public class ACMERescue extends JFrame {
     private ArrayList<Evento> eventos;
     private CadastroEquipe cadastroEquipePainel = new CadastroEquipe(this, equipes);
     private Evento eventoSelecionado;
-    private MostrarEvento mostrarEvento = new MostrarEvento(this,eventoSelecionado);
+    private MostrarEvento mostrarEvento = new MostrarEvento(this,null);
 
     public ACMERescue(){
         super();
-        this.eventoSelecionado = mostrarEvento.getEventoSelecionado();
         this.setContentPane(painel);
         this.setSize(600,400);
         this.setTitle("ACMERescue");
@@ -44,6 +43,9 @@ public class ACMERescue extends JFrame {
         cadastroAtendimento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mostrarEvento = new MostrarEvento(ACMERescue.this, null);
+                Evento eventoSelecionado = mostrarEvento.getEventoSelecionado();
+                CadastrarAtendimento cadastrarAtendimento = new CadastrarAtendimento(ACMERescue.this, eventoSelecionado);
                 mudarPainel(4);
             }
         });
@@ -57,6 +59,7 @@ public class ACMERescue extends JFrame {
                 break;
 
             case 4:
+                Evento eventoSelecionado = mostrarEvento.getEventoSelecionado();
                 this.setContentPane(mostrarEvento.getPainel());
                 this.setSize(800,400);
                 break;

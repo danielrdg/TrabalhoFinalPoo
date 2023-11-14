@@ -17,21 +17,21 @@ public class MostrarEvento extends JFrame {
     private AppEvento appEvento = new AppEvento();
     private Evento eventoSelecionado;
 
-    public MostrarEvento(ACMERescue acmeRescue, Evento eventoSelecionado) {
-        this.acmeRescue = acmeRescue;
-        this.eventoSelecionado = eventoSelecionado;
-
+    public MostrarEvento(ACMERescue acmeRescue, MostrarEvento mostrarEvento) {
+        super();
         DefaultComboBoxModel<Evento> comboBoxModel = new DefaultComboBoxModel<>();
 
         for (Evento e : appEvento.getEventos()){
             comboBoxModel.addElement(e);
         }
         comboBox1.setModel(comboBoxModel);
+        this.acmeRescue = acmeRescue;
+
 
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Evento eventoSelecionado = (Evento) comboBox1.getSelectedItem();
+                MostrarEvento.this.eventoSelecionado = (Evento) comboBox1.getSelectedItem();
                 CadastrarAtendimento cadastrarAtendimento = new CadastrarAtendimento(acmeRescue, eventoSelecionado);
                 acmeRescue.setSize(800,400);
                 acmeRescue.setContentPane(cadastrarAtendimento.getPainel());
