@@ -1,20 +1,26 @@
 package GUI;
 
+import dados.*;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ACMERescue extends JFrame {
 
     private JButton cadastroEvento;
     private JButton cadastroEquipe;
     private JButton cadastroEquipamento;
-    private JButton ccccButton1;
+    private JButton cadastroAtendimento;
     private JButton button5;
     private JPanel painel;
     private JPanel CadastroEvento;
     private JPanel panel1;
-    private CadastroEquipe cadastroEquipePainel = new CadastroEquipe(this);
+    private ArrayList<Equipe> equipes;
+    private ArrayList<Evento> eventos;
+    private CadastroEquipe cadastroEquipePainel = new CadastroEquipe(this, equipes);
+    private MostrarEvento mostrarEvento = new MostrarEvento(this, eventos);
 
     public ACMERescue(){
         super();
@@ -33,12 +39,23 @@ public class ACMERescue extends JFrame {
                mudarPainel(1);
             }
         });
+        cadastroAtendimento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mudarPainel(4);
+            }
+        });
     }
 
     public void mudarPainel(int painel) {
         switch(painel) {
             case 1:
                 this.setContentPane(cadastroEquipePainel.getPainel());
+                this.setSize(800,400);
+                break;
+
+            case 4:
+                this.setContentPane(mostrarEvento.getPainel());
                 this.setSize(800,400);
                 break;
         }

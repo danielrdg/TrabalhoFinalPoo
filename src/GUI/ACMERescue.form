@@ -68,14 +68,14 @@
           <text value="Cadastrar Equipamento"/>
         </properties>
       </component>
-      <component id="4bcf0" class="javax.swing.JButton" binding="ccccButton1" default-binding="true">
+      <component id="4bcf0" class="javax.swing.JButton" binding="cadastroAtendimento">
         <constraints>
           <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="306" height="30"/>
           </grid>
         </constraints>
         <properties>
-          <text value="cccc"/>
+          <text value="Cadastrar Atendimento"/>
         </properties>
       </component>
       <component id="3823" class="javax.swing.JButton" binding="button5" default-binding="true">
