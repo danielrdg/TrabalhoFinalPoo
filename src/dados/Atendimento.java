@@ -70,4 +70,9 @@ public class Atendimento {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	@Override
+	public String toString() {
+		return "Código: " + getCod() + "\n Data de início: " + getDataInicio() + "\nDuração: " + getDuracao() + "\nStatus: " + getStatus() + "Evento associado: " + getEvento() + "\n\n";
+	}
 }

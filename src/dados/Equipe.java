@@ -58,4 +58,9 @@ public class Equipe implements Comparable<Equipe> {
 	public int compareTo(Equipe o) {
 		return this.getCodinome().compareTo(o.getCodinome());
 	}
+
+	@Override
+	public String toString() {
+		return "Codinome: " + getCodinome() + "\nQuantidade: " + getQuantidade() + "\nLatitude: " + getLatitude() + "\nLongitude: " + getLongitude() + "\n\n";
+	}
 }
