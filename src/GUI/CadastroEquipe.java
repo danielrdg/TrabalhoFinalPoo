@@ -20,13 +20,14 @@ public class CadastroEquipe implements ActionListener {
     private JButton voltar;
     private JTextArea textArea1;
     private JPanel painel;
-    private AppEquipe appEquipe;
+    private AppEquipe appEquipe = new AppEquipe();
+    private ArrayList<Equipe> equipes = appEquipe.getEquipes();
     private ACMERescue acmeRescue;
 
-    public CadastroEquipe(ACMERescue acmeRescue){
+    public CadastroEquipe(ACMERescue acmeRescue, ArrayList<Equipe> equipes){
         super();
         this.acmeRescue = acmeRescue;
-        appEquipe = new AppEquipe();
+        this.equipes = equipes;
         cadastrar.addActionListener(this);
         limpar.addActionListener(this);
         mostrarDados.addActionListener(this);
