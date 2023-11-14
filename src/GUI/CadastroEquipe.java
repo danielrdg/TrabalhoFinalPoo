@@ -75,14 +75,18 @@ public class CadastroEquipe implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == cadastrar){
+        if(e.getSource() == cadastrar) {
             cadastrarEquipe();
         }
-        else if(e.getSource() == limpar){
+        else if(e.getSource() == limpar) {
             limparCampos();
         }
-        else if(e.getSource() == mostrarDados){
+        else if(e.getSource() == mostrarDados) {
             mostrarDados();
+        }
+        else if(e.getSource() == voltar) {
+            acmeRescue.setContentPane(acmeRescue.getPainel());
+            acmeRescue.setSize(600,400);
         }
     }
 
