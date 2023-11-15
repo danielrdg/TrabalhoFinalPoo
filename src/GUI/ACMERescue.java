@@ -14,8 +14,10 @@ public class ACMERescue extends JFrame {
     private ArrayList<Equipe> equipes;
     private ArrayList<Evento> eventos;
     private CadastroEquipe cadastroEquipePainel = new CadastroEquipe(this, equipes);
+    private CadastroEvento cadastroEventoPainel = new CadastroEvento(this);
+    private CadastroEquipamento cadastroEquipamentoPainel = new CadastroEquipamento(this);
     private Evento eventoSelecionado;
-    private MostrarEvento mostrarEvento = new MostrarEvento(this,null);
+    private MostrarEvento mostrarEvento = new MostrarEvento(this);
     private ImageIcon imageIcon;
 
     public ACMERescue(){
@@ -32,16 +34,27 @@ public class ACMERescue extends JFrame {
         cadastroEquipe.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               mudarPainel(1);
+               mudarPainel(2);
             }
         });
         cadastroAtendimento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mostrarEvento = new MostrarEvento(ACMERescue.this, null);
                 Evento eventoSelecionado = mostrarEvento.getEventoSelecionado();
                 CadastrarAtendimento cadastrarAtendimento = new CadastrarAtendimento(ACMERescue.this, eventoSelecionado);
                 mudarPainel(4);
+            }
+        });
+        cadastroEvento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mudarPainel(1);
+            }
+        });
+        cadastroEquipamento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mudarPainel(3);
             }
         });
     }
@@ -49,7 +62,17 @@ public class ACMERescue extends JFrame {
     public void mudarPainel(int painel) {
         switch(painel) {
             case 1:
+                this.setContentPane(cadastroEventoPainel.getPainel());
+                this.setSize(800,400);
+                break;
+
+            case 2:
                 this.setContentPane(cadastroEquipePainel.getPainel());
+                this.setSize(800,400);
+                break;
+
+            case 3:
+                this.setContentPane(cadastroEquipamentoPainel.getPainel());
                 this.setSize(800,400);
                 break;
 
