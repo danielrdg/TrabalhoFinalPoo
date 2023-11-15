@@ -10,13 +10,10 @@ import java.util.ArrayList;
 public class ACMERescue extends JFrame {
 
     private JButton cadastroEvento, cadastroEquipe, cadastroAtendimento, button5, cadastroEquipamento;
-    private JPanel painel, CadastroEvento, panel1;
-    private ArrayList<Equipe> equipes;
-    private ArrayList<Evento> eventos;
-    private CadastroEquipe cadastroEquipePainel = new CadastroEquipe(this, equipes);
+    private JPanel painel,painel1;
+    private CadastroEquipe cadastroEquipePainel = new CadastroEquipe(this);
     private CadastroEvento cadastroEventoPainel = new CadastroEvento(this);
     private CadastroEquipamento cadastroEquipamentoPainel = new CadastroEquipamento(this);
-    private Evento eventoSelecionado;
     private MostrarEvento mostrarEvento = new MostrarEvento(this);
     private ImageIcon imageIcon;
 
