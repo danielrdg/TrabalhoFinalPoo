@@ -14,33 +14,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CadastroEvento extends JFrame implements ActionListener {
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JButton confirmarButton;
-    private JButton limparButton;
-    private JButton mostrarDadosButton;
-    private JButton finalizarButton;
-    private JPanel CadastroE;
+    private JTextField textField1, textField2,textField3,textField4,textField5, txtSeca,txtTerremoto,txtPrecipitacao,txtCiclone;
+    private JButton confirmarButton, limparButton, mostrarDadosButton, finalizarButton,botaoConfirmarCic,botaoConfirmarTer,botaoConfirmarSec;
+    private JPanel painel;
     private JTextArea textArea1;
-    private JButton voltarButton;
-    private JTextField textField5;
-    private JLabel labelVelocidade;
-    private JTextField txtCiclone;
-    private JLabel labelPrecipitacao;
-    private JTextField txtPrecipitacao;
-    private JButton botaoConfirmarCic;
-    private JLabel labelTerremoto;
-    private JTextField txtTerremoto;
-    private JButton botaoConfirmarTer;
-    private JLabel labelSeca;
-    private JTextField txtSeca;
-    private JButton botaoConfirmarSec;
+    private JLabel labelVelocidade, labelPrecipitacao,labelTerremoto,labelSeca;
     private AppEvento appEvento;
+    private ACMERescue acmeRescue;
 
-    public CadastroEvento() {
+    public CadastroEvento(ACMERescue acmeRescue) {
         super();
+        this.acmeRescue = acmeRescue;
+
         for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
             if ("Nimbus".equals(info.getName())) {
                 try {
@@ -50,31 +35,20 @@ public class CadastroEvento extends JFrame implements ActionListener {
                 }
                 break;
             }}
-
         confirmarButton.addActionListener(this);
         mostrarDadosButton.addActionListener(this);
         limparButton.addActionListener(this);
         finalizarButton.addActionListener(this);
-        voltarButton.addActionListener(this);
         appEvento = new AppEvento();
-
-        setContentPane(CadastroE);
-        setSize(600,400);
-        setTitle("ACMERescue");
-        ImageIcon imageIcon = new ImageIcon("icon.png");
-        setLocationRelativeTo(null);
-        setIconImage(imageIcon.getImage());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
     }
 
     private void cadastrarEvento(){
         try {
-            String codigoEvento =textField1.getText();
-            String dataEvento =textField2.getText();
-            double latitudeEvento = Double.parseDouble(textField3.getText());
-            double longitudeEvento = Double.parseDouble(textField4.getText());
-            int tipoEvento = Integer.parseInt(textField5.getText());
+            String codigoEvento = textField1.getText().trim();
+            String dataEvento = textField2.getText().trim();
+            double latitudeEvento = Double.parseDouble(textField3.getText().trim());
+            double longitudeEvento = Double.parseDouble(textField4.getText().trim());
+            int tipoEvento = Integer.parseInt(textField5.getText().trim());
 
             if (existeCodigo(codigoEvento)) {
                 textArea1.append("Erro! Já existe um evento com esse código."+"\n");
@@ -104,13 +78,21 @@ public class CadastroEvento extends JFrame implements ActionListener {
 
                     botaoConfirmarCic.addActionListener(event -> {
                         try {
-                            ArrayList<Evento> eventos = appEvento.getEventos();
-                            double vel = Double.parseDouble(txtCiclone.getText());
-                            double prec = Double.parseDouble(txtPrecipitacao.getText());
-                            eventos.add(new Ciclone(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, vel, prec));
-                            textArea1.append("Evento cadastrado!" + "\n");
+                            double vel = Double.parseDouble(txtCiclone.getText().trim());
+                            double prec = Double.parseDouble(txtPrecipitacao.getText().trim());
+                            Ciclone ciclone = new Ciclone(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, vel, prec);
+
+                            if (appEvento.cadastrarEvento(ciclone)) {
+                                textArea1.append("Evendo cadastrado!" + "\n");
+                            }
+                            else {
+                                textArea1.append("Erro! Já existe um evento com esse código." + "\n");
+                            }
+
                             Ciclo.setVisible(false);
-                        } catch (NumberFormatException ex) {
+
+                        }
+                        catch (NumberFormatException ex) {
                             textArea1.append("Formato inválido para velocidade ou precipitação. Tente novamente." + "\n");
                         }
                     });
@@ -139,12 +121,17 @@ public class CadastroEvento extends JFrame implements ActionListener {
 
                     botaoConfirmarTer.addActionListener(event -> {
                         try {
-                            ArrayList<Evento> eventos = appEvento.getEventos();
-                            double mag = Double.parseDouble(txtTerremoto.getText());
-                            eventos.add(new Terremoto(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, mag));
-                            textArea1.append("Evento cadastrado!" + "\n");
+                            double mag = Double.parseDouble(txtTerremoto.getText().trim());
+                            Terremoto terremoto = new Terremoto(codigoEvento,dataEvento,latitudeEvento,longitudeEvento,mag);
+                            if (appEvento.cadastrarEvento(terremoto)) {
+                                textArea1.append("Evento cadastrado!" + "\n");
+                            }
+                            else {
+                                textArea1.append("Erro! Já existe um evento com esse código" + "\n");
+                            }
                             Terre.setVisible(false);
-                        } catch (NumberFormatException ex) {
+                        }
+                        catch (NumberFormatException ex) {
                             textArea1.append("Formato inválido para velocidade ou precipitação. Tente novamente." + "\n");
                         }
                     });
@@ -174,12 +161,19 @@ public class CadastroEvento extends JFrame implements ActionListener {
 
                     botaoConfirmarSec.addActionListener(event -> {
                         try {
-                            ArrayList<Evento> eventos = appEvento.getEventos();
-                            int est = Integer.parseInt(txtSeca.getText());
-                            eventos.add(new Seca(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, est));
-                            textArea1.append("Evento cadastrado!" + "\n");
+                            int est = Integer.parseInt(txtSeca.getText().trim());
+                            Seca seca = new Seca(codigoEvento,dataEvento,latitudeEvento,longitudeEvento,est);
+
+                            if (appEvento.cadastrarEvento(seca)) {
+                                textArea1.append("Evento cadastrado." + "\n");
+                            }
+                            else {
+                                textArea1.append("Erro! Já existe um evento com esse código" + "\n");
+                            }
                             Seca.setVisible(false);
-                        } catch (NumberFormatException ex) {
+
+                        }
+                        catch (NumberFormatException ex) {
                             textArea1.append("Formato inválido para velocidade ou precipitação. Tente novamente." + "\n");
                         }
                     });
@@ -195,8 +189,7 @@ public class CadastroEvento extends JFrame implements ActionListener {
         }
     }
     private boolean existeCodigo(String codigo){
-        ArrayList<Evento> eventos = appEvento.getEventos();
-        for(Evento evento : eventos){
+        for (Evento evento : appEvento.getEventos()){
             if (evento.getCodigo().equals(codigo)){
                 return true;
             }
@@ -204,12 +197,12 @@ public class CadastroEvento extends JFrame implements ActionListener {
         return false;
     }
     private void mostrarDados() {
-        ArrayList<Evento> eventos = appEvento.getEventos();
-        if (eventos.isEmpty()) {
+
+        if (appEvento.getEventos().isEmpty()) {
             textArea1.append("Nenhum evento cadastrado."+"\n");
         } else {
-            Collections.sort(eventos);
-            for (Evento evento1 : eventos){
+            Collections.sort(appEvento.getEventos());
+            for (Evento evento1 : appEvento.getEventos()){
                 textArea1.append("Código: "+evento1.getCodigo()+"\n");
                 textArea1.append("Data: " +evento1.getData()+"\n");
                 textArea1.append("Latitude: "+evento1.getLatitude()+"\n");
@@ -243,23 +236,26 @@ public class CadastroEvento extends JFrame implements ActionListener {
             textField2.setText("");
             textField3.setText("");
             textField4.setText("");
+            textField5.setText("");
             textArea1.setText("");
         }
         else if (e.getSource() == mostrarDadosButton){
             mostrarDados();
         }
         else if (e.getSource() == finalizarButton){
-            dispose();
+            acmeRescue.setContentPane(acmeRescue.getPainel());
+            acmeRescue.setSize(600,400);
         }
-        else if (e.getSource() == voltarButton){
-            CadastroE.setVisible(false);
-        }
+
         else if (e.getSource() == botaoConfirmarCic){
             cadastrarEvento();
         }
 
     }
 
+    public JPanel getPainel() {
+        return painel;
+    }
 }
 
 
