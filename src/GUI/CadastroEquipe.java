@@ -17,7 +17,7 @@ public class CadastroEquipe extends JFrame implements ActionListener {
     private AppEquipe appEquipe = new AppEquipe();
     private ACMERescue acmeRescue;
 
-    public CadastroEquipe(ACMERescue acmeRescue, ArrayList<Equipe> equipes){
+    public CadastroEquipe(ACMERescue acmeRescue){
         super();
         this.acmeRescue = acmeRescue;
         camposDeTexto = new ArrayList<>();
