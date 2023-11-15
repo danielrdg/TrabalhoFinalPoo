@@ -9,26 +9,21 @@ import java.util.ArrayList;
 
 public class ACMERescue extends JFrame {
 
-    private JButton cadastroEvento;
-    private JButton cadastroEquipe;
-    private JButton cadastroEquipamento;
-    private JButton cadastroAtendimento;
-    private JButton button5;
-    private JPanel painel;
-    private JPanel CadastroEvento;
-    private JPanel panel1;
+    private JButton cadastroEvento, cadastroEquipe, cadastroAtendimento, button5;
+    private JPanel painel, CadastroEvento, panel1;
     private ArrayList<Equipe> equipes;
     private ArrayList<Evento> eventos;
     private CadastroEquipe cadastroEquipePainel = new CadastroEquipe(this, equipes);
     private Evento eventoSelecionado;
     private MostrarEvento mostrarEvento = new MostrarEvento(this,null);
+    private ImageIcon imageIcon;
 
     public ACMERescue(){
         super();
         this.setContentPane(painel);
         this.setSize(600,400);
         this.setTitle("ACMERescue");
-        ImageIcon imageIcon = new ImageIcon("icon.png");
+        imageIcon = new ImageIcon("icon.png");
         this.setLocationRelativeTo(null);
         this.setIconImage(imageIcon.getImage());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
