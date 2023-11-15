@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ACMERescue extends JFrame {
 
-    private JButton cadastroEvento, cadastroEquipe, cadastroAtendimento, button5;
+    private JButton cadastroEvento, cadastroEquipe, cadastroAtendimento, button5, cadastroEquipamento;
     private JPanel painel, CadastroEvento, panel1;
     private ArrayList<Equipe> equipes;
     private ArrayList<Evento> eventos;
