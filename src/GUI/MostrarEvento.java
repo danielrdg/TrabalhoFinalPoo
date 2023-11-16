@@ -5,43 +5,72 @@ import dados.Evento;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class MostrarEvento {
     private JPanel painel;
-    private JComboBox<Evento> comboBox1;
-    private JTextArea textArea1;
+    private JTextArea areaEventos;
     private JButton voltarButton;
     private JButton confirmarButton;
+    private JTextField campoCodigo;
+    private JButton limparButton;
     private ACMERescue acmeRescue;
+    private MostrarEvento mostrarEvento;
     private Evento eventoSelecionado;
-    private AppEvento appEvento = new AppEvento();
+    private CadastrarAtendimento cadastrarAtendimento;
+    private AppEvento appEvento;
 
     public MostrarEvento(ACMERescue acmeRescue) {
         super();
         this.acmeRescue = acmeRescue;
-        DefaultComboBoxModel<Evento> comboBoxModel = new DefaultComboBoxModel<>();
+        this.mostrarEvento = mostrarEvento;
+        this.cadastrarAtendimento = new CadastrarAtendimento(acmeRescue, this);
+        this.appEvento = acmeRescue.getAppEvento();
 
-        for (Evento evento : appEvento.getEventos()) { //Para cada evento na lista de eventos, adiciona-o à combo box.
-            comboBoxModel.addElement(evento);
+        if (appEvento.getEventos().isEmpty()) {
+            areaEventos.append("Nenhum evento cadastrado.\n");
+        } else {
+            for (Evento evento : appEvento.getEventos()) {
+                areaEventos.append(evento.toString());
+            }
         }
-        comboBox1.setModel(comboBoxModel);
-
 
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Evento eventoSelecionado = (Evento) comboBox1.getSelectedItem();
-                CadastrarAtendimento cadastrarAtendimento = new CadastrarAtendimento(acmeRescue, eventoSelecionado);
-                acmeRescue.setSize(800,400);
-                acmeRescue.setContentPane(cadastrarAtendimento.getPainel());
+                boolean eventoEncontrado = false;
+                try {
+                    for (Evento evento : appEvento.getEventos()) {
+                        if (evento.getCodigo().equals(campoCodigo.getText().trim())) {
+                            eventoSelecionado = evento;
+                            eventoEncontrado = true;
+                            acmeRescue.setContentPane(cadastrarAtendimento.getPainel());
+                            acmeRescue.setSize(600,400);
+                            break;
+                        }
+                    }
+
+                    if (eventoEncontrado) {
+                        areaEventos.append("Evento selecionado com sucesso!\n");
+                    } else {
+                        areaEventos.append("Não existe evento com o código fornecido.\n");
+                    }
+                } catch (NumberFormatException ex) {
+                    areaEventos.append("Erro! Digite um valor inteiro no campo código.\n");
+                }
             }
         });
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                acmeRescue.setSize(600,400);
+                acmeRescue.setSize(600, 400);
                 acmeRescue.setContentPane(acmeRescue.getPainel());
+            }
+        });
+        limparButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                areaEventos.setText("");
+                campoCodigo.setText("");
             }
         });
     }
@@ -53,4 +82,18 @@ public class MostrarEvento {
     public Evento getEventoSelecionado() {
         return eventoSelecionado;
     }
+
+    public void atualizarListaEventos() {
+        SwingUtilities.invokeLater(() -> {
+            areaEventos.setText("");
+            if (appEvento.getEventos().isEmpty()) {
+                areaEventos.append("Nenhum evento cadastrado.\n");
+            } else {
+                for (Evento evento : appEvento.getEventos()) {
+                    areaEventos.append(evento.toString());
+                }
+            }
+        });
+    }
+
 }

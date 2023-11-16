@@ -42,4 +42,9 @@ public class Evento implements Comparable<Evento> {
     public int compareTo(Evento o) {
         return this.getCodigo().compareTo(o.getCodigo());
     }
+
+    @Override
+    public String toString() {
+        return "Código: " + codigo + "\nData: " + data + "\nLatitude: " + latitude + "\nLongitude: " + longitude + "\n\n";
+    }
 }

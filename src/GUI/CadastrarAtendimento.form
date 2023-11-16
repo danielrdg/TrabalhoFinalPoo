@@ -1,60 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.CadastrarAtendimento">
-  <grid id="27dc6" binding="painel" layout-manager="GridLayoutManager" row-count="6" column-count="8" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="painel" layout-manager="GridLayoutManager" row-count="6" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="502" height="400"/>
+      <xy x="20" y="20" width="500" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <component id="6f8fd" class="javax.swing.JLabel">
+      <component id="efb68" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="6" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="DialogInput" size="20" style="1"/>
-          <text value="Cadastro de Atendimento"/>
+          <text value="Cadastro de Atendimentos"/>
         </properties>
       </component>
-      <vspacer id="1fa91">
-        <constraints>
-          <grid row="1" column="7" row-span="4" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <component id="467e9" class="javax.swing.JLabel">
+      <component id="6ab16" class="javax.swing.JLabel">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Codigo:"/>
+          <text value="Código: "/>
         </properties>
       </component>
-      <component id="bba4e" class="javax.swing.JLabel">
+      <component id="dacf5" class="javax.swing.JLabel">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Data de Inicio"/>
+          <text value="Data de inicio: "/>
         </properties>
       </component>
-      <component id="274fd" class="javax.swing.JLabel">
+      <component id="cdad7" class="javax.swing.JLabel">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Duração"/>
+          <text value="Duração: "/>
         </properties>
       </component>
-      <component id="edbf4" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
-        <constraints>
-          <grid row="5" column="2" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="156f4" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="77a03" class="javax.swing.JTextField" binding="campoCodigo">
         <constraints>
           <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -62,7 +49,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="82378" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="d4e29" class="javax.swing.JTextField" binding="campoData">
         <constraints>
           <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -70,7 +57,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="f4a71" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+      <component id="50834" class="javax.swing.JTextField" binding="campoDuracao">
         <constraints>
           <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -78,37 +65,45 @@
         </constraints>
         <properties/>
       </component>
-      <component id="44496" class="javax.swing.JButton" binding="cadastrarButton">
+      <component id="bd228" class="javax.swing.JButton" binding="confirmarButton" default-binding="true">
         <constraints>
-          <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Cadastrar"/>
+          <text value="Confirmar"/>
         </properties>
       </component>
-      <component id="f73bc" class="javax.swing.JButton" binding="limparButton">
+      <component id="59634" class="javax.swing.JButton" binding="limparButton" default-binding="true">
         <constraints>
-          <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Limpar"/>
         </properties>
       </component>
-      <component id="1af6a" class="javax.swing.JButton" binding="mostrarDadosButton" default-binding="true">
+      <component id="6fc9d" class="javax.swing.JButton" binding="mostrarDadosButton" default-binding="true">
         <constraints>
-          <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Mostrar dados"/>
+          <text value="Mostrar Dados"/>
         </properties>
       </component>
-      <component id="f383c" class="javax.swing.JButton" binding="finalizarButton" default-binding="true">
+      <component id="e7a73" class="javax.swing.JButton" binding="voltarButton" default-binding="true">
         <constraints>
-          <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Finalizar"/>
+          <text value="Voltar"/>
         </properties>
+      </component>
+      <component id="4d203" class="javax.swing.JTextArea" binding="areaTexto">
+        <constraints>
+          <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties/>
       </component>
     </children>
   </grid>
