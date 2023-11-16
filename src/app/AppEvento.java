@@ -23,4 +23,13 @@ public class AppEvento {
     public ArrayList<Evento> getEventos() {
         return eventos;
     }
+
+    public Evento getEventoByCodigo(String codigo){
+        for (Evento e : eventos) {
+            if (e.getCodigo().equals(codigo)) {
+                return e;
+            }
+        }
+        return null;
+    }
 }

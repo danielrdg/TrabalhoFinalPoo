@@ -22,24 +22,14 @@ public class CadastroEvento extends JFrame implements ActionListener {
     private AppEvento appEvento;
     private ACMERescue acmeRescue;
 
-    public CadastroEvento(ACMERescue acmeRescue) {
+    public CadastroEvento(ACMERescue acmeRescue, AppEvento appEvento) {
         super();
         this.acmeRescue = acmeRescue;
-
-        for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                try {
-                    UIManager.setLookAndFeel(info.getClassName());
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }}
+        this.appEvento = appEvento;
         confirmarButton.addActionListener(this);
         mostrarDadosButton.addActionListener(this);
         limparButton.addActionListener(this);
         finalizarButton.addActionListener(this);
-        appEvento = new AppEvento();
     }
 
     private void cadastrarEvento(){

@@ -11,7 +11,7 @@ public class AppAtendimento {
         atendimentosPendentes = new LinkedList<>();
     }
 
-    public boolean add(Atendimento atendimento){
+    public boolean cadastrarAtendimento(Atendimento atendimento){
         for(Atendimento a : atendimentosPendentes){
             if(a.getCod() == atendimento.getCod()){
                 return false;

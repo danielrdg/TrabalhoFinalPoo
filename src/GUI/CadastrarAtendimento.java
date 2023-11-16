@@ -1,90 +1,102 @@
-    package GUI;
+package GUI;
 
-    import app.AppAtendimento;
-    import dados.Atendimento;
-    import dados.Evento;
+import app.AppAtendimento;
+import app.AppEvento;
+import dados.Atendimento;
+import dados.Evento;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-    import javax.swing.*;
-    import java.awt.event.ActionEvent;
-    import java.awt.event.ActionListener;
-    import java.util.ArrayList;
+public class CadastrarAtendimento {
+    private JTextField campoCodigo, campoData, campoDuracao;
+    private JButton confirmarButton, limparButton, mostrarDadosButton, voltarButton;
+    private JTextArea areaTexto;
+    private JPanel painel;
+    private AppAtendimento appAtendimento;
+    private ACMERescue acmeRescue;
+    private MostrarEvento mostrarEvento;
+    private Evento eventoSelecionado;
 
-    public class CadastrarAtendimento extends JFrame{
-        private JPanel painel;
-        private JTextField textField1, textField2, textField3;
-        private ArrayList<JTextField> camposDeTexto;
-        private JTextArea textArea1;
-        private JButton cadastrarButton, limparButton, mostrarDadosButton, finalizarButton;
-        private ACMERescue acmeRescue;
-        private Evento eventoSelecionado;
-        private AppAtendimento appAtendimento = new AppAtendimento();
+    public CadastrarAtendimento(ACMERescue acmeRescue, MostrarEvento mostrarEvento) {
+        this.acmeRescue = acmeRescue;
+        this.appAtendimento = acmeRescue.getAppAtendimento();
+        this.mostrarEvento = mostrarEvento;
+        this.eventoSelecionado = mostrarEvento.getEventoSelecionado();
 
-        public CadastrarAtendimento(ACMERescue acmeRescue, Evento eventoSelecionado){
-            this.acmeRescue = acmeRescue;
-            this.eventoSelecionado = eventoSelecionado;
-            camposDeTexto = new ArrayList<>();
-            camposDeTexto.add(textField1);
-            camposDeTexto.add(textField2);
-            camposDeTexto.add(textField3);
+        confirmarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int codigo = Integer.parseInt(campoCodigo.getText().trim());
+                    String dataInicio = campoData.getText().trim();
+                    int duracao = Integer.parseInt(campoDuracao.getText().trim());
+                    String status = "PENDENTE";
+                    Evento evento = mostrarEvento.getEventoSelecionado();
+                    Atendimento atendimento = new Atendimento(codigo, dataInicio, duracao, status, evento);
 
-            cadastrarButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                   try {
-                       int cod = Integer.parseInt(textField1.getText().trim());
-                       String dataInicio = textField2.getText().trim();
-                       int duracao = Integer.parseInt(textField3.getText().trim());
-                       String status = "PENDENTE"; //Todos obj atendimento quando instanciado fica no estado pendente.
-
-                       Atendimento atendimento = new Atendimento(cod,dataInicio,duracao,status,eventoSelecionado);
-
-                       if (eventoSelecionado.getAtendimento() != null){
-                           textArea1.append("Erro! Esse evento já possuí um atendimento.");
-                       }
-                       if (appAtendimento.add(atendimento)){
-                           textArea1.append("Atendimendo cadastrado com sucesso!");
-                       } else {
-                           textArea1.append("Erro! Já existe um atendimento com esse código.");
-                       }
-                   }
-                   catch(NumberFormatException ex){
-                       textArea1.append("Formato invalido, tente novamente.");
-                   }
-                }
-            });
-            limparButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-
-                    for (JTextField campoDeTexto : camposDeTexto) {
-                        campoDeTexto.setText("");
+                    if (appAtendimento.cadastrarAtendimento(atendimento)) {
+                        areaTexto.append("Atendimento cadastrado com sucesso!\n");
                     }
-
-                    textArea1.setText("");
-                }
-            });
-            mostrarDadosButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (appAtendimento.getAtendimentosPendentes().isEmpty()){
-                        textArea1.append("Nenhum atendimento cadastrado.");
-                    } else {
-                        for (Atendimento atendimento : appAtendimento.getAtendimentosPendentes()){
-                            textArea1.append("Atendimento:\n" + atendimento.toString());
-                        }
+                    else {
+                        areaTexto.append("Erro! Já existe um atendimento com esse código.\n");
                     }
                 }
-            });
-            finalizarButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    acmeRescue.setContentPane(acmeRescue.getPainel());
-                    acmeRescue.setSize(800,400);
+                catch (NumberFormatException ex) {
+                    areaTexto.append("Formato invalido, tente novamente.\n");
                 }
-            });
-        }
 
-        public JPanel getPainel() {
-            return painel;
-        }
+            }
+        });
+        limparButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                campoCodigo.setText("");
+                campoData.setText("");
+                campoDuracao.setText("");
+                areaTexto.setText("");
+            }
+        });
+        mostrarDadosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (appAtendimento.getAtendimentosPendentes().isEmpty()) {
+                    areaTexto.append("Nenhum atendimento cadastrado.\n");
+                }
+                else {
+                    for (Atendimento a : appAtendimento.getAtendimentosPendentes()) {
+                        areaTexto.append(a.toString());
+                    }
+                }
+            }
+        });
+        voltarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                acmeRescue.setSize(600, 400);
+                acmeRescue.setContentPane(acmeRescue.getPainel());
+            }
+        });
     }
+
+    public void atualizarListaAtendimentos() {
+        SwingUtilities.invokeLater(() -> {
+            areaTexto.setText("");
+            if (appAtendimento.getAtendimentosPendentes().isEmpty()) {
+                areaTexto.append("Nenhum atendimento cadastrado.\n");
+            } else {
+                for (Atendimento atendimento : appAtendimento.getAtendimentosPendentes()) {
+                    areaTexto.append(atendimento.toString());
+                }
+            }
+        });
+    }
+
+    public JPanel getPainel() {
+        return painel;
+    }
+
+    public void setEventoSelecionado(Evento eventoSelecionado) {
+        this.eventoSelecionado = eventoSelecionado;
+    }
+}
