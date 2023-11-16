@@ -29,6 +29,7 @@ public class ACMERescue extends JFrame {
         this.cadastroEventoPainel = new CadastroEvento(this, appEvento);
         this.mostrarEvento = new MostrarEvento(this);
         this.cadastrarAtendimento = new CadastrarAtendimento(this, mostrarEvento);
+        this.cadastroEquipamentoPainel = new CadastroEquipamento(this);
         this.setContentPane(painel);
         this.setSize(600, 400);
         this.setTitle("ACMERescue");
