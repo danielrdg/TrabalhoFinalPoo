@@ -1,73 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.ACMERescue">
-  <grid id="27dc6" binding="painel" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="painel" layout-manager="GridLayoutManager" row-count="5" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="766" height="446"/>
+      <xy x="20" y="20" width="739" height="446"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
       <component id="52718" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput" size="24" style="1"/>
+          <font name="JetBrains Mono" size="24" style="1"/>
           <text value="ACMERescue"/>
         </properties>
       </component>
-      <component id="98887" class="javax.swing.JButton" binding="cadastroEvento" default-binding="true">
+      <component id="a0fb8" class="javax.swing.JButton" binding="finalizarButton">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <text value="Finalizar "/>
+        </properties>
+      </component>
+      <component id="98887" class="javax.swing.JButton" binding="cadastroEventoButton">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="306" height="30"/>
           </grid>
         </constraints>
         <properties>
-          <font name="Consolas"/>
+          <font name="JetBrains Mono"/>
           <text value="Cadastrar Evento"/>
         </properties>
       </component>
-      <component id="2c6cb" class="javax.swing.JButton" binding="cadastroEquipe" default-binding="true">
+      <component id="2c6cb" class="javax.swing.JButton" binding="cadastroEquipeButton">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="306" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <text value="Cadastrar Equipe"/>
+        </properties>
+      </component>
+      <component id="fee6b" class="javax.swing.JButton" binding="cadastroEquipamentoButton">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="306" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <text value="Cadastrar Equipamento"/>
+        </properties>
+      </component>
+      <component id="3823" class="javax.swing.JButton" binding="mostrarRelatorioButton">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="306" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <text value="Mostrar Relatório"/>
+        </properties>
+      </component>
+      <component id="16f8d" class="javax.swing.JButton" binding="vincularEquipamentoButton">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <text value="Vincular Equipamento"/>
+        </properties>
+      </component>
+      <component id="4bcf0" class="javax.swing.JButton" binding="cadastroAtendimentoButton">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="306" height="30"/>
           </grid>
         </constraints>
         <properties>
-          <font name="Consolas"/>
-          <text value="Cadastrar Equipe"/>
-        </properties>
-      </component>
-      <component id="fee6b" class="javax.swing.JButton" binding="cadastroEquipamento" default-binding="true">
-        <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="306" height="30"/>
-          </grid>
-        </constraints>
-        <properties>
-          <font name="DialogInput"/>
-          <text value="Cadastrar Equipamento"/>
-        </properties>
-      </component>
-      <component id="4bcf0" class="javax.swing.JButton" binding="cadastroAtendimento">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="306" height="30"/>
-          </grid>
-        </constraints>
-        <properties>
+          <font name="JetBrains Mono"/>
           <text value="Cadastrar Atendimento"/>
         </properties>
       </component>
-      <component id="3823" class="javax.swing.JButton" binding="button5" default-binding="true">
+      <component id="3dc48" class="javax.swing.JButton" binding="alocarAtendimentoButton">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="306" height="30"/>
-          </grid>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <font name="JetBrains Mono"/>
+          <text value="Alocar Atendimento"/>
+        </properties>
+      </component>
+      <component id="c37f6" class="javax.swing.JButton" binding="consultarAtendimentosButton">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <text value="Consultar Atendimentos"/>
+        </properties>
+      </component>
+      <component id="e90bc" class="javax.swing.JButton" binding="alterarAtendimentoButton">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <text value="Alterar Atendimento"/>
+        </properties>
+      </component>
+      <component id="4304e" class="javax.swing.JButton" binding="salvarDadosButton">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <text value="Salvar Dados"/>
+        </properties>
+      </component>
+      <component id="51b2e" class="javax.swing.JButton" binding="carregarDadosIniciaisButton">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono"/>
+          <text value="Carregar Dados Iniciais"/>
         </properties>
       </component>
     </children>

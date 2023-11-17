@@ -86,7 +86,7 @@ public class CadastroEquipe extends JFrame implements ActionListener {
         }
         else if (e.getSource() == voltar) {
             acmeRescue.setContentPane(acmeRescue.getPainel());
-            acmeRescue.setSize(600,400);
+            acmeRescue.setSize(800, 600);
         }
     }
 

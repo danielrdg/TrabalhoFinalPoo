@@ -62,7 +62,7 @@ public class MostrarEvento {
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                acmeRescue.setSize(600, 400);
+                acmeRescue.setSize(800, 600);
                 acmeRescue.setContentPane(acmeRescue.getPainel());
             }
         });
