@@ -9,8 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ACMERescue extends JFrame {
-    private JButton cadastroEvento, cadastroEquipe, cadastroAtendimento, button5, cadastroEquipamento;
+    private JButton cadastroEventoButton, cadastroEquipeButton, cadastroAtendimentoButton, mostrarRelatorioButton, cadastroEquipamentoButton;
     private JPanel painel;
+    private JButton alterarAtendimentoButton;
+    private JButton consultarAtendimentosButton;
+    private JButton salvarDadosButton;
+    private JButton vincularEquipamentoButton;
+    private JButton alocarAtendimentoButton;
+    private JButton carregarDadosIniciaisButton;
+    private JButton finalizarButton;
     private CadastroEquipe cadastroEquipePainel = new CadastroEquipe(this);
     private CadastroEvento cadastroEventoPainel;
     private CadastroEquipamento cadastroEquipamentoPainel;
@@ -31,41 +38,89 @@ public class ACMERescue extends JFrame {
         this.cadastrarAtendimento = new CadastrarAtendimento(this, mostrarEvento);
         this.cadastroEquipamentoPainel = new CadastroEquipamento(this);
         this.setContentPane(painel);
-        this.setSize(600, 400);
+        this.setSize(800, 600);
         this.setTitle("ACMERescue");
         this.setLocationRelativeTo(null);
         this.setIconImage(imageIcon.getImage());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.setVisible(true);
 
-        cadastroEquipe.addActionListener(new ActionListener() {
+        cadastroEquipeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mudarPainel(2);
             }
         });
-        cadastroAtendimento.addActionListener(new ActionListener() {
+        cadastroAtendimentoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mudarPainel(4);
             }
         });
-        cadastroEvento.addActionListener(new ActionListener() {
+        cadastroEventoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mudarPainel(1);
             }
         });
-        cadastroEquipamento.addActionListener(new ActionListener() {
+        cadastroEquipamentoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mudarPainel(3);
             }
         });
-        cadastroAtendimento.addActionListener(new ActionListener() {
+        cadastroAtendimentoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mudarPainel(5);
+            }
+        });
+        mostrarRelatorioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        vincularEquipamentoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        alocarAtendimentoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        consultarAtendimentosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        alterarAtendimentoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        carregarDadosIniciaisButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        salvarDadosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        finalizarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         });
     }

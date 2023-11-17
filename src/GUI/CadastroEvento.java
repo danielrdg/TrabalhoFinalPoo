@@ -234,7 +234,7 @@ public class CadastroEvento extends JFrame implements ActionListener {
         }
         else if (e.getSource() == finalizarButton){
             acmeRescue.setContentPane(acmeRescue.getPainel());
-            acmeRescue.setSize(600,400);
+            acmeRescue.setSize(800, 600);
         }
 
         else if (e.getSource() == botaoConfirmarCic){
