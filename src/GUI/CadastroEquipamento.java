@@ -14,6 +14,7 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
     private JTextField textField1, textField2, textField3;
     private JButton confirmarButton, limparButton, mostrarDadosButton, voltarButton;
     private JTextArea textArea1;
+    private JTextField textField4;
     private ACMERescue acmeRescue;
     private AppEquipamento appEquipamento;
 
@@ -33,13 +34,14 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
             int idEquipamento = Integer.parseInt(textField1.getText().trim());
             String nomeEquipamento =textField2.getText().trim();
             double custoDia = Double.parseDouble(textField3.getText().trim());
+            int tipo = Integer.parseInt(textField4.getText().trim());
             Equipamento equipamento = new Equipamento(idEquipamento, nomeEquipamento, custoDia);
-            if (appEquipamento.cadastrarEquipamento(equipamento)) {
-                textArea1.append("Equipamento cadastrado com sucesso.");
+
+            switch(tipo) {
+                case 1:
+
             }
-            else {
-                textArea1.append("Erro! Já existe um equipamento com esse ID.");
-            }
+
         }
         catch (NumberFormatException e){
             textArea1.append("Formato inválido! Tente novamente."+"\n");
