@@ -37,7 +37,16 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                 int idEquipamento = Integer.parseInt(campoID.getText().trim());
                 String nomeEquipamento = campoNome.getText().trim();
                 double custoDia = Double.parseDouble(campoCustoDia.getText().trim());
-                int tipo = Integer.parseInt(campoTipo.getText().trim());
+                int tipo = 0;
+
+                do {
+                    tipo = Integer.parseInt(campoTipo.getText().trim());
+
+                    if (tipo < 1 || tipo > 3) {
+                        JOptionPane.showMessageDialog(null, "Tipo de equipamento inválido. O tipo deve ser de 1 a 3.");
+                        campoTipo.setText("");  // Limpa o campo para que o usuário digite novamente
+                    }
+                } while (tipo < 1 || tipo > 3);
 
                 switch (tipo) {
                     case 1:
@@ -179,6 +188,7 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                                     if (appEquipamento.cadastrarEquipamento(escavadeira)) {
                                         textArea1.append("Equipamento cadastrado.\n");
                                         cadastrarEscavadeira.dispose();
+
                                     } else {
                                         textArea1.append("Não foi possível cadastrar, já existe um equipamento com esse código.\n");
                                     }
