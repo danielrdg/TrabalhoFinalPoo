@@ -7,6 +7,8 @@ public class Barco extends Equipamento {
 		super(id, nome, custoDia);
 		this.capacidade = capacidade;
 	}
-	
-	
+
+	public int getCapacidade() {
+		return capacidade;
+	}
 }

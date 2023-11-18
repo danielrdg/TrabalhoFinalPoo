@@ -7,6 +7,8 @@ public class CaminhaoTanque extends Equipamento {
 		super(id, nome, custoDia);
 		this.capacidade = capacidade;
 	}
-	
-	
+
+	public double getCapacidadeTanque() {
+		return capacidade;
+	}
 }
