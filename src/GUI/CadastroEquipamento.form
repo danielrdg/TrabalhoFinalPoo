@@ -44,7 +44,7 @@
           <text value="Nome: "/>
         </properties>
       </component>
-      <component id="4a9a6" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="4a9a6" class="javax.swing.JTextField" binding="campoID">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -54,7 +54,7 @@
           <font name="DialogInput"/>
         </properties>
       </component>
-      <component id="89a1" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="89a1" class="javax.swing.JTextField" binding="campoNome">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -64,7 +64,7 @@
           <font name="DialogInput"/>
         </properties>
       </component>
-      <component id="76872" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+      <component id="76872" class="javax.swing.JTextField" binding="campoCustoDia">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -163,7 +163,7 @@
           <text value="3 - Escavadeira"/>
         </properties>
       </component>
-      <component id="6c57f" class="javax.swing.JTextField" binding="textField4" default-binding="true">
+      <component id="6c57f" class="javax.swing.JTextField" binding="campoTipo">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
