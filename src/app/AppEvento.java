@@ -11,8 +11,8 @@ public class AppEvento {
     }
 
     public boolean cadastrarEvento(Evento evento) {
-        for(Evento e : eventos) {
-            if(e.getCodigo().equals(evento.getCodigo())) {
+        for (Evento e : eventos) {
+            if (e.getCodigo().equals(evento.getCodigo())) {
                 return false;
             }
         }
@@ -24,12 +24,4 @@ public class AppEvento {
         return eventos;
     }
 
-    public Evento getEventoByCodigo(String codigo){
-        for (Evento e : eventos) {
-            if (e.getCodigo().equals(codigo)) {
-                return e;
-            }
-        }
-        return null;
-    }
 }
