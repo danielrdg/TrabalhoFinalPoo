@@ -11,4 +11,9 @@ public class Terremoto extends Evento {
 	public double getMagnitude() {
 		return magnitude;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString() + "Tipo de evento: Terremoto\n" + String.format(" Magnitude: %.2f", magnitude).replace(",", ".") + "\n\n";
+	}
 }

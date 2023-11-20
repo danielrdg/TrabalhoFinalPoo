@@ -110,7 +110,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="550e6" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+          <component id="550e6" class="javax.swing.JTextArea" binding="areaTexto">
             <constraints/>
             <properties>
               <font name="DialogInput"/>

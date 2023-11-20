@@ -61,6 +61,6 @@ public class Equipe implements Comparable<Equipe> {
 
 	@Override
 	public String toString() {
-		return "Codinome: " + getCodinome() + "\nQuantidade: " + getQuantidade() + "\nLatitude: " + getLatitude() + "\nLongitude: " + getLongitude() + "\n\n";
+		return "Equipe:\n" + "Codinome: " + getCodinome() + "\nQuantidade: " + getQuantidade() + "\nLatitude: " + getLatitude() + "\nLongitude: " + getLongitude() + "\n\n";
 	}
 }

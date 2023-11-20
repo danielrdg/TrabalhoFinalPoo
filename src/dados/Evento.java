@@ -45,6 +45,6 @@ public class Evento implements Comparable<Evento> {
 
     @Override
     public String toString() {
-        return "Código: " + codigo + "\nData: " + data + "\nLatitude: " + latitude + "\nLongitude: " + longitude + "\n\n";
+        return "\nEvento:\n" + "Código: " + codigo + "\nData: " + data + "\nLatitude: " + latitude + "\nLongitude: " + longitude + "\n";
     }
 }
