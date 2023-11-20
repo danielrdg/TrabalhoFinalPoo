@@ -73,6 +73,6 @@ public class Atendimento {
 
 	@Override
 	public String toString() {
-		return "Código: " + getCod() + "\n Data de início: " + getDataInicio() + "\nDuração: " + getDuracao() + "\nStatus: " + getStatus() + "\nEvento associado: " + getEvento() + "\n\n";
+		return "Atendimento:\n" + "Código: " + getCod() + "\n Data de início: " + getDataInicio() + "\nDuração: " + getDuracao() + "\nStatus: " + getStatus() + "\nEvento associado: " + getEvento() + "\n\n";
 	}
 }

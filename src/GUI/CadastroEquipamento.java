@@ -16,7 +16,7 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
     private JPanel painel;
     private JTextField campoID, campoNome, campoCustoDia;
     private JButton confirmarButton, limparButton, mostrarDadosButton, voltarButton;
-    private JTextArea textArea1;
+    private JTextArea areaTexto;
     private JTextField campoTipo;
     private ACMERescue acmeRescue;
     private AppEquipamento appEquipamento;
@@ -24,11 +24,11 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
     public CadastroEquipamento(ACMERescue acmeRescue) {
         super();
         this.acmeRescue = acmeRescue;
+        this.appEquipamento = acmeRescue.getAppEquipamento();
         confirmarButton.addActionListener(this);
         limparButton.addActionListener(this);
         mostrarDadosButton.addActionListener(this);
         voltarButton.addActionListener(this);
-        appEquipamento = new AppEquipamento();
     }
 
 
@@ -44,7 +44,7 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
 
                     if (tipo < 1 || tipo > 3) {
                         JOptionPane.showMessageDialog(null, "Tipo de equipamento inválido. O tipo deve ser de 1 a 3.");
-                        campoTipo.setText("");  // Limpa o campo para que o usuário digite novamente
+                        campoTipo.setText("");
                     }
                 } while (tipo < 1 || tipo > 3);
 
@@ -73,16 +73,17 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                                 try {
                                     int capacidade = Integer.parseInt(campoCapacidade.getText().trim());
                                     Barco barco = new Barco (idEquipamento, nomeEquipamento, custoDia, capacidade);
+
                                     if (appEquipamento.cadastrarEquipamento(barco)) {
-                                        textArea1.append("Equipamento cadastrado.\n");
+                                        areaTexto.append("Equipamento cadastrado.\n");
                                         cadastrarBarco.dispose();
                                     }
                                     else {
-                                        textArea1.append("Nao foi possivel cadastrar, ja existe um equipamento com esse codigo.\n");
+                                        areaTexto.append("Nao foi possivel cadastrar, ja existe um equipamento com esse codigo.\n");
                                     }
                                 }
                                 catch (NumberFormatException ex) {
-                                    textArea1.append("Formato invalido para capacidade, tente novamente.\n");
+                                    areaTexto.append("Formato invalido para capacidade, tente novamente.\n");
                                 }
                             }
                         });
@@ -98,8 +99,6 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                         JButton confirmarTanque = new JButton("Confirmar");
                         ImageIcon imageIconTanque = new ImageIcon("icon.png");
                         cadastrarCaminhaoTanque.setIconImage(imageIconTanque.getImage());
-
-
                         containerTanque.add(labelCapacidadeCombustivel);
                         containerTanque.add(campoCapacidadeCombustivel);
                         containerTanque.add(confirmarTanque);
@@ -117,16 +116,16 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                                     CaminhaoTanque caminhaoTanque = new CaminhaoTanque(idEquipamento, nomeEquipamento, custoDia, capacidadeCombustivel);
 
                                     if (appEquipamento.cadastrarEquipamento(caminhaoTanque)) {
-                                        textArea1.append("Equipamento cadastrado.\n");
+                                        areaTexto.append("Equipamento cadastrado.\n");
                                         cadastrarCaminhaoTanque.dispose();
                                     }
                                     else {
-                                        textArea1.append("Nao foi possivel cadastrar, ja existe um equipamento com esse codigo.\n");
+                                        areaTexto.append("Não foi possível cadastrar, já existe um equipamento com esse código.\n");
                                     }
                                 }
 
                                 catch (NumberFormatException ex) {
-                                    textArea1.append("Formato invalido para capacidade, tente novamente.\n");
+                                    areaTexto.append("Formato inválido para capacidade, tente novamente.\n");
                                 }
                             }
                         });
@@ -137,7 +136,7 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                         FlowLayout layoutEscavadeira = new FlowLayout();
                         JPanel containerEscavadeira = new JPanel();
                         containerEscavadeira.setLayout(layoutEscavadeira);
-                        JLabel labelCombustivel = new JLabel("Combustivel:\n 1 - Diesel\n 2 - Gasolina\n 3 - Alcool");
+                        JLabel labelCombustivel = new JLabel("Combustível:\n 1 - Diesel\n 2 - Gasolina\n 3 - Álcool");
                         JTextField campoCombustivel = new JTextField(10);
                         JLabel labelCarga = new JLabel("Carga: ");
                         JTextField campoCarga = new JTextField(10);
@@ -160,7 +159,7 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 try {
-                                    textArea1.setText("");
+                                    areaTexto.setText("");
                                     String combustivel = null;
 
                                     do {
@@ -186,14 +185,14 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
 
                                     Escavadeira escavadeira = new Escavadeira(idEquipamento, nomeEquipamento, custoDia, combustivel, carga);
                                     if (appEquipamento.cadastrarEquipamento(escavadeira)) {
-                                        textArea1.append("Equipamento cadastrado.\n");
+                                        areaTexto.append("Equipamento cadastrado.\n");
                                         cadastrarEscavadeira.dispose();
 
                                     } else {
-                                        textArea1.append("Não foi possível cadastrar, já existe um equipamento com esse código.\n");
+                                        areaTexto.append("Não foi possível cadastrar, já existe um equipamento com esse código.\n");
                                     }
                                 } catch (NumberFormatException exception) {
-                                    textArea1.append("Formato inválido, tente novamente!\n");
+                                    areaTexto.append("Formato inválido, tente novamente!\n");
                                 }
                             }
                         });
@@ -201,50 +200,48 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                 }
             }
                 catch (NumberFormatException e) {
-                textArea1.append("Formato inválido! Tente novamente."+"\n");
+                areaTexto.append("Formato inválido! Tente novamente."+"\n");
             }
         }
 
 
     private void mostrarEquipamentos() {
         if (appEquipamento.getEquipamentos().isEmpty()) {
-            textArea1.append("Nenhum equipamento cadastrado." + "\n");
+            areaTexto.append("Nenhum equipamento cadastrado." + "\n");
         } else {
             Collections.sort(appEquipamento.getEquipamentos());
             for (Equipamento equipamento : appEquipamento.getEquipamentos()) {
-                textArea1.append("ID: " + equipamento.getId() + "\n");
-                textArea1.append("Nome: " + equipamento.getNome() + "\n");
-                textArea1.append("Custo do Dia: " + "R$"+ equipamento.getCustoDia() + "\n");
+                areaTexto.append("ID: " + equipamento.getId() + "\n");
+                areaTexto.append("Nome: " + equipamento.getNome() + "\n");
+                areaTexto.append("Custo do Dia: " + "R$"+ equipamento.getCustoDia() + "\n");
 
-                // Adiciona o tipo de equipamento
-                textArea1.append("Tipo: ");
+                areaTexto.append("Tipo: ");
                 if (equipamento instanceof Barco) {
-                    textArea1.append("Barco\n");
+                    areaTexto.append("Barco\n");
                     Barco barco = (Barco) equipamento;
-                    textArea1.append("Capacidade: " + barco.getCapacidade() + "\n");
+                    areaTexto.append("Capacidade: " + barco.getCapacidade() + "\n");
                 } else if (equipamento instanceof CaminhaoTanque) {
-                    textArea1.append("Caminhão Tanque\n");
+                    areaTexto.append("Caminhão Tanque\n");
                     CaminhaoTanque caminhaoTanque = (CaminhaoTanque) equipamento;
-                    textArea1.append("Capacidade do Tanque: " + caminhaoTanque.getCapacidadeTanque() + "\n");
+                    areaTexto.append("Capacidade do Tanque: " + caminhaoTanque.getCapacidadeTanque() + "\n");
                 } else if (equipamento instanceof Escavadeira) {
-                    textArea1.append("Escavadeira\n");
+                    areaTexto.append("Escavadeira\n");
                     Escavadeira escavadeira = (Escavadeira) equipamento;
-                    textArea1.append("Combustível: " + escavadeira.getCombustivel() + "\n");
-                    textArea1.append("Carga: " + escavadeira.getCarga() + "\n");
+                    areaTexto.append("Combustível: " + escavadeira.getCombustivel() + "\n");
+                    areaTexto.append("Carga: " + escavadeira.getCarga() + "\n");
                 }
 
-                textArea1.append("--------------------------" + "\n");
+                areaTexto.append("--------------------------" + "\n");
             }
         }
     }
-
 
     private void limparCampos() {
         campoID.setText("");
         campoNome.setText("");
         campoCustoDia.setText("");
         campoTipo.setText("");
-        textArea1.setText("");
+        areaTexto.setText("");
     }
 
     @Override

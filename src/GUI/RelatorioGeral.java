@@ -30,22 +30,39 @@ public class RelatorioGeral {
         mostrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (appAtendimento.getAtendimentosPendentes().isEmpty() && appEvento.getEventos().isEmpty() && appEquipe.getEquipes().isEmpty()) {
-                    areaTexto.append("Erro! Nenhum dado cadastrado.\n");
-                }
-                else {
+
+                boolean algumDadoCadastrado = false;
+
+                if (!appAtendimento.getAtendimentosPendentes().isEmpty()) {
                     for (Atendimento a : appAtendimento.getAtendimentosPendentes()) {
-                        areaTexto.append(a.toString() + "\n");
+                        areaTexto.append(a.toString());
                     }
+                    algumDadoCadastrado = true;
+                }
+
+                if (!appEvento.getEventos().isEmpty()) {
                     for (Evento evento : appEvento.getEventos()) {
-                        areaTexto.append(evento.toString() + "\n");
+                        areaTexto.append(evento.toString());
                     }
+                    algumDadoCadastrado = true;
+                }
+
+                if (!appEquipe.getEquipes().isEmpty()) {
                     for (Equipe equipe : appEquipe.getEquipes()) {
-                        areaTexto.append(equipe.toString() + "\n");
+                        areaTexto.append(equipe.toString());
                     }
+                    algumDadoCadastrado = true;
+                }
+
+                if (!appEquipamento.getEquipamentos().isEmpty()) {
                     for (Equipamento equipamento : appEquipamento.getEquipamentos()) {
-                        areaTexto.append(equipamento.toString() + "\n");
+                        areaTexto.append(equipamento.toString());
                     }
+                    algumDadoCadastrado = true;
+                }
+
+                if (!algumDadoCadastrado) {
+                    areaTexto.append("Erro! Nenhum dado cadastrado.\n");
                 }
             }
         });

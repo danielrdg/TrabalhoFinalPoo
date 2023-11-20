@@ -11,4 +11,9 @@ public class CaminhaoTanque extends Equipamento {
 	public double getCapacidadeTanque() {
 		return capacidade;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("%sCapacidade do Tanque: %.2f", super.toString(), capacidade).replaceAll(",", ".") + "\n\n";
+	}
 }

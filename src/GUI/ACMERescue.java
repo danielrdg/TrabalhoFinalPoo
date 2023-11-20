@@ -30,7 +30,6 @@ public class ACMERescue extends JFrame {
     private AppEvento appEvento;
     private AppAtendimento appAtendimento;
     private RelatorioGeral relatorioGeral;
-
     private AppEquipe appEquipe;
     private AppEquipamento appEquipamento;
 

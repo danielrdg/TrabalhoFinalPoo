@@ -26,12 +26,12 @@ public class Equipamento implements Comparable<Equipamento> {
 	}
 
 	@Override
-    public String toString() {
-        return "ID: " + id + ", Equipamento: " + nome + ", Custo por Dia: R$" + custoDia;
-    }
-
-	@Override
 	public int compareTo(Equipamento o) {
 		return Integer.compare(this.getId(), o.getId());
+	}
+
+	@Override
+	public String toString() {
+		return "Equipamento:\n" + "ID: " + id + "\nNome: " + nome + "\nCusto por Dia: R$" + custoDia + "\n";
 	}
 }

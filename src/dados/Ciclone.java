@@ -17,4 +17,9 @@ public class Ciclone extends Evento {
 	public double getVelocidade() {
 		return velocidade;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString() + "Tipo de evento: Ciclone\n" + String.format(" Velocidade: %.2f\nPrecipitação: %.2f", velocidade, precipitacao).replace(",", ".");
+	}
 }

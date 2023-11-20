@@ -14,12 +14,13 @@ public class CadastroEquipe implements ActionListener {
     private JButton cadastrar, limpar, mostrarDados, voltar;
     private JTextArea textArea1;
     private JPanel painel;
-    private AppEquipe appEquipe = new AppEquipe();
+    private AppEquipe appEquipe;
     private ACMERescue acmeRescue;
 
     public CadastroEquipe(ACMERescue acmeRescue){
         super();
         this.acmeRescue = acmeRescue;
+        this.appEquipe = acmeRescue.getAppEquipe();
         camposDeTexto = new ArrayList<>();
         camposDeTexto.add(textField1);
         camposDeTexto.add(textField2);

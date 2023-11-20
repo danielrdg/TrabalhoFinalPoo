@@ -5,6 +5,7 @@ import dados.Equipamento;
 import java.util.ArrayList;
 
 public class AppEquipamento {
+
     private ArrayList<Equipamento> equipamentos;
 
     public AppEquipamento() {
@@ -12,8 +13,8 @@ public class AppEquipamento {
     }
 
     public boolean cadastrarEquipamento(Equipamento equipamento) {
-        for(Equipamento e : equipamentos) {
-            if(e.getId() == equipamento.getId()) {
+        for (Equipamento e : equipamentos) {
+            if (e.getId() == equipamento.getId()) {
                 return false;
             }
         }
