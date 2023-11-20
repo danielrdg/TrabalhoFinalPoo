@@ -1,8 +1,9 @@
 package dados;
 
+import app.AppEquipamento;
+import app.AppEquipe;
 import dados.Atendimento;
 import dados.Equipamento;
-
 import java.util.ArrayList;
 
 public class Equipe implements Comparable<Equipe> {
@@ -11,15 +12,19 @@ public class Equipe implements Comparable<Equipe> {
 	private double latitude;
 	private double longitude;
 	private ArrayList<Equipamento> equipamentos;
-	private ArrayList<Atendimento> atendimentos;
-	
+
 	public Equipe(String codinome, int quantidade, double latitude, double longitude) {
 		this.codinome = codinome;
 		this.quantidade = quantidade;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.equipamentos = new ArrayList<>();
 	}
-	
+
+	public void addEquipamento (Equipamento e) {
+		equipamentos.add(e);
+	}
+
 	public int getQuantidade() {
 		return quantidade;
 	}
@@ -32,13 +37,6 @@ public class Equipe implements Comparable<Equipe> {
 		return longitude;
 	}
 
-	public void setEquipamentos(ArrayList<Equipamento> equipamentos) {
-		this.equipamentos = equipamentos;
-	}
-
-	public void setAtendimentos(ArrayList<Atendimento> atendimentos) {
-		this.atendimentos = atendimentos;
-	}
 
 	public String getCodinome() {
 		return codinome;
@@ -46,11 +44,9 @@ public class Equipe implements Comparable<Equipe> {
 
 	public double somatorioCustosEquipamento() {
 		double somatorio = 0;
-		
-		for(Equipamento e : equipamentos) {
+		for (Equipamento e : equipamentos) {
 			somatorio += e.getCustoDia();
 		}
-		
 		return somatorio;
 	}
 

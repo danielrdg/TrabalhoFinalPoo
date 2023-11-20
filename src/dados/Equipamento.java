@@ -17,6 +17,14 @@ public class Equipamento implements Comparable<Equipamento> {
 		return id;
 	}
 
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}
+
 	public String getNome(){
 		return nome;
 	}
