@@ -171,10 +171,12 @@ public class ACMERescue extends JFrame {
             case 6:
                 this.setContentPane(relatorioGeral.getPainel());
                 this.setSize(800, 400);
+                break;
 
             case 7:
                 this.setContentPane(vincularEquipamento.getPainel());
                 this.setSize(800, 400);
+                break;
         }
     }
 
