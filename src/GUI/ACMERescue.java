@@ -1,6 +1,8 @@
 package GUI;
 
 import app.AppAtendimento;
+import app.AppEquipamento;
+import app.AppEquipe;
 import app.AppEvento;
 import dados.Evento;
 
@@ -18,7 +20,7 @@ public class ACMERescue extends JFrame {
     private JButton alocarAtendimentoButton;
     private JButton carregarDadosIniciaisButton;
     private JButton finalizarButton;
-    private CadastroEquipe cadastroEquipePainel = new CadastroEquipe(this);
+    private CadastroEquipe cadastroEquipePainel;
     private CadastroEvento cadastroEventoPainel;
     private CadastroEquipamento cadastroEquipamentoPainel;
     private CadastrarAtendimento cadastrarAtendimento;
@@ -27,16 +29,24 @@ public class ACMERescue extends JFrame {
     private Evento eventoSelecionado;
     private AppEvento appEvento;
     private AppAtendimento appAtendimento;
+    private RelatorioGeral relatorioGeral;
 
-    public ACMERescue(AppEvento appEvento, AppAtendimento appAtendimento) {
+    private AppEquipe appEquipe;
+    private AppEquipamento appEquipamento;
+
+    public ACMERescue(AppEvento appEvento, AppAtendimento appAtendimento, AppEquipe appEquipe, AppEquipamento appEquipamento) {
         super();
         imageIcon = new ImageIcon("icon.png");
         this.appEvento = appEvento;
         this.appAtendimento = appAtendimento;
-        this.cadastroEventoPainel = new CadastroEvento(this, appEvento);
+        this.appEquipe = appEquipe;
+        this.appEquipamento = appEquipamento;
+        this.cadastroEventoPainel = new CadastroEvento(this);
         this.mostrarEvento = new MostrarEvento(this);
         this.cadastrarAtendimento = new CadastrarAtendimento(this, mostrarEvento);
         this.cadastroEquipamentoPainel = new CadastroEquipamento(this);
+        this.cadastroEquipePainel = new CadastroEquipe(this);
+        this.relatorioGeral = new RelatorioGeral(this);
         this.setContentPane(painel);
         this.setSize(800, 600);
         this.setTitle("ACMERescue");
@@ -78,7 +88,7 @@ public class ACMERescue extends JFrame {
         mostrarRelatorioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                mudarPainel(6);
             }
         });
         vincularEquipamentoButton.addActionListener(new ActionListener() {
@@ -155,6 +165,10 @@ public class ACMERescue extends JFrame {
                 this.setContentPane(cadastrarAtendimento.getPainel());
                 this.setSize(800, 400);
                 break;
+
+            case 6:
+                this.setContentPane(relatorioGeral.getPainel());
+                this.setSize(800, 400);
         }
     }
 
@@ -168,5 +182,13 @@ public class ACMERescue extends JFrame {
 
     public AppAtendimento getAppAtendimento() {
         return appAtendimento;
+    }
+
+    public AppEquipamento getAppEquipamento() {
+        return appEquipamento;
+    }
+
+    public AppEquipe getAppEquipe() {
+        return appEquipe;
     }
 }

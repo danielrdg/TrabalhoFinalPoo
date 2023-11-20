@@ -216,19 +216,24 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                 textArea1.append("Nome: " + equipamento.getNome() + "\n");
                 textArea1.append("Custo do Dia: " + "R$"+ equipamento.getCustoDia() + "\n");
 
-                // Verifica o tipo do equipamento
+                // Adiciona o tipo de equipamento
+                textArea1.append("Tipo: ");
                 if (equipamento instanceof Barco) {
+                    textArea1.append("Barco\n");
                     Barco barco = (Barco) equipamento;
                     textArea1.append("Capacidade: " + barco.getCapacidade() + "\n");
                 } else if (equipamento instanceof CaminhaoTanque) {
+                    textArea1.append("Caminhão Tanque\n");
                     CaminhaoTanque caminhaoTanque = (CaminhaoTanque) equipamento;
                     textArea1.append("Capacidade do Tanque: " + caminhaoTanque.getCapacidadeTanque() + "\n");
                 } else if (equipamento instanceof Escavadeira) {
+                    textArea1.append("Escavadeira\n");
                     Escavadeira escavadeira = (Escavadeira) equipamento;
                     textArea1.append("Combustível: " + escavadeira.getCombustivel() + "\n");
                     textArea1.append("Carga: " + escavadeira.getCarga() + "\n");
                 }
 
+                textArea1.append("--------------------------" + "\n");
             }
         }
     }

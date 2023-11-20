@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CadastroEquipe extends JFrame implements ActionListener {
+public class CadastroEquipe implements ActionListener {
     private JTextField textField1, textField2, textField3, textField4;
     private ArrayList<JTextField> camposDeTexto;
     private JButton cadastrar, limpar, mostrarDados, voltar;

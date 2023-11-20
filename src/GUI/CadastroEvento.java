@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
 
-public class CadastroEvento extends JFrame implements ActionListener {
+public class CadastroEvento implements ActionListener {
     private JTextField textField1, textField2, textField3, textField4, textField5, txtSeca, txtTerremoto, txtPrecipitacao, txtCiclone;
     private JButton confirmarButton, limparButton, mostrarDadosButton, finalizarButton, botaoConfirmarCic, botaoConfirmarTer, botaoConfirmarSec;
     private JPanel painel;
@@ -21,10 +21,10 @@ public class CadastroEvento extends JFrame implements ActionListener {
     private AppEvento appEvento;
     private ACMERescue acmeRescue;
 
-    public CadastroEvento(ACMERescue acmeRescue, AppEvento appEvento) {
+    public CadastroEvento(ACMERescue acmeRescue) {
         super();
         this.acmeRescue = acmeRescue;
-        this.appEvento = appEvento;
+        this.appEvento = acmeRescue.getAppEvento();
         confirmarButton.addActionListener(this);
         mostrarDadosButton.addActionListener(this);
         limparButton.addActionListener(this);
@@ -241,4 +241,5 @@ public class CadastroEvento extends JFrame implements ActionListener {
     public JPanel getPainel() {
         return painel;
     }
+
 }
