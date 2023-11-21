@@ -54,7 +54,6 @@ public class VincularEquipamento {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-
                     String codinome = codinomeEquipe.getText().toLowerCase().trim();
                     int codEquipamento = Integer.parseInt(codigoEquipamento.getText().trim());
 
@@ -66,29 +65,28 @@ public class VincularEquipamento {
                                 if (equipamento.getId() == codEquipamento) {
                                     equipamentoSelecionado = equipamento;
                                     equipamentos.append("Equipamento selecionado com sucesso!\n");
-
                                     if (equipamento.getEquipe() != null) {
-                                        equipamentos.append("Erro! O equipamento já está vinculado a outra equipe.\n");
+                                        equipamentos.append("Erro! Equipamento já está vinculado a uma equipe.\n");
                                     } else {
                                         equipamento.setEquipe(equipeSelecionada);
                                         equipeSelecionada.addEquipamento(equipamentoSelecionado);
-                                        equipamentos.append("Equipamento vinculado à equipe com sucesso!\n");
+                                        equipamentos.append("Equipamento vinculado à equipe com sucesso.\n");
                                     }
                                     break;
                                 }
                             }
 
                             if (equipamentoSelecionado == null) {
-                                equipamentos.append("Erro! Não há um equipamento com esse código na lista.\n");
+                                equipamentos.append("Erro! Não existe um equipamento com esse ID.\n");
                             }
                             break;
                         }
                     }
                     if (equipeSelecionada == null) {
-                        equipes.append("Erro! Não há uma equipe com esse codinome na lista. \n");
+                        equipes.append("Erro! Não existe uma equipe com esse codinome. \n");
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Erro! Certifique-se de inserir valores válidos nos campos.");
+                    JOptionPane.showMessageDialog(null, "Erro! Formato inválido para ID.");
                 }
             }
         });
