@@ -13,7 +13,7 @@
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Codinome:"/>
         </properties>
       </component>
@@ -22,7 +22,7 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Quantidade:"/>
         </properties>
       </component>
@@ -31,7 +31,7 @@
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Latitude:"/>
         </properties>
       </component>
@@ -40,7 +40,7 @@
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Longitude:"/>
         </properties>
       </component>
@@ -50,7 +50,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font/>
+        </properties>
       </component>
       <component id="f25fb" class="javax.swing.JTextField" binding="textField2" default-binding="true">
         <constraints>
@@ -59,6 +61,7 @@
           </grid>
         </constraints>
         <properties>
+          <font/>
           <horizontalAlignment value="10"/>
         </properties>
       </component>
@@ -68,7 +71,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font/>
+        </properties>
       </component>
       <component id="226e0" class="javax.swing.JTextField" binding="textField4" default-binding="true">
         <constraints>
@@ -76,24 +81,26 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font/>
+        </properties>
       </component>
       <component id="64f87" class="javax.swing.JButton" binding="limpar">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Limpar"/>
         </properties>
       </component>
-      <component id="cc847" class="javax.swing.JButton" binding="cadastrar">
+      <component id="cc847" class="javax.swing.JButton" binding="confirmar">
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
-          <text value="Cadastrar"/>
+          <font/>
+          <text value="Confirmar"/>
         </properties>
       </component>
       <component id="51188" class="javax.swing.JButton" binding="mostrarDados">
@@ -101,7 +108,7 @@
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Mostrar dados"/>
         </properties>
       </component>
@@ -110,7 +117,7 @@
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Voltar"/>
         </properties>
       </component>
@@ -119,7 +126,7 @@
           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="8" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput" size="20" style="1"/>
+          <font size="20" style="1"/>
           <text value="Cadastro de Equipes"/>
         </properties>
       </component>

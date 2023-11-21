@@ -13,7 +13,7 @@
           <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput" size="20" style="1"/>
+          <font size="20" style="1"/>
           <text value="Cadastro de Equipamento"/>
         </properties>
       </component>
@@ -22,7 +22,7 @@
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Custo do Dia:"/>
         </properties>
       </component>
@@ -31,7 +31,7 @@
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="ID: "/>
         </properties>
       </component>
@@ -40,7 +40,7 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Nome: "/>
         </properties>
       </component>
@@ -51,7 +51,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
         </properties>
       </component>
       <component id="89a1" class="javax.swing.JTextField" binding="campoNome">
@@ -61,7 +61,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
         </properties>
       </component>
       <component id="76872" class="javax.swing.JTextField" binding="campoCustoDia">
@@ -71,7 +71,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
         </properties>
       </component>
       <component id="f88fd" class="javax.swing.JButton" binding="confirmarButton" default-binding="true">
@@ -79,7 +79,7 @@
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Confirmar"/>
         </properties>
       </component>
@@ -88,7 +88,7 @@
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Limpar"/>
         </properties>
       </component>
@@ -97,7 +97,7 @@
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Mostrar Dados"/>
         </properties>
       </component>
@@ -107,7 +107,9 @@
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="550e6" class="javax.swing.JTextArea" binding="areaTexto">
@@ -123,7 +125,7 @@
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Voltar"/>
         </properties>
       </component>
@@ -132,7 +134,7 @@
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="Tipo: "/>
         </properties>
       </component>
@@ -141,7 +143,7 @@
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="1 - Barco"/>
         </properties>
       </component>
@@ -150,7 +152,7 @@
           <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="2 - Caminhão Tanque"/>
         </properties>
       </component>
@@ -159,7 +161,7 @@
           <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font name="DialogInput"/>
+          <font/>
           <text value="3 - Escavadeira"/>
         </properties>
       </component>
@@ -169,7 +171,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font/>
+        </properties>
       </component>
     </children>
   </grid>

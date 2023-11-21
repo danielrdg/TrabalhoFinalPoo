@@ -11,7 +11,7 @@ import java.util.Collections;
 public class CadastroEquipe implements ActionListener {
     private JTextField textField1, textField2, textField3, textField4;
     private ArrayList<JTextField> camposDeTexto;
-    private JButton cadastrar, limpar, mostrarDados, voltar;
+    private JButton confirmar, limpar, mostrarDados, voltar;
     private JTextArea textArea1;
     private JPanel painel;
     private AppEquipe appEquipe;
@@ -26,7 +26,7 @@ public class CadastroEquipe implements ActionListener {
         camposDeTexto.add(textField2);
         camposDeTexto.add(textField3);
         camposDeTexto.add(textField4);
-        cadastrar.addActionListener(this);
+        confirmar.addActionListener(this);
         limpar.addActionListener(this);
         mostrarDados.addActionListener(this);
         voltar.addActionListener(this);
@@ -76,7 +76,7 @@ public class CadastroEquipe implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == cadastrar) {
+        if (e.getSource() == confirmar) {
             cadastrarEquipe();
         }
         else if (e.getSource() == limpar) {
