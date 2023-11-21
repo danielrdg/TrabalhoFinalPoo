@@ -27,7 +27,7 @@ public class MostrarEvento {
         this.appEvento = acmeRescue.getAppEvento();
 
         if (appEvento.getEventos().isEmpty()) {
-            areaEventos.append("Nenhum evento cadastrado.\n");
+            areaEventos.append("Erro! Nenhum evento cadastrado.\n");
         } else {
             for (Evento evento : appEvento.getEventos()) {
                 areaEventos.append(evento.toString());
@@ -50,12 +50,12 @@ public class MostrarEvento {
                     }
 
                     if (eventoEncontrado) {
-                        areaEventos.append("Evento selecionado com sucesso!\n");
+                        areaEventos.append("Evento selecionado.\n");
                     } else {
-                        areaEventos.append("Não existe evento com o código fornecido.\n");
+                        areaEventos.append("Erro! Não existe evento com esse código.\n");
                     }
                 } catch (NumberFormatException ex) {
-                    areaEventos.append("Erro! Digite um valor inteiro no campo código.\n");
+                    areaEventos.append("Erro! Formato inválido para código.\n");
                 }
             }
         });
@@ -87,7 +87,7 @@ public class MostrarEvento {
         SwingUtilities.invokeLater(() -> {
             areaEventos.setText("");
             if (appEvento.getEventos().isEmpty()) {
-                areaEventos.append("Nenhum evento cadastrado.\n");
+                areaEventos.append("Erro! Nenhum evento cadastrado.\n");
             } else {
                 for (Evento evento : appEvento.getEventos()) {
                     areaEventos.append(evento.toString());

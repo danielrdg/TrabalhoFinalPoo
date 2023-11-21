@@ -36,14 +36,14 @@ public class CadastrarAtendimento {
                     Atendimento atendimento = new Atendimento(codigo, dataInicio, duracao, status, evento);
 
                     if (appAtendimento.cadastrarAtendimento(atendimento)) {
-                        areaTexto.append("Atendimento cadastrado com sucesso!\n");
+                        areaTexto.append("Atendimento cadastrado.\n");
                     }
                     else {
                         areaTexto.append("Erro! Já existe um atendimento com esse código.\n");
                     }
                 }
                 catch (NumberFormatException ex) {
-                    areaTexto.append("Formato invalido, tente novamente.\n");
+                    areaTexto.append("Erro! Formato inválido para código ou duração.\n");
                 }
 
             }
@@ -61,7 +61,7 @@ public class CadastrarAtendimento {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (appAtendimento.getAtendimentosPendentes().isEmpty()) {
-                    areaTexto.append("Nenhum atendimento cadastrado.\n");
+                    areaTexto.append("Erro! Nenhum atendimento cadastrado.\n");
                 }
                 else {
                     for (Atendimento a : appAtendimento.getAtendimentosPendentes()) {
@@ -83,7 +83,7 @@ public class CadastrarAtendimento {
         SwingUtilities.invokeLater(() -> {
             areaTexto.setText("");
             if (appAtendimento.getAtendimentosPendentes().isEmpty()) {
-                areaTexto.append("Nenhum atendimento cadastrado.\n");
+                areaTexto.append("Erro! Nenhum atendimento cadastrado.\n");
             } else {
                 for (Atendimento atendimento : appAtendimento.getAtendimentosPendentes()) {
                     areaTexto.append(atendimento.toString());

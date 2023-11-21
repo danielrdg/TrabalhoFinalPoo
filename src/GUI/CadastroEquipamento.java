@@ -43,7 +43,7 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                     tipo = Integer.parseInt(campoTipo.getText().trim());
 
                     if (tipo < 1 || tipo > 3) {
-                        JOptionPane.showMessageDialog(null, "Tipo de equipamento inválido. O tipo deve ser de 1 a 3.");
+                        JOptionPane.showMessageDialog(null, "Erro! O tipo deve ser de 1 a 3.");
                         campoTipo.setText("");
                     }
                 } while (tipo < 1 || tipo > 3);
@@ -79,11 +79,11 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                                         cadastrarBarco.dispose();
                                     }
                                     else {
-                                        areaTexto.append("Nao foi possivel cadastrar, ja existe um equipamento com esse codigo.\n");
+                                        areaTexto.append("Erro! Já existe um equipamento com esse codigo.\n");
                                     }
                                 }
                                 catch (NumberFormatException ex) {
-                                    areaTexto.append("Formato invalido para capacidade, tente novamente.\n");
+                                    areaTexto.append("Erro! Formato inválido para capacidade.\n");
                                 }
                             }
                         });
@@ -120,12 +120,12 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                                         cadastrarCaminhaoTanque.dispose();
                                     }
                                     else {
-                                        areaTexto.append("Não foi possível cadastrar, já existe um equipamento com esse código.\n");
+                                        areaTexto.append("Erro! Já existe um equipamento com esse código.\n");
                                     }
                                 }
 
                                 catch (NumberFormatException ex) {
-                                    areaTexto.append("Formato inválido para capacidade, tente novamente.\n");
+                                    areaTexto.append("Erro! Formato inválido para capacidade.\n");
                                 }
                             }
                         });
@@ -176,7 +176,7 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                                                 combustivel = "ÁLCOOL";
                                                 break;
                                             default:
-                                                JOptionPane.showMessageDialog(null, "Opção inválida. O tipo de combustível deve ser de 1 a 3.");
+                                                JOptionPane.showMessageDialog(null, "Erro! O tipo deve ser de 1 a 3.");
                                                 campoCombustivel.setText("");
                                         }
                                     } while (combustivel == null);
@@ -189,10 +189,10 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                                         cadastrarEscavadeira.dispose();
 
                                     } else {
-                                        areaTexto.append("Não foi possível cadastrar, já existe um equipamento com esse código.\n");
+                                        areaTexto.append("Erro! Já existe um equipamento com esse código.\n");
                                     }
                                 } catch (NumberFormatException exception) {
-                                    areaTexto.append("Formato inválido, tente novamente!\n");
+                                    areaTexto.append("Erro! Formato inválido para carga.\n");
                                 }
                             }
                         });
@@ -200,14 +200,14 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                 }
             }
                 catch (NumberFormatException e) {
-                areaTexto.append("Formato inválido! Tente novamente."+"\n");
+                areaTexto.append("Erro! Formato inválido para ID ou custo.\n");
             }
         }
 
 
     private void mostrarEquipamentos() {
         if (appEquipamento.getEquipamentos().isEmpty()) {
-            areaTexto.append("Nenhum equipamento cadastrado." + "\n");
+            areaTexto.append("Erro! Nenhum equipamento cadastrado.\n");
         } else {
             Collections.sort(appEquipamento.getEquipamentos());
             for (Equipamento equipamento : appEquipamento.getEquipamentos()) {

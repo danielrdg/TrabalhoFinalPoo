@@ -67,7 +67,7 @@ public class CadastroEvento implements ActionListener {
                 }
             }
         } catch (NumberFormatException e) {
-            textArea1.append("Formato inválido! Tente novamente." + "\n");
+            textArea1.append("Formato inválido para latitude ou longitude.\n");
         }
     }
 
@@ -82,7 +82,7 @@ public class CadastroEvento implements ActionListener {
 
     private void mostrarDados() {
         if (appEvento.getEventos().isEmpty()) {
-            textArea1.append("Nenhum evento cadastrado." + "\n");
+            textArea1.append("Nenhum evento cadastrado.\n");
         } else {
             Collections.sort(appEvento.getEventos());
             for (Evento evento1 : appEvento.getEventos()) {
@@ -174,13 +174,13 @@ public class CadastroEvento implements ActionListener {
                 double mag = Double.parseDouble(txtTerremoto.getText().trim());
                 Terremoto terremoto = new Terremoto(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, mag);
                 if (appEvento.cadastrarEvento(terremoto)) {
-                    textArea1.append("Evento cadastrado!" + "\n");
+                    textArea1.append("Evento cadastrado.\n");
                 } else {
-                    textArea1.append("Erro! Já existe um evento com esse código" + "\n");
+                    textArea1.append("Erro! Já existe um evento com esse código.\n");
                 }
                 janela.setVisible(false);
             } catch (NumberFormatException ex) {
-                textArea1.append("Formato inválido para magnitude. Tente novamente." + "\n");
+                textArea1.append("Formato inválido para magnitude.\n");
             }
         });
 
@@ -211,7 +211,7 @@ public class CadastroEvento implements ActionListener {
                 }
                 janela.setVisible(false);
             } catch (NumberFormatException ex) {
-                textArea1.append("Formato inválido para estiagem. Tente novamente." + "\n");
+                textArea1.append("Formato inválido para estiagem." + "\n");
             }
         });
 
