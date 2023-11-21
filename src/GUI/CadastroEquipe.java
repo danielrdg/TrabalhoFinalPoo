@@ -48,7 +48,7 @@ public class CadastroEquipe implements ActionListener {
             }
         }
         catch(NumberFormatException e){
-            textArea1.append("Formato inválido! Tente novamente.\n");
+            textArea1.append("Erro! Formato inválido para quantidade, latitude ou longitude.\n");
         }
     }
 
@@ -66,7 +66,7 @@ public class CadastroEquipe implements ActionListener {
         Collections.sort(equipes);
 
         if (equipes.isEmpty()) {
-            textArea1.append("Nenhuma equipe cadastrada no sistema.\n");
+            textArea1.append("Erro! Nenhuma equipe cadastrada no sistema.\n");
         }
 
         for (Equipe e : equipes){
