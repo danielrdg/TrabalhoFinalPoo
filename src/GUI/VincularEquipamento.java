@@ -56,7 +56,6 @@ public class VincularEquipamento {
                 try {
                     String codinome = codinomeEquipe.getText().toLowerCase().trim();
                     int codEquipamento = Integer.parseInt(codigoEquipamento.getText().trim());
-
                     for (Equipe equipe : appEquipe.getEquipes()) {
                         if (equipe.getCodinome().toLowerCase().equals(codinome)) {
                             equipeSelecionada = equipe;
@@ -85,8 +84,9 @@ public class VincularEquipamento {
                     if (equipeSelecionada == null) {
                         equipes.append("Erro! Não existe uma equipe com esse codinome. \n");
                     }
+                    atualizarExibicaoAposVinculo();
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Erro! Formato inválido para ID.");
+                    JOptionPane.showMessageDialog(null, "Erro! Formato inválido.");
                 }
             }
         });
@@ -101,8 +101,9 @@ public class VincularEquipamento {
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                atualizarExibicao();
                 acmeRescue.setContentPane(acmeRescue.getPainel());
-                acmeRescue.setSize(800,600);
+                acmeRescue.setSize(800, 600);
             }
         });
     }
@@ -128,6 +129,13 @@ public class VincularEquipamento {
                 equipamentos.append(equipamento.toString());
             }
         }
+    }
+
+    private void atualizarExibicaoAposVinculo() {
+        atualizarExibicao();
+        codinomeEquipe.setText("");
+        codigoEquipamento.setText("");
+        equipamentos.append("Equipamento vinculado com sucesso!");
     }
 
 
