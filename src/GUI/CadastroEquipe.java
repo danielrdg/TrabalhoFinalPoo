@@ -12,7 +12,7 @@ public class CadastroEquipe implements ActionListener {
     private JTextField textField1, textField2, textField3, textField4;
     private ArrayList<JTextField> camposDeTexto;
     private JButton confirmar, limpar, mostrarDados, voltar;
-    private JTextArea textArea1;
+    private JTextArea areaTexto;
     private JPanel painel;
     private AppEquipe appEquipe;
     private ACMERescue acmeRescue;
@@ -41,14 +41,14 @@ public class CadastroEquipe implements ActionListener {
 
             Equipe equipe = new Equipe(codinome,quantidade,latitude,longitude);
             if (appEquipe.cadastrarEquipe(equipe)) {
-                textArea1.append("Equipe cadastrada com sucesso!");
+                areaTexto.append("Equipe cadastrada.\n");
             }
             else {
-                textArea1.append("Erro! Já existe uma equipe com esse codinome;");
+                areaTexto.append("Erro! Já existe uma equipe com esse codinome\n");
             }
         }
         catch(NumberFormatException e){
-            textArea1.append("Erro! Formato inválido para quantidade, latitude ou longitude.\n");
+            areaTexto.append("Erro! Formato inválido para quantidade, latitude ou longitude.\n");
         }
     }
 
@@ -56,7 +56,7 @@ public class CadastroEquipe implements ActionListener {
         for (JTextField j : camposDeTexto) {
             j.setText("");
         }
-        textArea1.setText("");
+        areaTexto.setText("");
     }
 
     private void mostrarDados() {
@@ -66,11 +66,11 @@ public class CadastroEquipe implements ActionListener {
         Collections.sort(equipes);
 
         if (equipes.isEmpty()) {
-            textArea1.append("Erro! Nenhuma equipe cadastrada no sistema.\n");
+            areaTexto.append("Erro! Nenhuma equipe cadastrada.\n");
         }
 
         for (Equipe e : equipes){
-            textArea1.append("Equipe:\n" + e.toString());
+            areaTexto.append("Equipe:\n" + e.toString());
         }
     }
 

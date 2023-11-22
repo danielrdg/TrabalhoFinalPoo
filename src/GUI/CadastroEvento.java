@@ -16,7 +16,7 @@ public class CadastroEvento implements ActionListener {
     private JTextField campoCodigo, campoData, campoLatitude, campoLongitude, txtSeca, txtTerremoto, txtPrecipitacao, txtCiclone;
     private JButton confirmarButton, limparButton, mostrarDadosButton, finalizarButton, botaoConfirmarCic, botaoConfirmarTer, botaoConfirmarSec;
     private JPanel painel;
-    private JTextArea textArea1;
+    private JTextArea areaTexto;
     private JRadioButton radioCiclone;
     private JRadioButton radioTerremoto;
     private JRadioButton radioSeca;
@@ -55,7 +55,7 @@ public class CadastroEvento implements ActionListener {
             }
 
             if (existeCodigo(codigoEvento)) {
-                textArea1.append("Erro! Já existe um evento com esse código.\n");
+                areaTexto.append("Erro! Já existe um evento com esse código.\n");
             }
             else {
                 switch (tipoEvento) {
@@ -82,7 +82,7 @@ public class CadastroEvento implements ActionListener {
 
             }
         } catch (NumberFormatException e) {
-            textArea1.append("Formato inválido para latitude ou longitude.\n");
+            areaTexto.append("Formato inválido para latitude ou longitude.\n");
         }
     }
 
@@ -97,30 +97,30 @@ public class CadastroEvento implements ActionListener {
 
     private void mostrarDados() {
         if (appEvento.getEventos().isEmpty()) {
-            textArea1.append("Nenhum evento cadastrado.\n");
+            areaTexto.append("Nenhum evento cadastrado.\n");
         } else {
             Collections.sort(appEvento.getEventos());
             for (Evento evento1 : appEvento.getEventos()) {
-                textArea1.append("Código: " + evento1.getCodigo() + "\n");
-                textArea1.append("Data: " + evento1.getData() + "\n");
-                textArea1.append("Latitude: " + evento1.getLatitude() + "\n");
-                textArea1.append("Longitude: " + evento1.getLongitude() + "\n");
+                areaTexto.append("Código: " + evento1.getCodigo() + "\n");
+                areaTexto.append("Data: " + evento1.getData() + "\n");
+                areaTexto.append("Latitude: " + evento1.getLatitude() + "\n");
+                areaTexto.append("Longitude: " + evento1.getLongitude() + "\n");
 
                 if (evento1 instanceof Ciclone) {
                     Ciclone ciclone = (Ciclone) evento1;
-                    textArea1.append("Tipo de evento: Ciclone\n");
-                    textArea1.append("Velocidade: " + ciclone.getVelocidade() + "\n");
-                    textArea1.append("Precipitação: " + ciclone.getPrecipitacao() + "\n");
+                    areaTexto.append("Tipo de evento: Ciclone\n");
+                    areaTexto.append("Velocidade: " + ciclone.getVelocidade() + "\n");
+                    areaTexto.append("Precipitação: " + ciclone.getPrecipitacao() + "\n");
                 } else if (evento1 instanceof Terremoto) {
                     Terremoto terremoto = (Terremoto) evento1;
-                    textArea1.append("Tipo de evento: Terremoto\n");
-                    textArea1.append("Magnitude: " + terremoto.getMagnitude() + "\n");
+                    areaTexto.append("Tipo de evento: Terremoto\n");
+                    areaTexto.append("Magnitude: " + terremoto.getMagnitude() + "\n");
                 } else if (evento1 instanceof Seca) {
                     Seca seca = (Seca) evento1;
-                    textArea1.append("Tipo de evento: Seca\n");
-                    textArea1.append("Estiagem: " + seca.getEstiagem() + "\n");
+                    areaTexto.append("Tipo de evento: Seca\n");
+                    areaTexto.append("Estiagem: " + seca.getEstiagem() + "\n");
                 }
-                textArea1.append("--------------------------" + "\n");
+                areaTexto.append("--------------------------" + "\n");
             }
         }
     }
@@ -158,14 +158,14 @@ public class CadastroEvento implements ActionListener {
                 Ciclone ciclone = new Ciclone(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, vel, prec);
 
                 if (appEvento.cadastrarEvento(ciclone)) {
-                    textArea1.append("Evendo cadastrado!" + "\n");
+                    areaTexto.append("Evendo cadastrado.\n");
                 } else {
-                    textArea1.append("Erro! Já existe um evento com esse código." + "\n");
+                    areaTexto.append("Erro! Já existe um evento com esse código.\n");
                 }
 
                 janela.setVisible(false);
             } catch (NumberFormatException ex) {
-                textArea1.append("Formato inválido para velocidade ou precipitação. Tente novamente." + "\n");
+                areaTexto.append("Formato inválido para velocidade ou precipitação. Tente novamente.\n");
             }
         });
 
@@ -189,13 +189,13 @@ public class CadastroEvento implements ActionListener {
                 double mag = Double.parseDouble(txtTerremoto.getText().trim());
                 Terremoto terremoto = new Terremoto(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, mag);
                 if (appEvento.cadastrarEvento(terremoto)) {
-                    textArea1.append("Evento cadastrado.\n");
+                    areaTexto.append("Evento cadastrado.\n");
                 } else {
-                    textArea1.append("Erro! Já existe um evento com esse código.\n");
+                    areaTexto.append("Erro! Já existe um evento com esse código.\n");
                 }
                 janela.setVisible(false);
             } catch (NumberFormatException ex) {
-                textArea1.append("Formato inválido para magnitude.\n");
+                areaTexto.append("Formato inválido para magnitude.\n");
             }
         });
 
@@ -220,13 +220,13 @@ public class CadastroEvento implements ActionListener {
                 Seca seca = new Seca(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, est);
 
                 if (appEvento.cadastrarEvento(seca)) {
-                    textArea1.append("Evento cadastrado." + "\n");
+                    areaTexto.append("Evento cadastrado." + "\n");
                 } else {
-                    textArea1.append("Erro! Já existe um evento com esse código" + "\n");
+                    areaTexto.append("Erro! Já existe um evento com esse código" + "\n");
                 }
                 janela.setVisible(false);
             } catch (NumberFormatException ex) {
-                textArea1.append("Formato inválido para estiagem." + "\n");
+                areaTexto.append("Formato inválido para estiagem." + "\n");
             }
         });
 
@@ -243,7 +243,7 @@ public class CadastroEvento implements ActionListener {
             campoData.setText("");
             campoLatitude.setText("");
             campoLongitude.setText("");
-            textArea1.setText("");
+            areaTexto.setText("");
             tipoEventoGroup.clearSelection();
         } else if (e.getSource() == mostrarDadosButton) {
             mostrarDados();
