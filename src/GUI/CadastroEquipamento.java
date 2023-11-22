@@ -17,9 +17,12 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
     private JTextField campoID, campoNome, campoCustoDia;
     private JButton confirmarButton, limparButton, mostrarDadosButton, voltarButton;
     private JTextArea areaTexto;
-    private JTextField campoTipo;
+    private JRadioButton radioBarco;
+    private JRadioButton radioCaminhaoTanque;
+    private JRadioButton radioEscavadeira;
     private ACMERescue acmeRescue;
     private AppEquipamento appEquipamento;
+    private ButtonGroup tipoEquipamentoGroup;
 
     public CadastroEquipamento(ACMERescue acmeRescue) {
         super();
@@ -29,24 +32,29 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
         limparButton.addActionListener(this);
         mostrarDadosButton.addActionListener(this);
         voltarButton.addActionListener(this);
+        tipoEquipamentoGroup = new ButtonGroup();
+        tipoEquipamentoGroup.add(radioBarco);
+        tipoEquipamentoGroup.add(radioCaminhaoTanque);
+        tipoEquipamentoGroup.add(radioEscavadeira);
+        radioBarco.addActionListener(this);
+        radioCaminhaoTanque.addActionListener(this);
+        radioEscavadeira.addActionListener(this);
     }
-
-
         private void cadastrarEquipamento() {
             try {
                 int idEquipamento = Integer.parseInt(campoID.getText().trim());
                 String nomeEquipamento = campoNome.getText().trim();
                 double custoDia = Double.parseDouble(campoCustoDia.getText().trim());
+
                 int tipo = 0;
 
-                do {
-                    tipo = Integer.parseInt(campoTipo.getText().trim());
-
-                    if (tipo < 1 || tipo > 3) {
-                        JOptionPane.showMessageDialog(null, "Erro! O tipo deve ser de 1 a 3.");
-                        campoTipo.setText("");
-                    }
-                } while (tipo < 1 || tipo > 3);
+                if (radioBarco.isSelected()) {
+                    tipo = 1;
+                } else if (radioCaminhaoTanque.isSelected()) {
+                    tipo = 2;
+                } else if (radioEscavadeira.isSelected()) {
+                    tipo = 3;
+                }
 
                 switch (tipo) {
                     case 1:
@@ -64,7 +72,8 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                         container.add(botaoConfirmar);
                         cadastrarBarco.add(container);
                         cadastrarBarco.setTitle("Cadastro de Barco");
-                        cadastrarBarco.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                        cadastrarBarco.setLocationRelativeTo(null);
+                        cadastrarBarco.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                         cadastrarBarco.pack();
                         cadastrarBarco.setVisible(true);
                         botaoConfirmar.addActionListener(new ActionListener() {
@@ -103,8 +112,9 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                         containerTanque.add(campoCapacidadeCombustivel);
                         containerTanque.add(confirmarTanque);
                         cadastrarCaminhaoTanque.add(containerTanque);
+                        cadastrarCaminhaoTanque.setLocationRelativeTo(null);
                         cadastrarCaminhaoTanque.setTitle("Cadastro de Caminhao Tanque");
-                        cadastrarCaminhaoTanque.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                        cadastrarCaminhaoTanque.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                         cadastrarCaminhaoTanque.pack();
                         cadastrarCaminhaoTanque.setVisible(true);
 
@@ -150,8 +160,9 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                         containerEscavadeira.add(campoCarga);
                         containerEscavadeira.add(confirmarEscavadeira);
                         cadastrarEscavadeira.add(containerEscavadeira);
+                        cadastrarEscavadeira.setLocationRelativeTo(null);
                         cadastrarEscavadeira.setTitle("Cadastro de Escavadeira");
-                        cadastrarEscavadeira.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                        cadastrarEscavadeira.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                         cadastrarEscavadeira.pack();
                         cadastrarEscavadeira.setVisible(true);
 
@@ -240,7 +251,6 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
         campoID.setText("");
         campoNome.setText("");
         campoCustoDia.setText("");
-        campoTipo.setText("");
         areaTexto.setText("");
     }
 

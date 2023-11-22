@@ -13,13 +13,17 @@ import java.awt.event.ActionListener;
 import java.util.Collections;
 
 public class CadastroEvento implements ActionListener {
-    private JTextField textField1, textField2, textField3, textField4, textField5, txtSeca, txtTerremoto, txtPrecipitacao, txtCiclone;
+    private JTextField campoCodigo, campoData, campoLatitude, campoLongitude, txtSeca, txtTerremoto, txtPrecipitacao, txtCiclone;
     private JButton confirmarButton, limparButton, mostrarDadosButton, finalizarButton, botaoConfirmarCic, botaoConfirmarTer, botaoConfirmarSec;
     private JPanel painel;
     private JTextArea textArea1;
+    private JRadioButton radioCiclone;
+    private JRadioButton radioTerremoto;
+    private JRadioButton radioSeca;
     private JLabel labelVelocidade, labelPrecipitacao, labelTerremoto, labelSeca;
     private AppEvento appEvento;
     private ACMERescue acmeRescue;
+    private ButtonGroup tipoEventoGroup;
 
     public CadastroEvento(ACMERescue acmeRescue) {
         super();
@@ -29,19 +33,36 @@ public class CadastroEvento implements ActionListener {
         mostrarDadosButton.addActionListener(this);
         limparButton.addActionListener(this);
         finalizarButton.addActionListener(this);
+        tipoEventoGroup = new ButtonGroup();
+        tipoEventoGroup.add(radioCiclone);
+        tipoEventoGroup.add(radioTerremoto);
+        tipoEventoGroup.add(radioSeca);
+        radioCiclone.addActionListener(this);
+        radioTerremoto.addActionListener(this);
+        radioSeca.addActionListener(this);
     }
 
     private void cadastrarEvento() {
         try {
-            String codigoEvento = textField1.getText().trim();
-            String dataEvento = textField2.getText().trim();
-            double latitudeEvento = Double.parseDouble(textField3.getText().trim());
-            double longitudeEvento = Double.parseDouble(textField4.getText().trim());
-            int tipoEvento = Integer.parseInt(textField5.getText().trim());
+            String codigoEvento = campoCodigo.getText().trim();
+            String dataEvento = campoData.getText().trim();
+            double latitudeEvento = Double.parseDouble(campoLatitude.getText().trim());
+            double longitudeEvento = Double.parseDouble(campoLongitude.getText().trim());
+
+            int tipoEvento = 0;
+
+            if (radioCiclone.isSelected()) {
+                tipoEvento = 1;
+            } else if (radioTerremoto.isSelected()) {
+                tipoEvento = 2;
+            } else if (radioSeca.isSelected()) {
+                tipoEvento = 3;
+            }
 
             if (existeCodigo(codigoEvento)) {
-                textArea1.append("Erro! Já existe um evento com esse código." + "\n");
-            } else {
+                textArea1.append("Erro! Já existe um evento com esse código.\n");
+            }
+            else {
                 switch (tipoEvento) {
                     case 1:
                         JFrame Ciclo = criarJanela("Ciclone");
@@ -224,11 +245,10 @@ public class CadastroEvento implements ActionListener {
         if (e.getSource() == confirmarButton) {
             cadastrarEvento();
         } else if (e.getSource() == limparButton) {
-            textField1.setText("");
-            textField2.setText("");
-            textField3.setText("");
-            textField4.setText("");
-            textField5.setText("");
+            campoCodigo.setText("");
+            campoData.setText("");
+            campoLatitude.setText("");
+            campoLongitude.setText("");
             textArea1.setText("");
         } else if (e.getSource() == mostrarDadosButton) {
             mostrarDados();
