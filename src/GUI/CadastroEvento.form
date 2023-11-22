@@ -141,12 +141,17 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="c47b2" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+          <scrollpane id="80c4f">
             <constraints/>
-            <properties>
-              <text value=""/>
-            </properties>
-          </component>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="9a456" class="javax.swing.JTextArea" binding="areaTexto">
+                <constraints/>
+                <properties/>
+              </component>
+            </children>
+          </scrollpane>
         </children>
       </scrollpane>
       <component id="d70da" class="javax.swing.JLabel">

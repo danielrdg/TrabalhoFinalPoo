@@ -112,12 +112,17 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="550e6" class="javax.swing.JTextArea" binding="areaTexto">
+          <scrollpane id="caad5">
             <constraints/>
-            <properties>
-              <font name="DialogInput"/>
-            </properties>
-          </component>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="e2c7a" class="javax.swing.JTextArea" binding="areaTexto">
+                <constraints/>
+                <properties/>
+              </component>
+            </children>
+          </scrollpane>
         </children>
       </scrollpane>
       <component id="caeee" class="javax.swing.JButton" binding="voltarButton">

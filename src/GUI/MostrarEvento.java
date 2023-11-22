@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class MostrarEvento {
     private JPanel painel;
-    private JTextArea areaEventos;
+    private JTextArea areaTexto;
     private JButton voltarButton;
     private JButton confirmarButton;
     private JTextField campoCodigo;
@@ -27,10 +27,10 @@ public class MostrarEvento {
         this.appEvento = acmeRescue.getAppEvento();
 
         if (appEvento.getEventos().isEmpty()) {
-            areaEventos.append("Erro! Nenhum evento cadastrado.\n");
+            areaTexto.append("Erro! Nenhum evento cadastrado.\n");
         } else {
             for (Evento evento : appEvento.getEventos()) {
-                areaEventos.append(evento.toString());
+                areaTexto.append(evento.toString());
             }
         }
 
@@ -50,12 +50,12 @@ public class MostrarEvento {
                     }
 
                     if (eventoEncontrado) {
-                        areaEventos.append("Evento selecionado.\n");
+                        areaTexto.append("Evento selecionado.\n");
                     } else {
-                        areaEventos.append("Erro! Não existe evento com esse código.\n");
+                        areaTexto.append("Erro! Não existe evento com esse código.\n");
                     }
                 } catch (NumberFormatException ex) {
-                    areaEventos.append("Erro! Formato inválido para código.\n");
+                    areaTexto.append("Erro! Formato inválido para código.\n");
                 }
             }
         });
@@ -69,7 +69,7 @@ public class MostrarEvento {
         limparButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                areaEventos.setText("");
+                areaTexto.setText("");
                 campoCodigo.setText("");
             }
         });
@@ -85,12 +85,12 @@ public class MostrarEvento {
 
     public void atualizarListaEventos() {
         SwingUtilities.invokeLater(() -> {
-            areaEventos.setText("");
+            areaTexto.setText("");
             if (appEvento.getEventos().isEmpty()) {
-                areaEventos.append("Erro! Nenhum evento cadastrado.\n");
+                areaTexto.append("Erro! Nenhum evento cadastrado.\n");
             } else {
                 for (Evento evento : appEvento.getEventos()) {
-                    areaEventos.append(evento.toString());
+                    areaTexto.append(evento.toString());
                 }
             }
         });
