@@ -45,15 +45,10 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                 int idEquipamento = Integer.parseInt(campoID.getText().trim());
                 String nomeEquipamento = campoNome.getText().trim();
                 double custoDia = Double.parseDouble(campoCustoDia.getText().trim());
+                int tipo = obterTipoEquipamento();
 
-                int tipo = 0;
-
-                if (radioBarco.isSelected()) {
-                    tipo = 1;
-                } else if (radioCaminhaoTanque.isSelected()) {
-                    tipo = 2;
-                } else if (radioEscavadeira.isSelected()) {
-                    tipo = 3;
+                if (tipo == 0) {
+                    JOptionPane.showMessageDialog(this, "Erro! Selecione um tipo de equipamento.");
                 }
 
                 switch (tipo) {
@@ -209,6 +204,8 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                         });
                         break;
                 }
+
+                tipoEquipamentoGroup.clearSelection();
             }
                 catch (NumberFormatException e) {
                 areaTexto.append("Erro! Formato inválido para ID ou custo.\n");
@@ -260,6 +257,7 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
             cadastrarEquipamento();
         }
         else if (e.getSource() == limparButton){
+            tipoEquipamentoGroup.clearSelection();
             limparCampos();
         }
         else if (e.getSource()==mostrarDadosButton){
@@ -273,6 +271,18 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
 
     public JPanel getPainel() {
         return painel;
+    }
+
+    private int obterTipoEquipamento() throws NumberFormatException {
+
+        if (radioBarco.isSelected()) {
+            return 1;
+        } else if (radioCaminhaoTanque.isSelected()) {
+            return 2;
+        } else if (radioEscavadeira.isSelected()) {
+            return 3;
+        }
+        return 0;
     }
 }
 

@@ -48,15 +48,10 @@ public class CadastroEvento implements ActionListener {
             String dataEvento = campoData.getText().trim();
             double latitudeEvento = Double.parseDouble(campoLatitude.getText().trim());
             double longitudeEvento = Double.parseDouble(campoLongitude.getText().trim());
+            int tipoEvento = obterTipoEvento();
 
-            int tipoEvento = 0;
-
-            if (radioCiclone.isSelected()) {
-                tipoEvento = 1;
-            } else if (radioTerremoto.isSelected()) {
-                tipoEvento = 2;
-            } else if (radioSeca.isSelected()) {
-                tipoEvento = 3;
+            if (tipoEvento == 0){
+                JOptionPane.showMessageDialog(null, "Erro! Selecione um tipo de evento.");
             }
 
             if (existeCodigo(codigoEvento)) {
@@ -81,11 +76,10 @@ public class CadastroEvento implements ActionListener {
                         adicionarComponentesSeca(Seca);
                         adicionarAcaoBotaoSeca(Seca, codigoEvento, dataEvento, latitudeEvento, longitudeEvento);
                         break;
-
-                    default:
-                        JOptionPane.showMessageDialog(null, "Tipo de evento inválido. O tipo deve ser de 1 a 3.");
-                        break;
                 }
+
+                tipoEventoGroup.clearSelection();
+
             }
         } catch (NumberFormatException e) {
             textArea1.append("Formato inválido para latitude ou longitude.\n");
@@ -250,6 +244,7 @@ public class CadastroEvento implements ActionListener {
             campoLatitude.setText("");
             campoLongitude.setText("");
             textArea1.setText("");
+            tipoEventoGroup.clearSelection();
         } else if (e.getSource() == mostrarDadosButton) {
             mostrarDados();
         } else if (e.getSource() == finalizarButton) {
@@ -260,6 +255,17 @@ public class CadastroEvento implements ActionListener {
 
     public JPanel getPainel() {
         return painel;
+    }
+
+    private int obterTipoEvento() throws NumberFormatException {
+        if (radioCiclone.isSelected()) {
+            return 1;
+        } else if (radioTerremoto.isSelected()) {
+            return 2;
+        } else if (radioSeca.isSelected()) {
+            return 3;
+        }
+        return 0;
     }
 
 }
