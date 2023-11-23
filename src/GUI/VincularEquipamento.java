@@ -31,7 +31,7 @@ public class VincularEquipamento {
         this.appEquipe = acmeRescue.getAppEquipe();
 
         if (appEquipe.getEquipes().isEmpty()) {
-            equipes.append("Não há equipes cadastradas no momento.\n");
+            equipes.append("Nenhuma equipe cadastrada.\n");
         }
         else {
             equipes.append("Equipes cadastradas:\n");
@@ -41,7 +41,7 @@ public class VincularEquipamento {
         }
 
         if (appEquipamento.getEquipamentos().isEmpty()) {
-            equipamentos.append("Não há equipamentos cadastrados no momento.\n");
+            equipamentos.append("Nenhum equipamento cadastrado.\n");
         }
         else {
             equipamentos.append("Equipamentos cadastrados:\n");
@@ -113,7 +113,7 @@ public class VincularEquipamento {
         equipes.setText("");
 
         if (appEquipe.getEquipes().isEmpty()) {
-            equipes.append("Não há equipes cadastradas no momento.\n");
+            equipes.append("Nenhum equipamento cadastrado.\n");
         } else {
             equipes.append("Equipes cadastradas:\n");
             for (Equipe equipe : appEquipe.getEquipes()) {
@@ -122,7 +122,7 @@ public class VincularEquipamento {
         }
 
         if (appEquipamento.getEquipamentos().isEmpty()) {
-            equipamentos.append("Não há equipamentos cadastrados no momento.\n");
+            equipamentos.append("Nenhuma equipe cadastrada.\n");
         } else {
             equipamentos.append("Equipamentos cadastrados:\n");
             for (Equipamento equipamento : appEquipamento.getEquipamentos()) {
