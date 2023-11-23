@@ -17,13 +17,10 @@ public class CadastroEvento implements ActionListener {
     private JButton confirmarButton, limparButton, mostrarDadosButton, finalizarButton, botaoConfirmarCic, botaoConfirmarTer, botaoConfirmarSec;
     private JPanel painel;
     private JTextArea areaTexto;
-    private JRadioButton radioCiclone;
-    private JRadioButton radioTerremoto;
-    private JRadioButton radioSeca;
-    private JLabel labelVelocidade, labelPrecipitacao, labelTerremoto, labelSeca;
+    private JTextField campoTipo;
+    private JLabel labelVelocidade, labelPrecipitacao, tipoTerremoto, tipoSeca, tipoCiclone;
     private AppEvento appEvento;
     private ACMERescue acmeRescue;
-    private ButtonGroup tipoEventoGroup;
 
     public CadastroEvento(ACMERescue acmeRescue) {
         super();
@@ -33,13 +30,6 @@ public class CadastroEvento implements ActionListener {
         mostrarDadosButton.addActionListener(this);
         limparButton.addActionListener(this);
         finalizarButton.addActionListener(this);
-        tipoEventoGroup = new ButtonGroup();
-        tipoEventoGroup.add(radioCiclone);
-        tipoEventoGroup.add(radioTerremoto);
-        tipoEventoGroup.add(radioSeca);
-        radioCiclone.addActionListener(this);
-        radioTerremoto.addActionListener(this);
-        radioSeca.addActionListener(this);
     }
 
     private void cadastrarEvento() {
@@ -48,11 +38,8 @@ public class CadastroEvento implements ActionListener {
             String dataEvento = campoData.getText().trim();
             double latitudeEvento = Double.parseDouble(campoLatitude.getText().trim());
             double longitudeEvento = Double.parseDouble(campoLongitude.getText().trim());
-            int tipoEvento = obterTipoEvento();
 
-            if (tipoEvento == 0){
-                JOptionPane.showMessageDialog(null, "Erro! Selecione um tipo de evento.");
-            }
+            int tipoEvento = Integer.parseInt(campoTipo.getText().trim());
 
             if (existeCodigo(codigoEvento)) {
                 areaTexto.append("Erro! Já existe um evento com esse código.\n");
@@ -76,9 +63,11 @@ public class CadastroEvento implements ActionListener {
                         adicionarComponentesSeca(Seca);
                         adicionarAcaoBotaoSeca(Seca, codigoEvento, dataEvento, latitudeEvento, longitudeEvento);
                         break;
+
+                    default:
+                        JOptionPane.showMessageDialog(this.getPainel(),"Erro! Tipo de evento deve ser de 1 a 3.");
                 }
 
-                tipoEventoGroup.clearSelection();
 
             }
         } catch (NumberFormatException e) {
@@ -174,10 +163,10 @@ public class CadastroEvento implements ActionListener {
     }
 
     private void adicionarComponentesTerremoto(JFrame janela) {
-        labelTerremoto = new JLabel("Magnitude: ");
+        tipoTerremoto = new JLabel("Magnitude: ");
         txtTerremoto = new JTextField(10);
         botaoConfirmarTer = new JButton("Confirmar");
-        janela.add(labelTerremoto);
+        janela.add(tipoTerremoto);
         janela.add(txtTerremoto);
         janela.add(botaoConfirmarTer);
         janela.pack();
@@ -204,10 +193,10 @@ public class CadastroEvento implements ActionListener {
     }
 
     private void adicionarComponentesSeca(JFrame janela) {
-        labelSeca = new JLabel("Estiagem: ");
+        tipoSeca = new JLabel("Estiagem: ");
         txtSeca = new JTextField(10);
         botaoConfirmarSec = new JButton("Confirmar");
-        janela.add(labelSeca);
+        janela.add(tipoSeca);
         janela.add(txtSeca);
         janela.add(botaoConfirmarSec);
         janela.pack();
@@ -244,7 +233,6 @@ public class CadastroEvento implements ActionListener {
             campoLatitude.setText("");
             campoLongitude.setText("");
             areaTexto.setText("");
-            tipoEventoGroup.clearSelection();
         } else if (e.getSource() == mostrarDadosButton) {
             mostrarDados();
         } else if (e.getSource() == finalizarButton) {
@@ -255,17 +243,6 @@ public class CadastroEvento implements ActionListener {
 
     public JPanel getPainel() {
         return painel;
-    }
-
-    private int obterTipoEvento() throws NumberFormatException {
-        if (radioCiclone.isSelected()) {
-            return 1;
-        } else if (radioTerremoto.isSelected()) {
-            return 2;
-        } else if (radioSeca.isSelected()) {
-            return 3;
-        }
-        return 0;
     }
 
 }

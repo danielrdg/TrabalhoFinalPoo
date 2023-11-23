@@ -14,15 +14,14 @@ import java.util.Collections;
 
 public class CadastroEquipamento extends JFrame implements ActionListener {
     private JPanel painel;
-    private JTextField campoID, campoNome, campoCustoDia;
+    private JTextField campoID, campoNome, campoCustoDia, campoTipo;
     private JButton confirmarButton, limparButton, mostrarDadosButton, voltarButton;
     private JTextArea areaTexto;
-    private JRadioButton radioBarco;
-    private JRadioButton radioCaminhaoTanque;
-    private JRadioButton radioEscavadeira;
+    private JLabel labelCaminhao;
+    private JLabel labelCaminhaoTanque;
+    private JLabel campoEscavadeira;
     private ACMERescue acmeRescue;
     private AppEquipamento appEquipamento;
-    private ButtonGroup tipoEquipamentoGroup;
 
     public CadastroEquipamento(ACMERescue acmeRescue) {
         super();
@@ -32,24 +31,14 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
         limparButton.addActionListener(this);
         mostrarDadosButton.addActionListener(this);
         voltarButton.addActionListener(this);
-        tipoEquipamentoGroup = new ButtonGroup();
-        tipoEquipamentoGroup.add(radioBarco);
-        tipoEquipamentoGroup.add(radioCaminhaoTanque);
-        tipoEquipamentoGroup.add(radioEscavadeira);
-        radioBarco.addActionListener(this);
-        radioCaminhaoTanque.addActionListener(this);
-        radioEscavadeira.addActionListener(this);
     }
         private void cadastrarEquipamento() {
             try {
                 int idEquipamento = Integer.parseInt(campoID.getText().trim());
                 String nomeEquipamento = campoNome.getText().trim();
                 double custoDia = Double.parseDouble(campoCustoDia.getText().trim());
-                int tipo = obterTipoEquipamento();
 
-                if (tipo == 0) {
-                    JOptionPane.showMessageDialog(this, "Erro! Selecione um tipo de equipamento.");
-                }
+                int tipo=Integer.parseInt(campoTipo.getText().trim());
 
                 switch (tipo) {
                     case 1:
@@ -202,10 +191,10 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                                 }
                             }
                         });
+                    default:
+                        JOptionPane.showMessageDialog(this,"Erro! Escolha um tipo de 1 a 3.");
                         break;
                 }
-
-                tipoEquipamentoGroup.clearSelection();
             }
                 catch (NumberFormatException e) {
                 areaTexto.append("Erro! Formato inválido para ID ou custo.\n");
@@ -257,7 +246,6 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
             cadastrarEquipamento();
         }
         else if (e.getSource() == limparButton){
-            tipoEquipamentoGroup.clearSelection();
             limparCampos();
         }
         else if (e.getSource()==mostrarDadosButton){
@@ -273,17 +261,6 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
         return painel;
     }
 
-    private int obterTipoEquipamento() throws NumberFormatException {
-
-        if (radioBarco.isSelected()) {
-            return 1;
-        } else if (radioCaminhaoTanque.isSelected()) {
-            return 2;
-        } else if (radioEscavadeira.isSelected()) {
-            return 3;
-        }
-        return 0;
-    }
 }
 
 
