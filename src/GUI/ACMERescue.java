@@ -11,15 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ACMERescue extends JFrame {
-    private JButton cadastroEventoButton, cadastroEquipeButton, cadastroAtendimentoButton, mostrarRelatorioButton, cadastroEquipamentoButton;
+    private JButton cadastroEventoButton, cadastroEquipeButton, cadastroAtendimentoButton, mostrarRelatorioButton, cadastroEquipamentoButton, vincularEquipamentoButton, alocarAtendimentoButton, consultarAtendimentosButton, alterarAtendimentoButton, carregarDadosIniciaisButton, salvarDadosButton, finalizarButton;
     private JPanel painel;
-    private JButton alterarAtendimentoButton;
-    private JButton consultarAtendimentosButton;
-    private JButton salvarDadosButton;
-    private JButton vincularEquipamentoButton;
-    private JButton alocarAtendimentoButton;
-    private JButton carregarDadosIniciaisButton;
-    private JButton finalizarButton;
     private CadastroEquipe cadastroEquipePainel;
     private CadastroEvento cadastroEventoPainel;
     private CadastroEquipamento cadastroEquipamentoPainel;
@@ -33,7 +26,6 @@ public class ACMERescue extends JFrame {
     private AppEquipe appEquipe;
     private AppEquipamento appEquipamento;
     private VincularEquipamento vincularEquipamento;
-
     private AlocarAtendimento alocarAtendimento;
 
     public ACMERescue(AppEvento appEvento, AppAtendimento appAtendimento, AppEquipe appEquipe, AppEquipamento appEquipamento) {
@@ -50,6 +42,7 @@ public class ACMERescue extends JFrame {
         this.cadastroEquipePainel = new CadastroEquipe(this);
         this.relatorioGeral = new RelatorioGeral(this);
         this.vincularEquipamento = new VincularEquipamento(this);
+        this.alocarAtendimento = new AlocarAtendimento(this);
         this.setContentPane(painel);
         this.setSize(800, 600);
         this.setTitle("ACMERescue");
@@ -104,7 +97,7 @@ public class ACMERescue extends JFrame {
         alocarAtendimentoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                mudarPainel(8);
             }
         });
         consultarAtendimentosButton.addActionListener(new ActionListener() {
