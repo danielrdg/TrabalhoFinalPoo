@@ -34,6 +34,8 @@ public class ACMERescue extends JFrame {
     private AppEquipamento appEquipamento;
     private VincularEquipamento vincularEquipamento;
 
+    private AlocarAtendimento alocarAtendimento;
+
     public ACMERescue(AppEvento appEvento, AppAtendimento appAtendimento, AppEquipe appEquipe, AppEquipamento appEquipamento) {
         super();
         imageIcon = new ImageIcon("icon.png");
@@ -176,6 +178,11 @@ public class ACMERescue extends JFrame {
             case 7:
                 this.setContentPane(vincularEquipamento.getPainel());
                 this.setSize(800, 400);
+                break;
+
+            case 8:
+                this.setContentPane(alocarAtendimento.getPainel());
+                this.setSize(800,400);
                 break;
         }
     }
