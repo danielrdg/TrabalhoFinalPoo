@@ -232,6 +232,7 @@ public class CadastroEvento implements ActionListener {
             campoData.setText("");
             campoLatitude.setText("");
             campoLongitude.setText("");
+            campoTipo.setText("");
             areaTexto.setText("");
         } else if (e.getSource() == mostrarDadosButton) {
             mostrarDados();
