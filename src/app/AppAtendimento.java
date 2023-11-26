@@ -29,23 +29,4 @@ public class AppAtendimento {
     public ArrayList<Atendimento> getAtendimentosPendentes() {
         return atendimentosPendentes;
     }
-    public void alocarAtendimentos() {
-        for (Atendimento atendimento : atendimentosPendentes) {
-            boolean equipeAlocada = false;
-
-            for (Equipe equipe : equipesDisponiveis) {
-                if (equipe.podeAtender(atendimento)) {
-                    atendimento.setEquipe(equipe);
-                    equipe.adicionarAtendimento(atendimento);
-                    atendimento.setStatus("ALOCADO");
-                    equipeAlocada = true;
-                    break;
-                }
-            }
-            if (!equipeAlocada) {
-                atendimento.setStatus("CANCELADO");
-                atendimento.setEquipe(null);
-            }
-        }
-}
 }
