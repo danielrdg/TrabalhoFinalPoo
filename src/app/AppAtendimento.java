@@ -1,14 +1,19 @@
 package app;
 
 import dados.Atendimento;
+import dados.Equipe;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class AppAtendimento {
-    private Queue<Atendimento> atendimentosPendentes;
+    private ArrayList<Atendimento> atendimentosPendentes;
+    private ArrayList<Equipe>equipesDisponiveis;
 
     public AppAtendimento(){
-        atendimentosPendentes = new LinkedList<>();
+        atendimentosPendentes = new ArrayList<>();
+        equipesDisponiveis = new ArrayList<>();
     }
 
     public boolean cadastrarAtendimento(Atendimento atendimento){
@@ -21,7 +26,26 @@ public class AppAtendimento {
         return true;
     }
 
-    public Queue<Atendimento> getAtendimentosPendentes() {
+    public ArrayList<Atendimento> getAtendimentosPendentes() {
         return atendimentosPendentes;
     }
+    public void alocarAtendimentos() {
+        for (Atendimento atendimento : atendimentosPendentes) {
+            boolean equipeAlocada = false;
+
+            for (Equipe equipe : equipesDisponiveis) {
+                if (equipe.podeAtender(atendimento)) {
+                    atendimento.setEquipe(equipe);
+                    equipe.adicionarAtendimento(atendimento);
+                    atendimento.setStatus("ALOCADO");
+                    equipeAlocada = true;
+                    break;
+                }
+            }
+            if (!equipeAlocada) {
+                atendimento.setStatus("CANCELADO");
+                atendimento.setEquipe(null);
+            }
+        }
+}
 }
