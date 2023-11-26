@@ -71,7 +71,6 @@ public class Equipe implements Comparable<Equipe> {
 			return false;
 		}
 
-		// Adicione outras verificações conforme necessário
 
 		return true;
 	}
