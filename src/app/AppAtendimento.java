@@ -8,11 +8,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class AppAtendimento {
-    private ArrayList<Atendimento> atendimentosPendentes;
+    private Queue<Atendimento> atendimentosPendentes;
     private ArrayList<Equipe>equipesDisponiveis;
 
     public AppAtendimento(){
-        atendimentosPendentes = new ArrayList<>();
+        atendimentosPendentes = new LinkedList();
         equipesDisponiveis = new ArrayList<>();
     }
 
@@ -26,7 +26,7 @@ public class AppAtendimento {
         return true;
     }
 
-    public ArrayList<Atendimento> getAtendimentosPendentes() {
+    public Queue<Atendimento> getAtendimentosPendentes() {
         return atendimentosPendentes;
     }
 }
