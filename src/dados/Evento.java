@@ -1,5 +1,7 @@
 package dados;
 
+import java.util.ArrayList;
+
 public class Evento implements Comparable<Evento> {
     private String codigo;
     private String data;

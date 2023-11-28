@@ -10,17 +10,21 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class CarregarDadosIniciais extends JFrame implements ActionListener {
     private JPanel Carrega;
     private JTextField textField1;
     private JButton confirmarButton;
     private JButton voltarButton;
+    private JTextArea textArea;
     private AppEvento appEvento;
     private ACMERescue acmeRescue;
     private ArrayList<Evento> eventos = new ArrayList<>();
     private ArrayList<Equipe>equipes = new ArrayList<>();
     private ArrayList<Equipamento>equipamentos = new ArrayList<>();
+    private Queue<Atendimento> atendimentos = new LinkedList<>();
 
     public CarregarDadosIniciais(ACMERescue acmeRescue) {
         this.acmeRescue = acmeRescue;
@@ -45,10 +49,13 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
         String arquivoEventos = nomeArquivo + "-EVENTOS.CSV";
         String arquivoEquipe = nomeArquivo + "-EQUIPES.CSV";
         String arquivoEquipamento =nomeArquivo + "-EQUIPAMENTOS.CSV";
+        String arquivoAtendimento = nomeArquivo + "-ATENDIMENTOS.CSV";
 
         try (BufferedReader leitor = new BufferedReader(new FileReader(arquivoEventos));
         BufferedReader leitor1 = new BufferedReader(new FileReader(arquivoEquipe));
-        BufferedReader leitor2 = new BufferedReader(new FileReader(arquivoEquipamento))) {
+        BufferedReader leitor2 = new BufferedReader(new FileReader(arquivoEquipamento));
+        BufferedReader leitor3 = new BufferedReader(new FileReader(arquivoAtendimento))) {
+
             String linhaEvento;
             leitor.readLine();
             while ((linhaEvento = leitor.readLine()) != null) {
@@ -82,10 +89,13 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
                         JOptionPane.showMessageDialog(this, "Erro! Tipo de evento inválido.");
                 }
                 if (evento!=null){
-                    eventos.add(evento);
-                    acmeRescue.getAppEvento().cadastrarEvento(evento);
-                }
-            }
+                    if (!evento.getCodigo().equals(evento)){
+                        eventos.add(evento);
+                        acmeRescue.getAppEvento().cadastrarEvento(evento);}
+                    else {
+                        textArea.append("Erro: Código de evento repetido - " + evento.getCodigo() + "\n");
+                    }
+            }}
             String linhaEquipe;
             leitor1.readLine();
             while ((linhaEquipe = leitor1.readLine()) != null) {
@@ -98,14 +108,15 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
                 equipes.add(equipe);
                 acmeRescue.getAppEquipe().cadastrarEquipe(equipe);
             }
+
             String linhaEquipamento;
             leitor2.readLine();
             while ((linhaEquipamento = leitor2.readLine()) != null) {
                 String[] dados = linhaEquipamento.split(";");
-                int id = Integer.parseInt(dados[0].trim());
                 String nome = dados[1].trim();
                 double custo = Double.parseDouble(dados[2].trim());
                 String codinom = dados[3].trim();
+                int id = Integer.parseInt(dados[0].trim());
                 int tipoEquipamento = Integer.parseInt(dados[4].trim());
                 Equipamento equipamento = null;
 
@@ -136,6 +147,47 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
                     acmeRescue.getAppEquipamento().cadastrarEquipamento(equipamento);
                 }
             }
+            String linhaAtendimento;
+            leitor3.readLine();
+            while ((linhaAtendimento = leitor3.readLine()) != null) {
+                String[] dados = linhaAtendimento.split(";");
+                String codEve = dados[4].trim();
+                int cod = Integer.parseInt(dados[0].trim());
+                String dataini =dados[1].trim();
+                int duracao = Integer.parseInt(dados[2].trim());
+                String status =dados[3].trim();
+                Evento eventoAssociado = null;
+                for (Evento evento : eventos) {
+                    if (evento.getCodigo().equals(codEve)) {
+                        eventoAssociado = evento;
+                        break;
+                    }
+                }
+                if (eventoAssociado != null) {
+                    Atendimento atendimento = new Atendimento(cod, dataini, duracao, status, eventoAssociado);
+                    atendimentos.add(atendimento);
+                    acmeRescue.getAppAtendimento().cadastrarAtendimento(atendimento);
+            }}
+            textArea.append("Eventos cadastrados:\n");
+            for (Evento evento : eventos) {
+                textArea.append(evento.toString() + "\n");
+            }
+            textArea.append("----------------------------\n");
+            textArea.append("\nEquipes cadastradas:\n");
+            for (Equipe equipe : equipes) {
+                textArea.append(equipe.toString() + "\n");
+            }
+            textArea.append("----------------------------\n");
+            textArea.append("\nEquipamentos cadastrados:\n");
+            for (Equipamento equipamento : equipamentos) {
+                textArea.append(equipamento.toString() + "\n");
+            }
+            textArea.append("----------------------------\n");
+            textArea.append("\nAtendimentos cadastrados:\n");
+            for (Atendimento atendimento : atendimentos) {
+                textArea.append(atendimento.toString() + "\n");
+            }
+            textArea.append("----------------------------\n");
 
             JOptionPane.showMessageDialog(this, "Dados carregados com sucesso.");
             dispose();
