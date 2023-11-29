@@ -62,7 +62,7 @@ public class RelatorioGeral {
                 }
 
                 if (!algumDadoCadastrado) {
-                    areaTexto.append("Erro! Nenhum dado cadastrado.\n");
+                    JOptionPane.showMessageDialog(null, "Erro! Nenhum dado cadastrado.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

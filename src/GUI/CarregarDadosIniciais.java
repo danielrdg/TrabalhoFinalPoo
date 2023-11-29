@@ -77,7 +77,7 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
                 String longitude = dados.next();
                 String tipoEvento = dados.next();
                 if (appEvento.existeCodigo(codigo)) {
-                    textArea.append("Erro! Código de evento já cadastrado: " + codigo + "\n");
+                    mostrarErro("Erro! Já existe um evento com esse código.");
                 } else {
 
                 if (tipoEvento.equals("1")) {
@@ -98,7 +98,7 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
                     appEvento.cadastrarEvento(seca);
                 }
                 else {
-                        JOptionPane.showMessageDialog(this, "Erro! Tipo de evento inválido.");
+                    mostrarErro("Erro! Tipo de evento inválido.");
                 }
             }}
             String linhaEquipe;
@@ -178,16 +178,25 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
             }
             textArea.append("----------------------------\n");
 
-            JOptionPane.showMessageDialog(this, "Dados carregados com sucesso.");
+            mostrarMensagem("Dados carregados com sucesso!");
             dispose();
         } catch (IOException | NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar dados. Verifique o nome do arquivo e o formato.");
+            mostrarErro("Erro ao carregar dados. Verifique o nome do arquivo e o formato.");
             ex.printStackTrace();
         }
     }
     public JPanel getPainel(){
         return Carrega;
     }
+
+    private void mostrarMensagem(String mensagem) {
+        JOptionPane.showMessageDialog(this, mensagem);
+    }
+
+    private void mostrarErro(String mensagem) {
+        JOptionPane.showMessageDialog(this, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+
 
 }
 
