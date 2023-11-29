@@ -2,6 +2,7 @@ package GUI;
 
 import app.AppEquipe;
 import dados.Equipe;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,7 @@ public class CadastroEquipe implements ActionListener {
     private AppEquipe appEquipe;
     private ACMERescue acmeRescue;
 
-    public CadastroEquipe(ACMERescue acmeRescue){
+    public CadastroEquipe(ACMERescue acmeRescue) {
         super();
         this.acmeRescue = acmeRescue;
         this.appEquipe = acmeRescue.getAppEquipe();
@@ -33,22 +34,25 @@ public class CadastroEquipe implements ActionListener {
     }
 
     private void cadastrarEquipe() {
+        if(textField1.getText().trim().isEmpty() || textField2.getText().trim().isEmpty() || textField3.getText().trim().isEmpty() || textField4.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Erro! Preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         try {
             String codinome = textField1.getText().trim();
             int quantidade = Integer.parseInt(textField2.getText().trim());
             double latitude = Double.parseDouble(textField3.getText().trim());
             double longitude = Double.parseDouble(textField4.getText().trim());
 
-            Equipe equipe = new Equipe(codinome,quantidade,latitude,longitude);
+            Equipe equipe = new Equipe(codinome, quantidade, latitude, longitude);
             if (appEquipe.cadastrarEquipe(equipe)) {
-                areaTexto.append("Equipe cadastrada.\n");
+                JOptionPane.showMessageDialog(null, "Equipe cadastrada com sucesso.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro! Já existe uma equipe com esse codinome.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-            else {
-                areaTexto.append("Erro! Já existe uma equipe com esse codinome\n");
-            }
-        }
-        catch(NumberFormatException e){
-            areaTexto.append("Erro! Formato inválido para quantidade, latitude ou longitude.\n");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Erro! Formato inválido para quantidade, latitude ou longitude.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -60,17 +64,15 @@ public class CadastroEquipe implements ActionListener {
     }
 
     private void mostrarDados() {
-
         ArrayList<Equipe> equipes = appEquipe.getEquipes();
-
         Collections.sort(equipes);
 
         if (equipes.isEmpty()) {
             areaTexto.append("Erro! Nenhuma equipe cadastrada.\n");
-        }
-
-        for (Equipe e : equipes){
-            areaTexto.append("Equipe:\n" + e.toString());
+        } else {
+            for (Equipe e : equipes) {
+                areaTexto.append(e.toString() + "\n");
+            }
         }
     }
 
@@ -78,14 +80,11 @@ public class CadastroEquipe implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == confirmar) {
             cadastrarEquipe();
-        }
-        else if (e.getSource() == limpar) {
+        } else if (e.getSource() == limpar) {
             limparCampos();
-        }
-        else if (e.getSource() == mostrarDados) {
+        } else if (e.getSource() == mostrarDados) {
             mostrarDados();
-        }
-        else if (e.getSource() == voltar) {
+        } else if (e.getSource() == voltar) {
             acmeRescue.setContentPane(acmeRescue.getPainel());
             acmeRescue.setSize(800, 600);
         }

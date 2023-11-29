@@ -21,7 +21,6 @@ public class AlocarAtendimentos {
     public AlocarAtendimentos(ACMERescue acmeRescue){
         super();
         this.acmeRescue = acmeRescue;
-
     }
 
     public JPanel getPainel() {
@@ -40,7 +39,6 @@ public class AlocarAtendimentos {
         for (Atendimento atendimento : appAtendimento.getAtendimentosPendentes()) {
             if (atendimento.getStatus().equals("PENDENTE")) {
                 boolean equipeAlocada = false;
-
                 for (Equipe equipe : appEquipe.getEquipes()) {
                     if (equipeEstaDisponivel(equipe) && equipe.podeAtender(atendimento)) {
                         atendimento.setEquipe(equipe);
@@ -50,7 +48,6 @@ public class AlocarAtendimentos {
                         break;
                     }
                 }
-
                 if (!equipeAlocada) {
                     atendimento.setStatus("CANCELADO");
                     atendimento.setEquipe(null);
@@ -79,7 +76,6 @@ public class AlocarAtendimentos {
         for (Atendimento atendimento : appAtendimento.getAtendimentosPendentes()) {
             resultado.append(atendimento.toString());
         }
-
         textArea1.setText(resultado.toString());
     }
 }

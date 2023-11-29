@@ -34,18 +34,22 @@ public class CadastroEvento implements ActionListener {
     }
 
     private void cadastrarEvento() {
+
+        if(campoCodigo.getText().trim().isEmpty() || campoData.getText().trim().isEmpty() || campoLatitude.getText().trim().isEmpty() || campoLongitude.getText().trim().isEmpty() || campoTipo.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this.getPainel(), "Erro! Preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         try {
             String codigoEvento = campoCodigo.getText().trim();
             String dataEvento = campoData.getText().trim();
             double latitudeEvento = Double.parseDouble(campoLatitude.getText().trim());
             double longitudeEvento = Double.parseDouble(campoLongitude.getText().trim());
-
             int tipoEvento = Integer.parseInt(campoTipo.getText().trim());
 
             if (existeCodigo(codigoEvento)) {
-                areaTexto.append("Erro! Já existe um evento com esse código.\n");
-            }
-            else {
+                JOptionPane.showMessageDialog(this.getPainel(), "Erro! Já existe um evento com esse código.", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else {
                 switch (tipoEvento) {
                     case 1:
                         JFrame Ciclo = criarJanela("Ciclone");
@@ -66,13 +70,11 @@ public class CadastroEvento implements ActionListener {
                         break;
 
                     default:
-                        JOptionPane.showMessageDialog(this.getPainel(),"Erro! Tipo de evento deve ser de 1 a 3.");
+                        JOptionPane.showMessageDialog(this.getPainel(), "Erro! Tipo de evento deve ser de 1 a 3.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
-
-
             }
         } catch (NumberFormatException e) {
-            areaTexto.append("Formato inválido para latitude ou longitude.\n");
+            JOptionPane.showMessageDialog(this.getPainel(), "Formato inválido para latitude ou longitude.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -148,14 +150,14 @@ public class CadastroEvento implements ActionListener {
                 Ciclone ciclone = new Ciclone(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, vel, prec);
 
                 if (appEvento.cadastrarEvento(ciclone)) {
-                    areaTexto.append("Evendo cadastrado.\n");
+                    JOptionPane.showMessageDialog(null, "Evento cadastrado com sucesso.");
                 } else {
-                    areaTexto.append("Erro! Já existe um evento com esse código.\n");
+                    JOptionPane.showMessageDialog(null, "Erro! Já existe um evento com esse código.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
 
                 janela.setVisible(false);
             } catch (NumberFormatException ex) {
-                areaTexto.append("Formato inválido para velocidade ou precipitação. Tente novamente.\n");
+                JOptionPane.showMessageDialog(null, "Formato inválido para velocidade ou precipitação. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -179,13 +181,13 @@ public class CadastroEvento implements ActionListener {
                 double mag = Double.parseDouble(txtTerremoto.getText().trim());
                 Terremoto terremoto = new Terremoto(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, mag);
                 if (appEvento.cadastrarEvento(terremoto)) {
-                    areaTexto.append("Evento cadastrado.\n");
+                    JOptionPane.showMessageDialog(null, "Evento cadastrado com sucesso.");
                 } else {
-                    areaTexto.append("Erro! Já existe um evento com esse código.\n");
+                    JOptionPane.showMessageDialog(null, "Erro! Já existe um evento com esse código.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
                 janela.setVisible(false);
             } catch (NumberFormatException ex) {
-                areaTexto.append("Formato inválido para magnitude.\n");
+                JOptionPane.showMessageDialog(null, "Formato inválido para magnitude.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -210,13 +212,13 @@ public class CadastroEvento implements ActionListener {
                 Seca seca = new Seca(codigoEvento, dataEvento, latitudeEvento, longitudeEvento, est);
 
                 if (appEvento.cadastrarEvento(seca)) {
-                    areaTexto.append("Evento cadastrado." + "\n");
+                    JOptionPane.showMessageDialog(null, "Evento cadastrado com sucesso.");
                 } else {
-                    areaTexto.append("Erro! Já existe um evento com esse código" + "\n");
+                    JOptionPane.showMessageDialog(null, "Erro! Já existe um evento com esse código.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
                 janela.setVisible(false);
             } catch (NumberFormatException ex) {
-                areaTexto.append("Formato inválido para estiagem." + "\n");
+                JOptionPane.showMessageDialog(null, "Formato inválido para estiagem.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         });
 

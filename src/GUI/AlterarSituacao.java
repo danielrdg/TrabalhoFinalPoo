@@ -22,7 +22,7 @@ public class AlterarSituacao {
                 try {
                     realizarAcaoConfirmar();
                 } catch (NumberFormatException ex) {
-                    areaTexto.append("Erro! Digite um código válido.\n");
+                    JOptionPane.showMessageDialog(null, "Erro! Digite um código válido.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -54,7 +54,7 @@ public class AlterarSituacao {
                 areaTexto.append(a.toString() + "\n");
 
                 if (a.getStatus().equalsIgnoreCase("FINALIZADO")) {
-                    areaTexto.append("Erro! O atendimento já foi finalizado.\n");
+                    JOptionPane.showMessageDialog(null, "Erro! O atendimento já foi finalizado.", "Erro", JOptionPane.ERROR_MESSAGE);
                 } else {
                     abrirJanelaAlterarSituacao(a);
                 }
@@ -62,7 +62,7 @@ public class AlterarSituacao {
         }
 
         if (!atendimentoEncontrado) {
-            areaTexto.append("Erro! Nenhum atendimento encontrado com o código indicado.\n");
+            JOptionPane.showMessageDialog(null, "Erro! Nenhum atendimento encontrado com o código indicado.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -104,10 +104,10 @@ public class AlterarSituacao {
                         JOptionPane.showMessageDialog(null, "Situação do atendimento alterada com sucesso.");
                         alterarSituacao.dispose();
                     } else {
-                        areaTexto.append("Erro! Situação deve ser um número de 1 até 4.\n");
+                        JOptionPane.showMessageDialog(null, "Erro! Situação deve ser um número de 1 até 4.", "Erro", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NumberFormatException ex) {
-                    areaTexto.append("Erro! Digite um número válido.\n");
+                    JOptionPane.showMessageDialog(null, "Erro! Digite um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
