@@ -72,6 +72,9 @@ public class ConsultarAtendimento implements ActionListener {
                     }
                 }
             }
+            double custoAtendimento = atendimento.calculaCusto();
+            String custoFormatado = String.format("Custo do Atendimento: R$ %.2f", custoAtendimento);
+            areaTexto.append("\n" + custoFormatado);
             areaTexto.append("\n--------------------------\n");
         }
         JOptionPane.showMessageDialog(null, "Atendimentos consultados com sucesso.");
