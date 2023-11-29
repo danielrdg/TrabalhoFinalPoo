@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import dados.Atendimento;
 
 public class AlterarSituacao {
-    private ACMERescue acmeRescue;
+    private final ACMERescue acmeRescue;
     private JPanel painel;
     private JLabel labelAtendimento, labelCodigo;
     private JTextField campoCodigo;
@@ -51,7 +51,7 @@ public class AlterarSituacao {
         for (Atendimento a : acmeRescue.getAppAtendimento().getAtendimentosPendentes()) {
             if (a.getCod() == cod) {
                 atendimentoEncontrado = true;
-                areaTexto.append(a.toString() + "\n");
+                areaTexto.append(a + "\n");
 
                 if (a.getStatus().equalsIgnoreCase("FINALIZADO")) {
                     JOptionPane.showMessageDialog(null, "Erro! O atendimento já foi finalizado.", "Erro", JOptionPane.ERROR_MESSAGE);

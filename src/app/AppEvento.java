@@ -8,7 +8,7 @@ import dados.Atendimento;
 import dados.Evento;
 
 public class AppEvento {
-    private ArrayList<Evento> eventos;
+    private final ArrayList<Evento> eventos;
 
 
     public AppEvento() {

@@ -15,11 +15,11 @@ public class RelatorioGeral {
     private JTextArea areaTexto;
     private JPanel painel;
     private JButton limparButton, voltarButton, mostrarButton;
-    private AppAtendimento appAtendimento;
-    private AppEvento appEvento;
-    private AppEquipe appEquipe;
-    private AppEquipamento appEquipamento;
-    private ACMERescue acmeRescue;
+    private final AppAtendimento appAtendimento;
+    private final AppEvento appEvento;
+    private final AppEquipe appEquipe;
+    private final AppEquipamento appEquipamento;
+    private final ACMERescue acmeRescue;
 
     public RelatorioGeral(ACMERescue acmeRescue){
         this.acmeRescue = acmeRescue;

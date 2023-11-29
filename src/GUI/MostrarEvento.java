@@ -14,11 +14,11 @@ public class MostrarEvento {
     private JButton confirmarButton;
     private JTextField campoCodigo;
     private JButton limparButton;
-    private ACMERescue acmeRescue;
+    private final ACMERescue acmeRescue;
     private MostrarEvento mostrarEvento;
     private Evento eventoSelecionado;
-    private CadastrarAtendimento cadastrarAtendimento;
-    private AppEvento appEvento;
+    private final CadastrarAtendimento cadastrarAtendimento;
+    private final AppEvento appEvento;
 
     public MostrarEvento(ACMERescue acmeRescue) {
         super();

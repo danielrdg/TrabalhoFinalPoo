@@ -17,11 +17,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class SalvarDados implements ActionListener {
-    private AppEvento appEvento;
-    private AppEquipe appEquipe;
-    private AppEquipamento appEquipamento;
-    private AppAtendimento appAtendimento;
-    private ACMERescue acmeRescue;
+    private final AppEvento appEvento;
+    private final AppEquipe appEquipe;
+    private final AppEquipamento appEquipamento;
+    private final AppAtendimento appAtendimento;
+    private final ACMERescue acmeRescue;
     private JTextField textField1;
     private JButton voltarButton;
     private JButton confirmarButton;

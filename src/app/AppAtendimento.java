@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class AppAtendimento {
-    private Queue<Atendimento> atendimentosPendentes;
+    private final Queue<Atendimento> atendimentosPendentes;
 
     public AppAtendimento(){
         atendimentosPendentes = new LinkedList();

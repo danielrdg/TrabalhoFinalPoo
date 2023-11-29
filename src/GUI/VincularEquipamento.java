@@ -10,9 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VincularEquipamento {
-    private ACMERescue acmeRescue;
-    private AppEquipamento appEquipamento;
-    private AppEquipe appEquipe;
+    private final ACMERescue acmeRescue;
+    private final AppEquipamento appEquipamento;
+    private final AppEquipe appEquipe;
     private JPanel painel;
     private JTextArea equipamentos;
     private JTextArea equipes;

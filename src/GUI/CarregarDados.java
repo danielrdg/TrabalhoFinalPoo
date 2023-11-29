@@ -25,11 +25,11 @@ public class CarregarDados extends Component implements ActionListener {
     private JButton confirmarButton;
     private JButton escolherArquivosButton;
     private JComboBox comboBox1;
-    private AppEvento appEvento;
-    private AppEquipe appEquipe;
-    private AppEquipamento appEquipamento;
-    private AppAtendimento appAtendimento;
-    private ACMERescue acmeRescue;
+    private final AppEvento appEvento;
+    private final AppEquipe appEquipe;
+    private final AppEquipamento appEquipamento;
+    private final AppAtendimento appAtendimento;
+    private final ACMERescue acmeRescue;
 
     public CarregarDados(ACMERescue acmeRescue){
         this.acmeRescue = acmeRescue;

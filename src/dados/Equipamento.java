@@ -1,9 +1,9 @@
 package dados;
 
 public class Equipamento implements Comparable<Equipamento> {
-	private int id;
-	private String nome;
-	private double custoDia;
+	private final int id;
+	private final String nome;
+	private final double custoDia;
 	private Equipe equipe;
 	
 	

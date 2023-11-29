@@ -20,8 +20,8 @@ public class CadastroEvento implements ActionListener {
     private JTextArea areaTexto;
     private JTextField campoTipo;
     private JLabel labelVelocidade, labelPrecipitacao, tipoTerremoto, tipoSeca, tipoCiclone;
-    private AppEvento appEvento;
-    private ACMERescue acmeRescue;
+    private final AppEvento appEvento;
+    private final ACMERescue acmeRescue;
 
     public CadastroEvento(ACMERescue acmeRescue) {
         super();
@@ -98,17 +98,14 @@ public class CadastroEvento implements ActionListener {
                 areaTexto.append("Latitude: " + evento1.getLatitude() + "\n");
                 areaTexto.append("Longitude: " + evento1.getLongitude() + "\n");
 
-                if (evento1 instanceof Ciclone) {
-                    Ciclone ciclone = (Ciclone) evento1;
+                if (evento1 instanceof Ciclone ciclone) {
                     areaTexto.append("Tipo de evento: Ciclone\n");
                     areaTexto.append("Velocidade: " + ciclone.getVelocidade() + "\n");
                     areaTexto.append("Precipitação: " + ciclone.getPrecipitacao() + "\n");
-                } else if (evento1 instanceof Terremoto) {
-                    Terremoto terremoto = (Terremoto) evento1;
+                } else if (evento1 instanceof Terremoto terremoto) {
                     areaTexto.append("Tipo de evento: Terremoto\n");
                     areaTexto.append("Magnitude: " + terremoto.getMagnitude() + "\n");
-                } else if (evento1 instanceof Seca) {
-                    Seca seca = (Seca) evento1;
+                } else if (evento1 instanceof Seca seca) {
                     areaTexto.append("Tipo de evento: Seca\n");
                     areaTexto.append("Estiagem: " + seca.getEstiagem() + "\n");
                 }

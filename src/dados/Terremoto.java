@@ -1,7 +1,7 @@
 package dados;
 
 public class Terremoto extends Evento {
-	private double magnitude;
+	private final double magnitude;
 
 	public Terremoto(String codigo, String data, double latitude, double longitude, double magnitude) {
 		super(codigo, data, latitude, longitude);

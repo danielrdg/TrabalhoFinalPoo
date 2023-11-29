@@ -7,12 +7,12 @@ import dados.Equipamento;
 import java.util.ArrayList;
 
 public class Equipe implements Comparable<Equipe> {
-	private String codinome;
-	private int quantidade;
-	private double latitude;
-	private double longitude;
-	private ArrayList<Equipamento> equipamentos;
-	private ArrayList<Atendimento>atendimentos;
+	private final String codinome;
+	private final int quantidade;
+	private final double latitude;
+	private final double longitude;
+	private final ArrayList<Equipamento> equipamentos;
+	private final ArrayList<Atendimento>atendimentos;
 
 	public Equipe(String codinome, int quantidade, double latitude, double longitude) {
 		this.codinome = codinome;
@@ -71,13 +71,8 @@ public class Equipe implements Comparable<Equipe> {
 		if (distancia > distaciaMaxima) {
 			return false;
 		}
-		if (!atendimentos.isEmpty()) {
-			return false;
-		}
-
-
-		return true;
-	}
+        return atendimentos.isEmpty();
+    }
 
 	private double calcularDistancia(double latitudeEvento, double longitudeEvento) {
 		return Math.sqrt(Math.pow(latitude - latitudeEvento, 2) + Math.pow(longitude - longitudeEvento, 2));

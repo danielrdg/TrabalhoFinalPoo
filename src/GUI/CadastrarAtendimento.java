@@ -14,9 +14,9 @@ public class CadastrarAtendimento {
     private JButton confirmarButton, limparButton, mostrarDadosButton, voltarButton;
     private JTextArea areaTexto;
     private JPanel painel;
-    private AppAtendimento appAtendimento;
-    private ACMERescue acmeRescue;
-    private MostrarEvento mostrarEvento;
+    private final AppAtendimento appAtendimento;
+    private final ACMERescue acmeRescue;
+    private final MostrarEvento mostrarEvento;
     private Evento eventoSelecionado;
 
     public CadastrarAtendimento(ACMERescue acmeRescue, MostrarEvento mostrarEvento) {

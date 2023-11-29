@@ -1,12 +1,12 @@
 package dados;
 
 public class Atendimento {
-	private int cod;
-	private String dataInicio;
-	private int duracao;
+	private final int cod;
+	private final String dataInicio;
+	private final int duracao;
 	private String status;
 	private Equipe equipe;
-	private Evento evento;
+	private final Evento evento;
 
 	public Atendimento(int cod, String dataInicio, int duracao, String status, Evento evento) {
 		this.cod = cod;

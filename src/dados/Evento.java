@@ -3,10 +3,10 @@ package dados;
 import java.util.ArrayList;
 
 public class Evento implements Comparable<Evento> {
-    private String codigo;
-    private String data;
-    private double latitude;
-    private double longitude;
+    private final String codigo;
+    private final String data;
+    private final double latitude;
+    private final double longitude;
     private Atendimento atendimento;
 
     public Evento(String codigo, String data, double latitude, double longitude){

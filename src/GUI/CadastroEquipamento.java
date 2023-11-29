@@ -20,8 +20,8 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
     private JLabel labelCaminhao;
     private JLabel labelCaminhaoTanque;
     private JLabel campoEscavadeira;
-    private ACMERescue acmeRescue;
-    private AppEquipamento appEquipamento;
+    private final ACMERescue acmeRescue;
+    private final AppEquipamento appEquipamento;
 
     public CadastroEquipamento(ACMERescue acmeRescue) {
         super();
@@ -213,17 +213,14 @@ public class CadastroEquipamento extends JFrame implements ActionListener {
                 infoEquipamento.append("Custo do Dia: ").append("R$").append(equipamento.getCustoDia()).append("\n");
 
                 infoEquipamento.append("Tipo: ");
-                if (equipamento instanceof Barco) {
+                if (equipamento instanceof Barco barco) {
                     infoEquipamento.append("Barco\n");
-                    Barco barco = (Barco) equipamento;
                     infoEquipamento.append("Capacidade: ").append(barco.getCapacidade()).append("\n");
-                } else if (equipamento instanceof CaminhaoTanque) {
+                } else if (equipamento instanceof CaminhaoTanque caminhaoTanque) {
                     infoEquipamento.append("Caminhão Tanque\n");
-                    CaminhaoTanque caminhaoTanque = (CaminhaoTanque) equipamento;
                     infoEquipamento.append("Capacidade do Tanque: ").append(caminhaoTanque.getCapacidadeTanque()).append("\n");
-                } else if (equipamento instanceof Escavadeira) {
+                } else if (equipamento instanceof Escavadeira escavadeira) {
                     infoEquipamento.append("Escavadeira\n");
-                    Escavadeira escavadeira = (Escavadeira) equipamento;
                     infoEquipamento.append("Combustível: ").append(escavadeira.getCombustivel()).append("\n");
                     infoEquipamento.append("Carga: ").append(escavadeira.getCarga()).append("\n");
                 }

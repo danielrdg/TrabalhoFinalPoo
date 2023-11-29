@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class AppEquipamento {
 
-    private ArrayList<Equipamento> equipamentos;
+    private final ArrayList<Equipamento> equipamentos;
     private Equipe equipe;
 
     public void setEquipe(Equipe equipe) {

@@ -1,7 +1,7 @@
 package dados;
 
 public class Seca extends Evento {
-	private int estiagem;
+	private final int estiagem;
 	
 	public Seca(String codigo, String data, double latitude, double longitude, int estiagem) {
 		super(codigo, data, latitude, longitude);

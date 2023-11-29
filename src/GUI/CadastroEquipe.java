@@ -11,12 +11,12 @@ import java.util.Collections;
 
 public class CadastroEquipe implements ActionListener {
     private JTextField textField1, textField2, textField3, textField4;
-    private ArrayList<JTextField> camposDeTexto;
+    private final ArrayList<JTextField> camposDeTexto;
     private JButton confirmar, limpar, mostrarDados, voltar;
     private JTextArea areaTexto;
     private JPanel painel;
-    private AppEquipe appEquipe;
-    private ACMERescue acmeRescue;
+    private final AppEquipe appEquipe;
+    private final ACMERescue acmeRescue;
 
     public CadastroEquipe(ACMERescue acmeRescue) {
         super();

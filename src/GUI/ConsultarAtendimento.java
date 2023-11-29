@@ -18,8 +18,8 @@ public class ConsultarAtendimento implements ActionListener {
     private JButton consultarAtendimentosButton;
     private JButton limparButton;
     private JButton voltarButton;
-    private ACMERescue acmeRescue;
-    private AppAtendimento appAtendimento;
+    private final ACMERescue acmeRescue;
+    private final AppAtendimento appAtendimento;
 
     public ConsultarAtendimento(ACMERescue acmeRescue) {
         super();

@@ -7,7 +7,7 @@ import dados.Equipe;
 import dados.Evento;
 
 public class AppEquipe {
-    private ArrayList<Equipe> equipes;
+    private final ArrayList<Equipe> equipes;
     AppAtendimento appAtendimento=new AppAtendimento();
 
     public AppEquipe() {
