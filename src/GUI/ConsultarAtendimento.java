@@ -49,32 +49,46 @@ public class ConsultarAtendimento implements ActionListener {
     }
 
     private void consultarAtendimentos() {
-        if (appAtendimento.getAtendimentosPendentes().isEmpty()) {
+        Queue<Atendimento> todosAtendimentos = appAtendimento.getAtendimentosPendentes();
+
+        if (todosAtendimentos.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Não há atendimentos cadastrados.", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        for (Atendimento atendimento : appAtendimento.getAtendimentosPendentes()) {
-            areaTexto.append(atendimento.toString());
 
-            Evento evento = atendimento.getEvento();
-            if (evento != null) {
-                areaTexto.append("\n" + evento);
-            }
-
-            Equipe equipe = atendimento.getEquipe();
-            if (equipe != null) {
-                areaTexto.append("\n" + equipe);
-
-                ArrayList<Equipamento> equipamentos = equipe.getEquipamentos();
-                if (!equipamentos.isEmpty()) {
-                    for (Equipamento equipamento : equipamentos) {
-                        areaTexto.append("\n" + equipamento);
-                    }
-                }
-            }
-            areaTexto.append("\n--------------------------\n");
+        for (Atendimento atendimento : todosAtendimentos) {
+            exibirDetalhesAtendimento(atendimento);
         }
+
         JOptionPane.showMessageDialog(null, "Atendimentos consultados com sucesso.");
+    }
+
+    private void exibirDetalhesAtendimento(Atendimento atendimento) {
+        areaTexto.append(atendimento.toString());
+        Evento evento = atendimento.getEvento();
+        if (evento != null) {
+            areaTexto.append("\n" + evento);
+        }
+
+        Equipe equipe = atendimento.getEquipe();
+        if (equipe != null) {
+            areaTexto.append("\n" + equipe);
+
+            ArrayList<Equipamento> equipamentos = equipe.getEquipamentos();
+            if (!equipamentos.isEmpty()) {
+                for (Equipamento equipamento : equipamentos) {
+                    areaTexto.append("\n" + equipamento);
+                }
+                String custoEquipamento = atendimento.calculaCustoEquipamentos();
+                areaTexto.append("\nCusto dos Equipamentos: " + custoEquipamento);
+            }
+
+            String custoTotal = atendimento.calculaCusto();
+            areaTexto.append("\nCusto Total do Atendimento: " + custoTotal);
+        }
+
+
+        areaTexto.append("\n--------------------------\n");
     }
 
 }
