@@ -70,7 +70,7 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
             String linhaEvento;
             leitor.readLine();
             while ((linhaEvento = leitor.readLine()) != null) {
-                Scanner dados = new Scanner(linhaEvento).useDelimiter(";");
+                Scanner dados = new Scanner(linhaEvento.trim()).useDelimiter(";");
                 String codigo = dados.next();
                 String data = dados.next();
                 String latitude = dados.next();
@@ -104,7 +104,7 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
             String linhaEquipe;
             leitor1.readLine();
             while ((linhaEquipe = leitor1.readLine()) != null) {
-                Scanner dados = new Scanner(linhaEquipe).useDelimiter(";");
+                Scanner dados = new Scanner(linhaEquipe.trim()).useDelimiter(";");
                 String codinome = dados.next();
                 String membros = dados.next();
                 String latitude = dados.next();
@@ -117,7 +117,7 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
             String linhaEquipamento;
             leitor2.readLine();
             while ((linhaEquipamento = leitor2.readLine()) != null) {
-                Scanner dados = new Scanner(linhaEquipamento).useDelimiter(";");
+                Scanner dados = new Scanner(linhaEquipamento.trim()).useDelimiter(";");
                 String id = dados.next();
                 String nome = dados.next();
                 String custo = dados.next();
@@ -149,7 +149,7 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
             String linhaAtendimento;
             leitor3.readLine();
             while ((linhaAtendimento = leitor3.readLine()) != null) {
-                Scanner dados = new Scanner(linhaAtendimento).useDelimiter(";");
+                Scanner dados = new Scanner(linhaAtendimento.trim()).useDelimiter(";");
                 String codStr = dados.next();
                 String dataIni = dados.next();
                 String duracaoStr = dados.next();
