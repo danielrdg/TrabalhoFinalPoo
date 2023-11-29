@@ -30,7 +30,11 @@ public class Equipe implements Comparable<Equipe> {
 	public int getQuantidade() {
 		return quantidade;
 	}
-	
+
+	public ArrayList<Equipamento> getEquipamentos() {
+		return equipamentos;
+	}
+
 	public double getLatitude() {
 		return latitude;
 	}

@@ -8,7 +8,6 @@ public class Evento implements Comparable<Evento> {
     private double latitude;
     private double longitude;
     private Atendimento atendimento;
-    private boolean temAtendimento;
 
     public Evento(String codigo, String data, double latitude, double longitude){
         this.codigo = codigo;
@@ -40,9 +39,7 @@ public class Evento implements Comparable<Evento> {
     public void setAtendimento(Atendimento atendimento) {
         this.atendimento = atendimento;
     }
-    public boolean temAtendimento(){
-        return temAtendimento;
-    }
+
 
     @Override
     public int compareTo(Evento o) {

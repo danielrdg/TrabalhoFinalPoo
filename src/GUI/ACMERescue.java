@@ -30,6 +30,7 @@ public class ACMERescue extends JFrame {
     private CarregarDadosIniciais carregarDadosIniciais;
     private AlocarAtendimentos alocarAtendimentos;
     private AlterarSituacao alterarSituacao;
+    private ConsultarAtendimento consultarAtendimentos;
     private CarregarDados carregarDados;
     private SalvarDados salvarDados;
 
@@ -43,6 +44,7 @@ public class ACMERescue extends JFrame {
         this.alterarSituacao = new AlterarSituacao(this);
         this.cadastroEventoPainel = new CadastroEvento(this);
         this.mostrarEvento = new MostrarEvento(this);
+        this.consultarAtendimentos = new ConsultarAtendimento(this);
         this.cadastrarAtendimento = new CadastrarAtendimento(this, mostrarEvento);
         this.cadastroEquipamentoPainel = new CadastroEquipamento(this);
         this.cadastroEquipePainel = new CadastroEquipe(this);
@@ -112,7 +114,7 @@ public class ACMERescue extends JFrame {
         consultarAtendimentosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                mudarPainel(13);
             }
         });
         alterarAtendimentoButton.addActionListener(new ActionListener() {
@@ -210,6 +212,11 @@ public class ACMERescue extends JFrame {
             case 12:
                 this.setContentPane(salvarDados.getPainel());
                 this.setSize(800,400);
+                break;
+
+            case 13:
+                this.setContentPane(consultarAtendimentos.getPainel());
+                this.setSize(800, 400);
                 break;
         }
     }

@@ -4,6 +4,7 @@ import app.AppAtendimento;
 import app.AppEvento;
 import dados.Atendimento;
 import dados.Evento;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,21 +34,24 @@ public class CadastrarAtendimento {
                     int duracao = Integer.parseInt(campoDuracao.getText().trim());
                     String status = "PENDENTE";
                     Evento evento = mostrarEvento.getEventoSelecionado();
-                    Atendimento atendimento = new Atendimento(codigo, dataInicio, duracao, status, evento);
 
-                    if (appAtendimento.cadastrarAtendimento(atendimento)) {
-                        areaTexto.append("Atendimento cadastrado.\n");
+                    if (evento.getAtendimento() != null) {
+                        JOptionPane.showMessageDialog(null, "Erro! Já existe um atendimento para esse evento.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        Atendimento atendimento = new Atendimento(codigo, dataInicio, duracao, status, evento);
+                        if (appAtendimento.cadastrarAtendimento(atendimento)) {
+                            JOptionPane.showMessageDialog(null, "Atendimento cadastrado com sucesso.");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Erro! Já existe um atendimento com esse código.", "Erro", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
-                    else {
-                        areaTexto.append("Erro! Já existe um atendimento com esse código.\n");
-                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro! Formato inválido para código ou duração.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
-                catch (NumberFormatException ex) {
-                    areaTexto.append("Erro! Formato inválido para código ou duração.\n");
-                }
-
+                atualizarListaAtendimentos();
             }
         });
+
         limparButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -57,19 +61,18 @@ public class CadastrarAtendimento {
                 areaTexto.setText("");
             }
         });
+
         mostrarDadosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (appAtendimento.getAtendimentosPendentes().isEmpty()) {
-                    areaTexto.append("Erro! Nenhum atendimento cadastrado.\n");
-                }
-                else {
-                    for (Atendimento a : appAtendimento.getAtendimentosPendentes()) {
-                        areaTexto.append(a.toString());
-                    }
+                    JOptionPane.showMessageDialog(null, "Erro! Nenhum atendimento cadastrado.", "Erro", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    atualizarListaAtendimentos();
                 }
             }
         });
+
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -83,7 +86,7 @@ public class CadastrarAtendimento {
         SwingUtilities.invokeLater(() -> {
             areaTexto.setText("");
             if (appAtendimento.getAtendimentosPendentes().isEmpty()) {
-                areaTexto.append("Erro! Nenhum atendimento cadastrado.\n");
+                areaTexto.append("Erro! Nenhum atendimento cadastrado\n");
             } else {
                 for (Atendimento atendimento : appAtendimento.getAtendimentosPendentes()) {
                     areaTexto.append(atendimento.toString());

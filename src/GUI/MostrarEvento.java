@@ -2,6 +2,7 @@ package GUI;
 
 import app.AppEvento;
 import dados.Evento;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +28,7 @@ public class MostrarEvento {
         this.appEvento = acmeRescue.getAppEvento();
 
         if (appEvento.getEventos().isEmpty()) {
-            areaTexto.append("Erro! Nenhum evento cadastrado.\n");
+            areaTexto.append("Nenhum evento cadastrado.\n");
         } else {
             for (Evento evento : appEvento.getEventos()) {
                 areaTexto.append(evento.toString());
@@ -44,8 +45,8 @@ public class MostrarEvento {
                             eventoSelecionado = evento;
                             eventoEncontrado = true;
 
-                            if (evento.temAtendimento()) {
-                                areaTexto.append("Erro! Este evento já possui um atendimento cadastrado.\n");
+                            if (evento.getAtendimento() != null) {
+                                mostrarErro("Este evento já possui um atendimento cadastrado.");
                             } else {
                                 acmeRescue.setContentPane(cadastrarAtendimento.getPainel());
                                 acmeRescue.setSize(600, 400);
@@ -54,16 +55,17 @@ public class MostrarEvento {
                         }
                     }
 
-                    if (eventoEncontrado && !eventoSelecionado.temAtendimento()) {
-                        areaTexto.append("Evento selecionado.\n");
+                    if (eventoEncontrado && eventoSelecionado.getAtendimento() != null) {
+                        mostrarMensagem("Evento selecionado.");
                     } else if (!eventoEncontrado) {
-                        areaTexto.append("Erro! Não existe evento com esse código.\n");
+                        mostrarErro("Não existe evento com esse código.");
                     }
                 } catch (NumberFormatException ex) {
-                    areaTexto.append("Erro! Formato inválido para código.\n");
+                    mostrarErro("Formato inválido para código.");
                 }
             }
         });
+
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,6 +73,7 @@ public class MostrarEvento {
                 acmeRescue.setContentPane(acmeRescue.getPainel());
             }
         });
+
         limparButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,7 +95,7 @@ public class MostrarEvento {
         SwingUtilities.invokeLater(() -> {
             areaTexto.setText("");
             if (appEvento.getEventos().isEmpty()) {
-                areaTexto.append("Erro! Nenhum evento cadastrado.\n");
+                areaTexto.append("Nenhum evento cadastrado.\n");
             } else {
                 for (Evento evento : appEvento.getEventos()) {
                     areaTexto.append(evento.toString());
@@ -101,4 +104,11 @@ public class MostrarEvento {
         });
     }
 
+    private void mostrarMensagem(String mensagem) {
+        JOptionPane.showMessageDialog(painel, mensagem);
+    }
+
+    private void mostrarErro(String mensagem) {
+        JOptionPane.showMessageDialog(painel, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
+    }
 }
