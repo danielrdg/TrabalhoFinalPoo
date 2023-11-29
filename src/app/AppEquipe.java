@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import dados.Atendimento;
 import dados.Equipe;
+import dados.Evento;
 
 public class AppEquipe {
     private ArrayList<Equipe> equipes;
@@ -33,6 +34,14 @@ public class AppEquipe {
             }
         }
         return false;
+    }
+    public Equipe buscarEquipe(String codinome) {
+        for (Equipe e : equipes) {
+            if (e.getCodinome().equals(codinome)) {
+                return e;
+            }
+        }
+        return null;
     }
 
 }

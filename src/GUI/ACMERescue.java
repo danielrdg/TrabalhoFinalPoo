@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 public class ACMERescue extends JFrame {
     private JButton cadastroEventoButton, cadastroEquipeButton, cadastroAtendimentoButton, mostrarRelatorioButton, cadastroEquipamentoButton, vincularEquipamentoButton, alocarAtendimentoButton, consultarAtendimentosButton, alterarAtendimentoButton, carregarDadosIniciaisButton, salvarDadosButton, finalizarButton;
     private JPanel painel;
+    private JButton carregarDadosButton;
     private CadastroEquipe cadastroEquipePainel;
     private CadastroEvento cadastroEventoPainel;
     private CadastroEquipamento cadastroEquipamentoPainel;
@@ -30,6 +31,8 @@ public class ACMERescue extends JFrame {
     private AlocarAtendimentos alocarAtendimentos;
     private AlterarSituacao alterarSituacao;
     private ConsultarAtendimento consultarAtendimentos;
+    private CarregarDados carregarDados;
+    private SalvarDados salvarDados;
 
     public ACMERescue(AppEvento appEvento, AppAtendimento appAtendimento, AppEquipe appEquipe, AppEquipamento appEquipamento) {
         super();
@@ -49,6 +52,8 @@ public class ACMERescue extends JFrame {
         this.vincularEquipamento = new VincularEquipamento(this);
         this.carregarDadosIniciais = new CarregarDadosIniciais(this);
         this.alocarAtendimentos = new AlocarAtendimentos(this);
+        this.carregarDados = new CarregarDados(this);
+        this.salvarDados = new SalvarDados(this);
         this.setContentPane(painel);
         this.setSize(800, 600);
         this.setTitle("ACMERescue");
@@ -109,7 +114,7 @@ public class ACMERescue extends JFrame {
         consultarAtendimentosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mudarPainel(11);
+                mudarPainel(13);
             }
         });
         alterarAtendimentoButton.addActionListener(new ActionListener() {
@@ -124,9 +129,16 @@ public class ACMERescue extends JFrame {
                 mudarPainel(9);
             }
         });
+        carregarDadosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mudarPainel(11);
+            }
+        });
         salvarDadosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                mudarPainel(12);
 
             }
         });
@@ -194,6 +206,15 @@ public class ACMERescue extends JFrame {
                 break;
 
             case 11:
+                this.setContentPane(carregarDados.getPainel());
+                this.setSize(800,400);
+                break;
+            case 12:
+                this.setContentPane(salvarDados.getPainel());
+                this.setSize(800,400);
+                break;
+
+            case 13:
                 this.setContentPane(consultarAtendimentos.getPainel());
                 this.setSize(800, 400);
                 break;

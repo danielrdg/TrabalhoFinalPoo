@@ -11,6 +11,7 @@ public class Equipamento implements Comparable<Equipamento> {
 		this.id = id;
 		this.nome = nome;
 		this.custoDia = custoDia;
+		this.equipe = null;
 	}
 
 	public int getId(){

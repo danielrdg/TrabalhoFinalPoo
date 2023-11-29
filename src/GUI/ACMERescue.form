@@ -17,15 +17,6 @@
           <text value="ACMERescue"/>
         </properties>
       </component>
-      <component id="a0fb8" class="javax.swing.JButton" binding="finalizarButton">
-        <constraints>
-          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font/>
-          <text value="Finalizar "/>
-        </properties>
-      </component>
       <component id="98887" class="javax.swing.JButton" binding="cadastroEventoButton">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
@@ -133,6 +124,23 @@
         <properties>
           <font name="JetBrains Mono"/>
           <text value="Carregar Dados Iniciais"/>
+        </properties>
+      </component>
+      <component id="a0fb8" class="javax.swing.JButton" binding="finalizarButton">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font/>
+          <text value="Finalizar "/>
+        </properties>
+      </component>
+      <component id="c5d2" class="javax.swing.JButton" binding="carregarDadosButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Carregar Dados"/>
         </properties>
       </component>
     </children>

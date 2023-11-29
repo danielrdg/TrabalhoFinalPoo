@@ -7,29 +7,31 @@ import app.AppEvento;
 import dados.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class CarregarDadosIniciais extends JFrame implements ActionListener {
-    private JPanel Carrega;
+public class CarregarDados extends Component implements ActionListener {
     private JTextField textField1;
-    private JButton confirmarButton;
+    private JPanel painel;
     private JButton voltarButton;
-    private JTextArea textArea;
+    private JButton confirmarButton;
+    private JButton escolherArquivosButton;
+    private JComboBox comboBox1;
     private AppEvento appEvento;
     private AppEquipe appEquipe;
     private AppEquipamento appEquipamento;
     private AppAtendimento appAtendimento;
     private ACMERescue acmeRescue;
 
-    public CarregarDadosIniciais(ACMERescue acmeRescue) {
+    public CarregarDados(ACMERescue acmeRescue){
         this.acmeRescue = acmeRescue;
         this.appEvento = acmeRescue.getAppEvento();
         this.appEquipe = acmeRescue.getAppEquipe();
@@ -39,33 +41,23 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
         voltarButton.addActionListener(this);
 
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == confirmarButton) {
-            carregarDadosIniciais();
-        }
-        else if(e.getSource() == voltarButton){
-            acmeRescue.setContentPane(acmeRescue.getPainel());
-            acmeRescue.setSize(800, 600);
-        }
-    }
 
-    private void carregarDadosIniciais() {
-        String nomeArquivo = textField1.getText().trim();
-        String arquivoEventos = nomeArquivo + "-EVENTOS.CSV";
-        String arquivoEquipe = nomeArquivo + "-EQUIPES.CSV";
-        String arquivoEquipamento =nomeArquivo + "-EQUIPAMENTOS.CSV";
-        String arquivoAtendimento = nomeArquivo + "-ATENDIMENTOS.CSV";
 
+
+    private void carregarDados(String arquivo) {
+        String arquivoEventos = arquivo+ "-EVENTOS.CSV";
+        String arquivoEquipe = arquivo + "-EQUIPES.CSV";
+        String arquivoEquipamento = arquivo + "-EQUIPAMENTOS.CSV";
+        String arquivoAtendimento = arquivo + "-ATENDIMENTOS.CSV";
         ArrayList<Evento>eventos = appEvento.getEventos();
         ArrayList<Equipe>equipes = appEquipe.getEquipes();
         ArrayList<Equipamento>equipamentos = appEquipamento.getEquipamentos();
         Queue<Atendimento>atendimentos = appAtendimento.getAtendimentosPendentes();
 
         try (BufferedReader leitor = new BufferedReader(new FileReader(arquivoEventos));
-        BufferedReader leitor1 = new BufferedReader(new FileReader(arquivoEquipe));
-        BufferedReader leitor2 = new BufferedReader(new FileReader(arquivoEquipamento));
-        BufferedReader leitor3 = new BufferedReader(new FileReader(arquivoAtendimento))) {
+             BufferedReader leitor1 = new BufferedReader(new FileReader(arquivoEquipe));
+             BufferedReader leitor2 = new BufferedReader(new FileReader(arquivoEquipamento));
+             BufferedReader leitor3 = new BufferedReader(new FileReader(arquivoAtendimento))) {
 
             String linhaEvento;
             leitor.readLine();
@@ -76,31 +68,29 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
                 String latitude = dados.next();
                 String longitude = dados.next();
                 String tipoEvento = dados.next();
-                if (appEvento.existeCodigo(codigo)) {
-                    mostrarErro("Erro! Já existe um evento com esse código.");
-                } else {
 
-                if (tipoEvento.equals("1")) {
-                    String velocidade = dados.next();
-                    String precipitacao = dados.next();
-                    Ciclone ciclone = new Ciclone(codigo, data, Double.parseDouble(latitude), Double.parseDouble(longitude), Double.parseDouble(velocidade), Double.parseDouble(precipitacao));
-                    appEvento.cadastrarEvento(ciclone);
-                }
 
-                else if (tipoEvento.equals("2")){
-                    String magnitude = dados.next();
-                    Terremoto terremoto = new Terremoto(codigo, data, Double.parseDouble(latitude), Double.parseDouble(longitude), Double.parseDouble(magnitude));
-                    appEvento.cadastrarEvento(terremoto);
+                    if (tipoEvento.equals("1")) {
+                        String velocidade = dados.next();
+                        String precipitacao = dados.next();
+                        Ciclone ciclone = new Ciclone(codigo, data, Double.parseDouble(latitude), Double.parseDouble(longitude), Double.parseDouble(velocidade), Double.parseDouble(precipitacao));
+                        appEvento.cadastrarEvento(ciclone);
+                    }
+
+                    else if (tipoEvento.equals("2")){
+                        String magnitude = dados.next();
+                        Terremoto terremoto = new Terremoto(codigo, data, Double.parseDouble(latitude), Double.parseDouble(longitude), Double.parseDouble(magnitude));
+                        appEvento.cadastrarEvento(terremoto);
+                    }
+                    else if (tipoEvento.equals("3")){
+                        String estiagem = dados.next();
+                        Seca seca = new Seca(codigo, data, Double.parseDouble(latitude), Double.parseDouble(longitude), Integer.parseInt(estiagem));
+                        appEvento.cadastrarEvento(seca);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Erro! Tipo de evento inválido.");
+                    }
                 }
-                else if (tipoEvento.equals("3")){
-                    String estiagem = dados.next();
-                    Seca seca = new Seca(codigo, data, Double.parseDouble(latitude), Double.parseDouble(longitude), Integer.parseInt(estiagem));
-                    appEvento.cadastrarEvento(seca);
-                }
-                else {
-                    mostrarErro("Erro! Tipo de evento inválido.");
-                }
-            }}
             String linhaEquipe;
             leitor1.readLine();
             while ((linhaEquipe = leitor1.readLine()) != null) {
@@ -160,48 +150,25 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
                 Atendimento atendimento = new Atendimento(Integer.parseInt(codStr), dataIni, Integer.parseInt(duracaoStr), status,evento);
                 atendimentos.add(atendimento);
                 acmeRescue.getAppAtendimento().cadastrarAtendimento(atendimento);
-                }
-            textArea.append("Eventos cadastrados:\n");
-            for (Evento evento : eventos) {
-                textArea.append(evento.toString() + "\n");
             }
-            textArea.append("----------------------------\n");
-            textArea.append("\nEquipes cadastradas:\n");
-            for (Equipe equipe : equipes) {
-                textArea.append(equipe.toString() + "\n");
-            }
-            textArea.append("----------------------------\n");
-            textArea.append("\nEquipamentos cadastrados:\n");
-            for (Equipamento equipamento : equipamentos) {
-                textArea.append(equipamento.toString() + "\n");
-            }
-            textArea.append("----------------------------\n");
-            textArea.append("\nAtendimentos cadastrados:\n");
-            for (Atendimento atendimento : atendimentos) {
-                textArea.append(atendimento.toString() + "\n");
-            }
-            textArea.append("----------------------------\n");
-
-            mostrarMensagem("Dados carregados com sucesso!");
-            dispose();
         } catch (IOException | NumberFormatException ex) {
-            mostrarErro("Erro ao carregar dados. Verifique o nome do arquivo e o formato.");
+            JOptionPane.showMessageDialog(this, "Erro ao carregar dados. Verifique o nome do arquivo e o formato.");
             ex.printStackTrace();
+        }}
+
+
+    public JPanel getPainel() {
+        return painel;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == confirmarButton) {
+            carregarDados("EXEMPLO2");
+        }
+        else if(e.getSource() == voltarButton){
+            acmeRescue.setContentPane(acmeRescue.getPainel());
+            acmeRescue.setSize(800, 600);
         }
     }
-    public JPanel getPainel(){
-        return Carrega;
-    }
-
-    private void mostrarMensagem(String mensagem) {
-        JOptionPane.showMessageDialog(this, mensagem);
-    }
-
-    private void mostrarErro(String mensagem) {
-        JOptionPane.showMessageDialog(this, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
-    }
-
-
 }
-
-
