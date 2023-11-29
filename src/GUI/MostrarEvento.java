@@ -43,15 +43,20 @@ public class MostrarEvento {
                         if (evento.getCodigo().equals(campoCodigo.getText().trim())) {
                             eventoSelecionado = evento;
                             eventoEncontrado = true;
-                            acmeRescue.setContentPane(cadastrarAtendimento.getPainel());
-                            acmeRescue.setSize(600,400);
+
+                            if (evento.temAtendimento()) {
+                                areaTexto.append("Erro! Este evento já possui um atendimento cadastrado.\n");
+                            } else {
+                                acmeRescue.setContentPane(cadastrarAtendimento.getPainel());
+                                acmeRescue.setSize(600, 400);
+                            }
                             break;
                         }
                     }
 
-                    if (eventoEncontrado) {
+                    if (eventoEncontrado && !eventoSelecionado.temAtendimento()) {
                         areaTexto.append("Evento selecionado.\n");
-                    } else {
+                    } else if (!eventoEncontrado) {
                         areaTexto.append("Erro! Não existe evento com esse código.\n");
                     }
                 } catch (NumberFormatException ex) {

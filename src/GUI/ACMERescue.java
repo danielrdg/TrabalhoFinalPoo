@@ -45,7 +45,6 @@ public class ACMERescue extends JFrame {
         this.cadastroEquipePainel = new CadastroEquipe(this);
         this.relatorioGeral = new RelatorioGeral(this);
         this.vincularEquipamento = new VincularEquipamento(this);
-        //this.alocarAtendimento = new AlocarAtendimento(this);
         this.carregarDadosIniciais = new CarregarDadosIniciais(this);
         this.alocarAtendimentos = new AlocarAtendimentos(this);
         this.setContentPane(painel);

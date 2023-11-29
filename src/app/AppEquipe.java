@@ -34,13 +34,5 @@ public class AppEquipe {
         }
         return false;
     }
-    public boolean equipeEstaDisponivel(Equipe equipe) {
-        for (Atendimento atendimento :appAtendimento.getAtendimentosPendentes()) {
-            if (atendimento.getEquipe() != null && atendimento.getEquipe().equals(equipe)) {
-                return false;
-            }
-        }
-        return true;
-    }
 
 }

@@ -21,8 +21,16 @@ public class AppEquipamento {
         equipamentos.add(equipamento);
         return true;
     }
-
+    public boolean existeEquipamento(int id) {
+        for (Equipamento equipamento : equipamentos) {
+            if (equipamento.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
     public ArrayList<Equipamento> getEquipamentos() {
         return equipamentos;
     }
+
 }

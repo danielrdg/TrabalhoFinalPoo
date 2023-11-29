@@ -1,10 +1,15 @@
 package app;
 
 import java.util.ArrayList;
+import java.util.Queue;
+
+import GUI.ACMERescue;
+import dados.Atendimento;
 import dados.Evento;
 
 public class AppEvento {
     private ArrayList<Evento> eventos;
+
 
     public AppEvento() {
         eventos = new ArrayList<>();
@@ -19,6 +24,23 @@ public class AppEvento {
         eventos.add(evento);
         return true;
     }
+    public Evento buscarEvento(String codigo) {
+        for (Evento e : eventos) {
+            if (e.getCodigo().equals(codigo)) {
+                return e;
+            }
+        }
+        return null;
+    }
+    public boolean existeCodigo(String codigo) {
+        for (Evento evento : eventos) {
+            if (evento.getCodigo().equals(codigo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public ArrayList<Evento> getEventos() {
         return eventos;

@@ -1,5 +1,8 @@
 package GUI;
 
+import app.AppAtendimento;
+import app.AppEquipamento;
+import app.AppEquipe;
 import app.AppEvento;
 import dados.*;
 
@@ -12,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 
 public class CarregarDadosIniciais extends JFrame implements ActionListener {
     private JPanel Carrega;
@@ -20,15 +24,17 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
     private JButton voltarButton;
     private JTextArea textArea;
     private AppEvento appEvento;
+    private AppEquipe appEquipe;
+    private AppEquipamento appEquipamento;
+    private AppAtendimento appAtendimento;
     private ACMERescue acmeRescue;
-    private ArrayList<Evento> eventos = new ArrayList<>();
-    private ArrayList<Equipe>equipes = new ArrayList<>();
-    private ArrayList<Equipamento>equipamentos = new ArrayList<>();
-    private Queue<Atendimento> atendimentos = new LinkedList<>();
 
     public CarregarDadosIniciais(ACMERescue acmeRescue) {
         this.acmeRescue = acmeRescue;
         this.appEvento = acmeRescue.getAppEvento();
+        this.appEquipe = acmeRescue.getAppEquipe();
+        this.appEquipamento = acmeRescue.getAppEquipamento();
+        this.appAtendimento = acmeRescue.getAppAtendimento();
         confirmarButton.addActionListener(this);
         voltarButton.addActionListener(this);
 
@@ -51,6 +57,11 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
         String arquivoEquipamento =nomeArquivo + "-EQUIPAMENTOS.CSV";
         String arquivoAtendimento = nomeArquivo + "-ATENDIMENTOS.CSV";
 
+        ArrayList<Evento>eventos = appEvento.getEventos();
+        ArrayList<Equipe>equipes = appEquipe.getEquipes();
+        ArrayList<Equipamento>equipamentos = appEquipamento.getEquipamentos();
+        Queue<Atendimento>atendimentos = appAtendimento.getAtendimentosPendentes();
+
         try (BufferedReader leitor = new BufferedReader(new FileReader(arquivoEventos));
         BufferedReader leitor1 = new BufferedReader(new FileReader(arquivoEquipe));
         BufferedReader leitor2 = new BufferedReader(new FileReader(arquivoEquipamento));
@@ -59,52 +70,46 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
             String linhaEvento;
             leitor.readLine();
             while ((linhaEvento = leitor.readLine()) != null) {
-                String[] dados = linhaEvento.split(";");
-                String codigo = dados[0].trim();
-                String data = dados[1].trim();
-                double latitude = Double.parseDouble(dados[2].trim());
-                double longitude = Double.parseDouble(dados[3].trim());
-                int tipoEvento = Integer.parseInt(dados[4].trim());
-                Evento evento = null;
+                Scanner dados = new Scanner(linhaEvento).useDelimiter(";");
+                String codigo = dados.next();
+                String data = dados.next();
+                String latitude = dados.next();
+                String longitude = dados.next();
+                String tipoEvento = dados.next();
+                if (appEvento.existeCodigo(codigo)) {
+                    textArea.append("Erro! Código de evento já cadastrado: " + codigo + "\n");
+                } else {
 
-                switch (tipoEvento) {
-                    case 1:
-                        double velocidade = Double.parseDouble(dados[5].trim());
-                        double precipitacao = Double.parseDouble(dados[6].trim());
-                        evento = new Ciclone(codigo, data, latitude, longitude, velocidade, precipitacao);
-                        break;
+                if (tipoEvento.equals("1")) {
+                    String velocidade = dados.next();
+                    String precipitacao = dados.next();
+                    Ciclone ciclone = new Ciclone(codigo, data, Double.parseDouble(latitude), Double.parseDouble(longitude), Double.parseDouble(velocidade), Double.parseDouble(precipitacao));
+                    appEvento.cadastrarEvento(ciclone);
+                }
 
-                    case 2:
-                        double magnitude = Double.parseDouble(dados[5].trim());
-                        evento = new Terremoto(codigo, data, latitude, longitude, magnitude);
-
-                        break;
-
-                    case 3:
-                        int estiagem = Integer.parseInt(dados[5].trim());
-                        evento = new Seca(codigo, data, latitude, longitude, estiagem);
-                        break;
-
-                    default:
+                else if (tipoEvento.equals("2")){
+                    String magnitude = dados.next();
+                    Terremoto terremoto = new Terremoto(codigo, data, Double.parseDouble(latitude), Double.parseDouble(longitude), Double.parseDouble(magnitude));
+                    appEvento.cadastrarEvento(terremoto);
+                }
+                else if (tipoEvento.equals("3")){
+                    String estiagem = dados.next();
+                    Seca seca = new Seca(codigo, data, Double.parseDouble(latitude), Double.parseDouble(longitude), Integer.parseInt(estiagem));
+                    appEvento.cadastrarEvento(seca);
+                }
+                else {
                         JOptionPane.showMessageDialog(this, "Erro! Tipo de evento inválido.");
                 }
-                if (evento!=null){
-                    if (!evento.getCodigo().equals(evento)){
-                        eventos.add(evento);
-                        acmeRescue.getAppEvento().cadastrarEvento(evento);}
-                    else {
-                        textArea.append("Erro: Código de evento repetido - " + evento.getCodigo() + "\n");
-                    }
             }}
             String linhaEquipe;
             leitor1.readLine();
             while ((linhaEquipe = leitor1.readLine()) != null) {
-                String[] dados = linhaEquipe.split(";");
-                String codinome = dados[0].trim();
-                int membros = Integer.parseInt(dados[1].trim());
-                double latitude = Double.parseDouble(dados[2].trim());
-                double longitude = Double.parseDouble(dados[3].trim());
-                Equipe equipe = new Equipe(codinome,membros,latitude,longitude);
+                Scanner dados = new Scanner(linhaEquipe).useDelimiter(";");
+                String codinome = dados.next();
+                String membros = dados.next();
+                String latitude = dados.next();
+                String longitude = dados.next();
+                Equipe equipe = new Equipe(codinome,Integer.parseInt(membros),Double.parseDouble(latitude),Double.parseDouble(longitude));
                 equipes.add(equipe);
                 acmeRescue.getAppEquipe().cadastrarEquipe(equipe);
             }
@@ -112,62 +117,46 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
             String linhaEquipamento;
             leitor2.readLine();
             while ((linhaEquipamento = leitor2.readLine()) != null) {
-                String[] dados = linhaEquipamento.split(";");
-                String nome = dados[1].trim();
-                double custo = Double.parseDouble(dados[2].trim());
-                String codinom = dados[3].trim();
-                int id = Integer.parseInt(dados[0].trim());
-                int tipoEquipamento = Integer.parseInt(dados[4].trim());
-                Equipamento equipamento = null;
+                Scanner dados = new Scanner(linhaEquipamento).useDelimiter(";");
+                String nome = dados.next();
+                String custo = dados.next();
+                String id = dados.next();
+                String tipoEquipamento = dados.next();
 
-                switch (tipoEquipamento) {
-                    case 1:
-                        int capacidade = Integer.parseInt(dados[5].trim());
-                        equipamento = new Barco(id,nome,custo,capacidade);
-                        break;
-
-                    case 2:
-                        double capacidadeC = Double.parseDouble(dados[5].trim());
-                        equipamento = new CaminhaoTanque(id,nome,custo,capacidadeC);
-
-                        break;
-
-                    case 3:
-                        String combustivel = dados[5].trim();
-                        double carga = Double.parseDouble(dados[6].trim());
-
-                        equipamento = new Escavadeira(id,nome,custo,combustivel,carga);
-                        break;
-
-                    default:
-                        JOptionPane.showMessageDialog(this, "Erro! Tipo de equipamento inválido.");
+                if (tipoEquipamento.equals("1")){
+                    String capacidade = dados.next();
+                    Barco barco = new Barco(Integer.parseInt(id),nome,Double.parseDouble(custo),Integer.parseInt(capacidade));
+                    appEquipamento.cadastrarEquipamento(barco);
                 }
-                if (equipamento!=null){
-                    equipamentos.add(equipamento);
-                    acmeRescue.getAppEquipamento().cadastrarEquipamento(equipamento);
+
+                else if (tipoEquipamento.equals("2")){
+                    String capacidadeC = dados.next();
+                    CaminhaoTanque caminhaoTanque= new CaminhaoTanque(Integer.parseInt(id),nome,Double.parseDouble(custo),Double.parseDouble(capacidadeC));
+                    appEquipamento.cadastrarEquipamento(caminhaoTanque);
+                }
+
+                else if (tipoEquipamento.equals("3")){
+                    String combustivel = dados.next();
+                    String carga = dados.next();
+                    Escavadeira escavadeira = new Escavadeira(Integer.parseInt(id),nome,Double.parseDouble(custo),combustivel,Double.parseDouble(carga));
+                    appEquipamento.cadastrarEquipamento(escavadeira);
                 }
             }
             String linhaAtendimento;
             leitor3.readLine();
             while ((linhaAtendimento = leitor3.readLine()) != null) {
-                String[] dados = linhaAtendimento.split(";");
-                String codEve = dados[4].trim();
-                int cod = Integer.parseInt(dados[0].trim());
-                String dataini =dados[1].trim();
-                int duracao = Integer.parseInt(dados[2].trim());
-                String status =dados[3].trim();
-                Evento eventoAssociado = null;
-                for (Evento evento : eventos) {
-                    if (evento.getCodigo().equals(codEve)) {
-                        eventoAssociado = evento;
-                        break;
-                    }
+                Scanner dados = new Scanner(linhaAtendimento).useDelimiter(";");
+                String codStr = dados.next();
+                String dataIni = dados.next();
+                String duracaoStr = dados.next();
+                String status = dados.next();
+                String codEve = dados.next();
+                Evento evento = appEvento.buscarEvento(codEve);
+
+                Atendimento atendimento = new Atendimento(Integer.parseInt(codStr), dataIni, Integer.parseInt(duracaoStr), status,evento);
+                atendimentos.add(atendimento);
+                acmeRescue.getAppAtendimento().cadastrarAtendimento(atendimento);
                 }
-                if (eventoAssociado != null) {
-                    Atendimento atendimento = new Atendimento(cod, dataini, duracao, status, eventoAssociado);
-                    atendimentos.add(atendimento);
-                    acmeRescue.getAppAtendimento().cadastrarAtendimento(atendimento);
-            }}
             textArea.append("Eventos cadastrados:\n");
             for (Evento evento : eventos) {
                 textArea.append(evento.toString() + "\n");

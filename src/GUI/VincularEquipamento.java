@@ -113,7 +113,7 @@ public class VincularEquipamento {
         equipes.setText("");
 
         if (appEquipe.getEquipes().isEmpty()) {
-            equipes.append("Nenhum equipamento cadastrado.\n");
+            equipes.append("Nenhuma equipe cadastrada.\n");
         } else {
             equipes.append("Equipes cadastradas:\n");
             for (Equipe equipe : appEquipe.getEquipes()) {
@@ -122,7 +122,7 @@ public class VincularEquipamento {
         }
 
         if (appEquipamento.getEquipamentos().isEmpty()) {
-            equipamentos.append("Nenhuma equipe cadastrada.\n");
+            equipamentos.append("Nenhum equipamento cadastrado.\n");
         } else {
             equipamentos.append("Equipamentos cadastrados:\n");
             for (Equipamento equipamento : appEquipamento.getEquipamentos()) {

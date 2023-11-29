@@ -9,11 +9,9 @@ import java.util.Queue;
 
 public class AppAtendimento {
     private Queue<Atendimento> atendimentosPendentes;
-    private ArrayList<Equipe>equipesDisponiveis;
 
     public AppAtendimento(){
         atendimentosPendentes = new LinkedList();
-        equipesDisponiveis = new ArrayList<>();
     }
 
     public boolean cadastrarAtendimento(Atendimento atendimento){
@@ -24,6 +22,14 @@ public class AppAtendimento {
         }
         atendimentosPendentes.add(atendimento);
         return true;
+    }
+    public boolean existeAtendimento(int cod) {
+        for (Atendimento atendimento : atendimentosPendentes) {
+            if (atendimento.getCod() == cod) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Queue<Atendimento> getAtendimentosPendentes() {
