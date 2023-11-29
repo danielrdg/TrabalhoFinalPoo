@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AlocarAtendimentos implements ActionListener {
+public class AlocarAtendimentos {
     private JPanel painel;
     private JButton alocarAtendimentosButton;
     private JTextArea textArea1;
@@ -21,28 +21,14 @@ public class AlocarAtendimentos implements ActionListener {
     public AlocarAtendimentos(ACMERescue acmeRescue){
         super();
         this.acmeRescue = acmeRescue;
-        alocarAtendimentosButton.addActionListener(this);
-        finalizarButton.addActionListener(this);
-    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == alocarAtendimentosButton){
-        alocarAtendimentos();
-        atualizarTextArea();
     }
-      else if (e.getSource() == finalizarButton) {
-        acmeRescue.setContentPane(acmeRescue.getPainel());
-        acmeRescue.setSize(800, 600);
-    }
-}
 
     public JPanel getPainel() {
         return painel;
     }
 
-    private void alocarAtendimentos() {
+    public void alocarAtendimentos() {
         AppAtendimento appAtendimento = acmeRescue.getAppAtendimento();
         AppEquipe appEquipe = acmeRescue.getAppEquipe();
 

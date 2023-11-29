@@ -178,8 +178,7 @@ public class ACMERescue extends JFrame {
                 break;
 
             case 8:
-                this.setContentPane(alocarAtendimentos.getPainel());
-                this.setSize(800,400);
+                alocarAtendimentos.alocarAtendimentos();
                 break;
 
             case 9:
