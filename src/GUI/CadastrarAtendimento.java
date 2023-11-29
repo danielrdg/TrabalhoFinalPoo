@@ -33,13 +33,17 @@ public class CadastrarAtendimento {
                     int duracao = Integer.parseInt(campoDuracao.getText().trim());
                     String status = "PENDENTE";
                     Evento evento = mostrarEvento.getEventoSelecionado();
-                    Atendimento atendimento = new Atendimento(codigo, dataInicio, duracao, status, evento);
 
-                    if (appAtendimento.cadastrarAtendimento(atendimento)) {
-                        areaTexto.append("Atendimento cadastrado.\n");
-                    }
-                    else {
-                        areaTexto.append("Erro! Já existe um atendimento com esse código.\n");
+                    if (evento.getAtendimento() != null) {
+                        areaTexto.append("Erro! Já existe um atendimento para esse evento.\n");
+                    } else {
+                        Atendimento atendimento = new Atendimento(codigo, dataInicio, duracao, status, evento);
+                        if (appAtendimento.cadastrarAtendimento(atendimento)) {
+                            areaTexto.append("Atendimento cadastrado.\n");
+                        }
+                        else {
+                            areaTexto.append("Erro! Já existe um atendimento com esse código.\n");
+                        }
                     }
                 }
                 catch (NumberFormatException ex) {
