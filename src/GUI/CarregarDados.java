@@ -42,147 +42,119 @@ public class CarregarDados extends Component implements ActionListener {
 
     }
 
-    public void carregarDadosSalvos(String nomeArquivo) {
-        carregarEventos(nomeArquivo + "-EVENTOS.CSV");
-        carregarEquipes(nomeArquivo + "-EQUIPES.CSV");
-        carregarEquipamentos(nomeArquivo + "-EQUIPAMENTOS.CSV");
-        carregarAtendimentos(nomeArquivo + "-ATENDIMENTOS.CSV");
-    }
 
-    private void carregarEventos(String arquivoEventos) {
-        try (BufferedReader leitor = new BufferedReader(new FileReader(arquivoEventos))) {
-            String linha;
+
+    private void carregarDados(String arquivo) {
+        String arquivoEventos = arquivo+ "-EVENTOS.CSV";
+        String arquivoEquipe = arquivo + "-EQUIPES.CSV";
+        String arquivoEquipamento = arquivo + "-EQUIPAMENTOS.CSV";
+        String arquivoAtendimento = arquivo + "-ATENDIMENTOS.CSV";
+        ArrayList<Evento>eventos = appEvento.getEventos();
+        ArrayList<Equipe>equipes = appEquipe.getEquipes();
+        ArrayList<Equipamento>equipamentos = appEquipamento.getEquipamentos();
+        Queue<Atendimento>atendimentos = appAtendimento.getAtendimentosPendentes();
+
+        try (BufferedReader leitor = new BufferedReader(new FileReader(arquivoEventos));
+             BufferedReader leitor1 = new BufferedReader(new FileReader(arquivoEquipe));
+             BufferedReader leitor2 = new BufferedReader(new FileReader(arquivoEquipamento));
+             BufferedReader leitor3 = new BufferedReader(new FileReader(arquivoAtendimento))) {
+
+            String linhaEvento;
             leitor.readLine();
+            while ((linhaEvento = leitor.readLine()) != null) {
+                Scanner dados = new Scanner(linhaEvento.trim()).useDelimiter(";");
+                String codigo = dados.next();
+                String data = dados.next();
+                String latitude = dados.next();
+                String longitude = dados.next();
+                String tipoEvento = dados.next();
 
-            while ((linha = leitor.readLine()) != null) {
-                try (Scanner scanner = new Scanner(linha).useDelimiter(";")) {
-                    String codigo = scanner.next();
-                    String data = scanner.next();
-                    double latitude = scanner.nextDouble();
-                    double longitude = scanner.nextDouble();
-                    String tipoEvento = scanner.next();
 
-                    Evento evento;
-
-                    switch (tipoEvento) {
-                        case "1":
-                            double velocidade = scanner.nextDouble();
-                            double precipitacao = scanner.nextDouble();
-                            evento = new Ciclone(codigo, data, latitude, longitude, velocidade, precipitacao);
-                            break;
-                        case "2":
-                            double magnitude = scanner.nextDouble();
-                            evento = new Terremoto(codigo, data, latitude, longitude, magnitude);
-                            break;
-                        case "3":
-                            int estiagem = scanner.nextInt();
-                            evento = new Seca(codigo, data, latitude, longitude, estiagem);
-                            break;
-                        default:
-                            throw new IllegalArgumentException("Tipo de evento inválido.");
+                    if (tipoEvento.equals("1")) {
+                        String velocidade = dados.next();
+                        String precipitacao = dados.next();
+                        Ciclone ciclone = new Ciclone(codigo, data, Double.parseDouble(latitude), Double.parseDouble(longitude), Double.parseDouble(velocidade), Double.parseDouble(precipitacao));
+                        appEvento.cadastrarEvento(ciclone);
                     }
 
-                    appEvento.cadastrarEvento(evento);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Erro ao carregar eventos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao ler arquivo de eventos: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void carregarEquipes(String arquivoEquipes) {
-        try (BufferedReader leitor = new BufferedReader(new FileReader(arquivoEquipes))) {
-            String linha;
-            leitor.readLine();
-            while ((linha = leitor.readLine()) != null) {
-                try (Scanner scanner = new Scanner(linha).useDelimiter(";")) {
-                    String codinome = scanner.next();
-                    int membros = scanner.nextInt();
-                    double latitude = scanner.nextDouble();
-                    double longitude = scanner.nextDouble();
-
-                    Equipe equipe = new Equipe(codinome, membros, latitude, longitude);
-                    appEquipe.cadastrarEquipe(equipe);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Erro ao carregar eventos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao ler arquivo de eventos: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void carregarEquipamentos(String arquivoEquipamentos) {
-        try (BufferedReader leitor = new BufferedReader(new FileReader(arquivoEquipamentos))) {
-            String linha;
-            leitor.readLine();
-
-            while ((linha = leitor.readLine()) != null) {
-                try (Scanner scanner = new Scanner(linha).useDelimiter(";")) {
-                    String id = scanner.next();
-                    String nome = scanner.next();
-                    double custo = scanner.nextDouble();
-                    String codinome = scanner.next();
-                    Equipe equipe = appEquipe.buscarEquipe(codinome);
-                    String tipoEquipamento = scanner.next();
-
-                    switch (tipoEquipamento) {
-                        case "1":
-                            int capacidade = scanner.nextInt();
-                            Barco barco = new Barco(Integer.parseInt(id), nome, custo, capacidade);
-                            appEquipamento.cadastrarEquipamento(barco);
-                            break;
-                        case "2":
-                            double capacidadeC = scanner.nextDouble();
-                            CaminhaoTanque caminhaoTanque = new CaminhaoTanque(Integer.parseInt(id), nome, custo, capacidadeC);
-                            caminhaoTanque.setEquipe(equipe);
-                            appEquipamento.cadastrarEquipamento(caminhaoTanque);
-                            break;
-                        case "3":
-                            String combustivel = scanner.next();
-                            double carga = scanner.nextDouble();
-                            Escavadeira escavadeira = new Escavadeira(Integer.parseInt(id), nome, custo, combustivel, carga);
-                            escavadeira.setEquipe(equipe);
-                            appEquipamento.cadastrarEquipamento(escavadeira);
-                            break;
-                        default:
-                            throw new IllegalArgumentException("Tipo de equipamento inválido.");
+                    else if (tipoEvento.equals("2")){
+                        String magnitude = dados.next();
+                        Terremoto terremoto = new Terremoto(codigo, data, Double.parseDouble(latitude), Double.parseDouble(longitude), Double.parseDouble(magnitude));
+                        appEvento.cadastrarEvento(terremoto);
                     }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Erro ao carregar eventos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                    else if (tipoEvento.equals("3")){
+                        String estiagem = dados.next();
+                        Seca seca = new Seca(codigo, data, Double.parseDouble(latitude), Double.parseDouble(longitude), Integer.parseInt(estiagem));
+                        appEvento.cadastrarEvento(seca);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Erro! Tipo de evento inválido.");
+                    }
+                }
+            String linhaEquipe;
+            leitor1.readLine();
+            while ((linhaEquipe = leitor1.readLine()) != null) {
+                Scanner dados = new Scanner(linhaEquipe.trim()).useDelimiter(";");
+                String codinome = dados.next();
+                String membros = dados.next();
+                String latitude = dados.next();
+                String longitude = dados.next();
+                Equipe equipe = new Equipe(codinome,Integer.parseInt(membros),Double.parseDouble(latitude),Double.parseDouble(longitude));
+                equipes.add(equipe);
+                acmeRescue.getAppEquipe().cadastrarEquipe(equipe);
+            }
+
+            String linhaEquipamento;
+            leitor2.readLine();
+            while ((linhaEquipamento = leitor2.readLine()) != null) {
+                Scanner dados = new Scanner(linhaEquipamento.trim()).useDelimiter(";");
+                String id = dados.next();
+                String nome = dados.next();
+                String custo = dados.next();
+                String codinome = dados.next();
+                Equipe equipe = appEquipe.buscarEquipe(codinome);
+                String tipoEquipamento = dados.next();
+
+                if (tipoEquipamento.equals("1")){
+                    String capacidade = dados.next();
+                    Barco barco = new Barco(Integer.parseInt(id),nome,Double.parseDouble(custo),Integer.parseInt(capacidade));
+                    appEquipamento.cadastrarEquipamento(barco);
+                }
+
+                else if (tipoEquipamento.equals("2")){
+                    String capacidadeC = dados.next();
+                    CaminhaoTanque caminhaoTanque= new CaminhaoTanque(Integer.parseInt(id),nome,Double.parseDouble(custo),Double.parseDouble(capacidadeC));
+                    caminhaoTanque.setEquipe(equipe);
+                    appEquipamento.cadastrarEquipamento(caminhaoTanque);
+                }
+
+                else if (tipoEquipamento.equals("3")){
+                    String combustivel = dados.next();
+                    String carga = dados.next();
+                    Escavadeira escavadeira = new Escavadeira(Integer.parseInt(id),nome,Double.parseDouble(custo),combustivel,Double.parseDouble(carga));
+                    escavadeira.setEquipe(equipe);
+                    appEquipamento.cadastrarEquipamento(escavadeira);
                 }
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao ler arquivo de eventos: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+            String linhaAtendimento;
+            leitor3.readLine();
+            while ((linhaAtendimento = leitor3.readLine()) != null) {
+                Scanner dados = new Scanner(linhaAtendimento.trim()).useDelimiter(";");
+                String codStr = dados.next();
+                String dataIni = dados.next();
+                String duracaoStr = dados.next();
+                String status = dados.next();
+                String codEve = dados.next();
+                Evento evento = appEvento.buscarEvento(codEve);
 
-    private void carregarAtendimentos(String arquivoAtendimentos) {
-        try (BufferedReader leitor = new BufferedReader(new FileReader(arquivoAtendimentos))) {
-            String linha;
-            leitor.readLine();
-
-            while ((linha = leitor.readLine()) != null) {
-                try (Scanner scanner = new Scanner(linha).useDelimiter(";")) {
-                    int codStr = scanner.nextInt();
-                    String dataIni = scanner.next();
-                    int duracaoStr = scanner.nextInt();
-                    String status = scanner.next();
-                    String codEve = scanner.next();
-                    Evento evento = appEvento.buscarEvento(codEve);
-
-                    Atendimento atendimento = new Atendimento(codStr, dataIni, duracaoStr, status, evento);
-                    appAtendimento.cadastrarAtendimento(atendimento);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Erro ao carregar eventos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-                }
+                Atendimento atendimento = new Atendimento(Integer.parseInt(codStr), dataIni, Integer.parseInt(duracaoStr), status,evento);
+                atendimentos.add(atendimento);
+                acmeRescue.getAppAtendimento().cadastrarAtendimento(atendimento);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao ler arquivo de eventos: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+        } catch (IOException | NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar dados. Verifique o nome do arquivo e o formato.");
+            ex.printStackTrace();
+        }}
 
 
     public JPanel getPainel() {
@@ -192,7 +164,7 @@ public class CarregarDados extends Component implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == confirmarButton) {
-            carregaDados();
+            carregarDados("EXEMPLO2");
         }
         else if(e.getSource() == voltarButton){
             acmeRescue.setContentPane(acmeRescue.getPainel());

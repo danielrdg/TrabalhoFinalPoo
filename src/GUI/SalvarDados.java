@@ -69,10 +69,10 @@ public class SalvarDados implements ActionListener {
                 escritorAtendimento.newLine();
             }
 
-            System.out.println("Dados salvos com sucesso.");
+            JOptionPane.showMessageDialog(null, "Dados salvos com sucesso.");
 
         } catch (IOException ex) {
-            System.out.println("Erro ao salvar dados. Verifique o nome do arquivo e tente novamente.");
+            JOptionPane.showMessageDialog(null, "Erro ao salvar dados. Verifique o nome do arquivo e tente novamente.");
             ex.printStackTrace();
         }
     }
@@ -81,8 +81,7 @@ public class SalvarDados implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == confirmarButton) {
             salvarTodosOsDados("EXEMPLO2");
-        }
-        else if(e.getSource() == voltarButton){
+        } else if(e.getSource() == voltarButton){
             acmeRescue.setContentPane(acmeRescue.getPainel());
             acmeRescue.setSize(800, 600);
         }
