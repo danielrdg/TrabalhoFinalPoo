@@ -118,9 +118,11 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
             leitor2.readLine();
             while ((linhaEquipamento = leitor2.readLine()) != null) {
                 Scanner dados = new Scanner(linhaEquipamento).useDelimiter(";");
+                String id = dados.next();
                 String nome = dados.next();
                 String custo = dados.next();
-                String id = dados.next();
+                String codinome = dados.next();
+                Equipe equipe = appEquipe.buscarEquipe(codinome);
                 String tipoEquipamento = dados.next();
 
                 if (tipoEquipamento.equals("1")){
@@ -132,6 +134,7 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
                 else if (tipoEquipamento.equals("2")){
                     String capacidadeC = dados.next();
                     CaminhaoTanque caminhaoTanque= new CaminhaoTanque(Integer.parseInt(id),nome,Double.parseDouble(custo),Double.parseDouble(capacidadeC));
+                    caminhaoTanque.setEquipe(equipe);
                     appEquipamento.cadastrarEquipamento(caminhaoTanque);
                 }
 
@@ -139,6 +142,7 @@ public class CarregarDadosIniciais extends JFrame implements ActionListener {
                     String combustivel = dados.next();
                     String carga = dados.next();
                     Escavadeira escavadeira = new Escavadeira(Integer.parseInt(id),nome,Double.parseDouble(custo),combustivel,Double.parseDouble(carga));
+                    escavadeira.setEquipe(equipe);
                     appEquipamento.cadastrarEquipamento(escavadeira);
                 }
             }

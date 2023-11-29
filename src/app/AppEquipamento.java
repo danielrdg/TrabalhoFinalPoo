@@ -1,12 +1,19 @@
 package app;
 
 import dados.Equipamento;
+import dados.Equipe;
+import dados.Evento;
 
 import java.util.ArrayList;
 
 public class AppEquipamento {
 
     private ArrayList<Equipamento> equipamentos;
+    private Equipe equipe;
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
+    }
 
     public AppEquipamento() {
         equipamentos = new ArrayList<>();
@@ -29,6 +36,7 @@ public class AppEquipamento {
         }
         return false;
     }
+
     public ArrayList<Equipamento> getEquipamentos() {
         return equipamentos;
     }
